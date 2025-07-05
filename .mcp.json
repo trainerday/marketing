@@ -4,9 +4,8 @@
       "command": "uvx",
       "args": [
         "basic-memory",
-        "--project",
-        "TrainerDay",
         "mcp"
       ]
     }
+  }
 }
