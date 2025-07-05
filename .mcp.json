@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "basic-memory": {
+      "command": "uvx",
+      "args": [
+        "basic-memory",
+        "--project",
+        "TrainerDay",
+        "mcp"
+      ]
+    }
+}

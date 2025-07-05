@@ -1,0 +1,14 @@
+{
+  "lastUserId": 113660,
+  "lastEmail": "xristosn@hotmail.com",
+  "lastUsername": "gatoloco",
+  "lastSyncTime": "2025-07-01T20:47:00.000Z",
+  "totalSynced": 101,
+  "lastEmailBlastDate": "2024-09-19T02:52:00.000Z",
+  "firstnameUpdateCompleted": true,
+  "totalFirstnameUpdates": 99,
+  "csvExportCompleted": true,
+  "csvExportDate": "2025-07-01T20:47:00.000Z",
+  "csvExportCount": 24558,
+  "csvExportNote": "Exported all users created since Sept 1, 2024 for bulk import to BigMailer"
+}
