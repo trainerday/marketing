@@ -25,12 +25,12 @@ def run_command(cmd, description):
         print(f"  ✗ Error in {description}: {e}")
         return False
 
-def create_video_concat_list(directory, timing_data, temp_dir):
+def create_video_concat_list(directory, timing_data, source_temp_dir, output_temp_dir):
     """Create concatenation list for videos."""
     chapter_timings = timing_data['chapter_timings']
     
     # Create concat list
-    concat_list = temp_dir / "video_concat.txt"
+    concat_list = output_temp_dir / "video_concat.txt"
     
     with open(concat_list, 'w') as f:
         # B-roll intro (10 seconds)
@@ -43,7 +43,7 @@ def create_video_concat_list(directory, timing_data, temp_dir):
             return None
         
         # Chapter videos
-        timed_videos_dir = directory / "timed_chapter_videos"
+        timed_videos_dir = source_temp_dir / "timed_chapter_videos"
         for timing in chapter_timings:
             chapter_num = timing['chapter']
             chapter_file = timed_videos_dir / f"chapter_{chapter_num}.mp4"
@@ -108,14 +108,15 @@ def create_audio_track(directory, timing_data, temp_dir):
 def combine_final_video(concat_list, voice_track, background_music, output_file):
     """Combine video with audio tracks."""
     
-    # First create video without audio
+    # First create video without audio - re-encode to ensure consistent codec
     video_only = output_file.parent / "temp_video_only.mp4"
     cmd = [
         'ffmpeg', '-f', 'concat', '-safe', '0', '-i', str(concat_list),
-        '-c', 'copy', '-y', str(video_only)
+        '-c:v', 'libx264', '-crf', '23', '-preset', 'medium',
+        '-pix_fmt', 'yuv420p', '-an', '-y', str(video_only)
     ]
     
-    if not run_command(cmd, "Concatenating video clips"):
+    if not run_command(cmd, "Concatenating and re-encoding video clips"):
         return False
     
     # Then combine with audio tracks
@@ -181,12 +182,12 @@ def main():
     temp_final_dir.mkdir(exist_ok=True)
     
     # Create video concatenation list
-    concat_list = create_video_concat_list(directory, timing_data, temp_final_dir)
+    concat_list = create_video_concat_list(directory, timing_data, temp_dir, temp_final_dir)
     if not concat_list:
         sys.exit(1)
     
     # Create audio track
-    voice_track = create_audio_track(directory, timing_data, temp_final_dir)
+    voice_track = create_audio_track(directory, timing_data, temp_dir)
     if not voice_track:
         sys.exit(1)
     

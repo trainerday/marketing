@@ -164,7 +164,7 @@ def main():
     for video_file in timed_videos:
         print(f"  ✓ {video_file.name}")
     
-    print(f"\nNext: python 8_create_music.py {directory}/")
+    print(f"\nNext: python 8_create_final_audio.py {directory}/")
 
 if __name__ == "__main__":
     main()
