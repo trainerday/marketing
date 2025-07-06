@@ -1,0 +1,3 @@
+file '/Users/alex/Documents/Projects/marketing/marketing-video/temp-assets/b-roll.mp4'
+file '/Users/alex/Documents/Projects/marketing/marketing-video/temp-assets/chapter1_20s.mp4'
+file '/Users/alex/Documents/Projects/marketing/marketing-video/temp-assets/b-roll.mp4'

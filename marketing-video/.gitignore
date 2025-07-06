@@ -1,0 +1,49 @@
+# Video project working directory
+current-project/
+
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Node modules
+node_modules/
+
+# MacOS
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+temp_*/
+
+# Video/audio files (large)
+*.mp4
+*.mov
+*.avi
+*.wav
+*.mp3
+*.m4a
+*.aac
+
+# Except example files
+!example_*
+!assets/**/*.mp3
+!assets/**/*.mp4
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log

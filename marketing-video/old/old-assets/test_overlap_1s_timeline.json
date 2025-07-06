@@ -1,0 +1,37 @@
+{
+  "background": "#000000",
+  "tracks": [
+    {
+      "clips": [
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-x0wsk-hqa31-1qsgx-e2exer/source.mp4",
+            "trim": 0,
+            "volume": 0
+          },
+          "start": 0,
+          "length": 5,
+          "transition": {
+            "in": "fade",
+            "out": "fade"
+          }
+        },
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-wzzye-mk23x-eq90a-rwp3jv/source.mp4",
+            "trim": 0,
+            "volume": 0
+          },
+          "start": 4,
+          "length": 5,
+          "transition": {
+            "in": "fade",
+            "out": "fade"
+          }
+        }
+      ]
+    }
+  ]
+}

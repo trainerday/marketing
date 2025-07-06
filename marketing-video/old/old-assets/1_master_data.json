@@ -1,0 +1,95 @@
+{
+  "video_info": {
+    "base_name": "1",
+    "total_duration": 91.566,
+    "total_chapters": 3,
+    "data_sources": {
+      "chapters": "1_chapters.json",
+      "transcription": "1_audio_transcript.json",
+      "screenshots": "1_screenshot_gpt_description.json",
+      "github_issues": null
+    }
+  },
+  "github_context": null,
+  "chapters": [
+    {
+      "chapter_index": 0,
+      "chapter_info": {
+        "title": "Chapter 001",
+        "start_time": 0.0,
+        "end_time": 23.6,
+        "duration": 23.6
+      },
+      "transcription": {
+        "text": "We have considerably simplified the way Coach Jack works with regards to hours and minutes. It will make it much easier to get exactly what you want and makes the whole process seem or look easier. So instead of dealing with weekly hours or anything else, what we've done is just put a daily range. So it's optimum to",
+        "available": true
+      },
+      "screenshot": {
+        "analysis": "1. **UI Elements Visible:**\n   - Tabs for \"Week/Month\" and \"Specific Event Date\"\n   - Buttons for selecting \"Plan Duration\" options (e.g., 4 weeks, 8 weeks, etc.)\n   - Dropdown/selection buttons for \"Block Type\" with multiple options\n   - A bar chart displaying data over a 12-week span\n   - Toggle switch labeled \"Split Long Indoor Rides\"\n   - Navigation controls for weeks\n   - Action buttons: \"Cancel\" and \"Save & Next\"\n\n2. **Specific Data or Content:**\n   - Text introduction to \"Coach Jack\u2019s recommended plan\"\n   - Selected starting date information\n   - Description for \"The Serious Italian\" training plan\n   - Various \"Block Type\" options for customization\n   - A visual representation of training hours over 12 weeks\n\n3. **User Action or Feature Demonstrated:**\n   - Selecting a training plan based on duration and block type\n   - Reading and understanding the plan description\n   - Adjusting settings like the ride split and choosing recovery weeks\n   - Navigating through different weeks of the training plan\n   \n4. **Notable Visual Indicators or States:**\n   - Current duration and block type selections are highlighted\n   - Each week in the bar chart is distinctly shaded to indicate progression\n   - Toggle for ride split set to \"3/1\"\n   - Current week navigation is indicated by a selection underlined in the interface\n   -",
+        "screenshot_file": "1_screenshot_1.png",
+        "timestamp": 11.8,
+        "available": true
+      },
+      "data_completeness": {
+        "has_transcription": true,
+        "has_screenshot": true,
+        "ready_for_script_generation": true
+      }
+    },
+    {
+      "chapter_index": 1,
+      "chapter_info": {
+        "title": "1",
+        "start_time": 23.6,
+        "end_time": 68.266667,
+        "duration": 44.666667
+      },
+      "transcription": {
+        "text": "anything else, what we've done is just put a daily range. So it's optimum to have that daily range start, you know, from a lower number where you're kind of currently at and go to a higher number. Now some days you may have fixed time available so you can't do that, but overall you want your plan to increase in duration from the beginning of the four weeks or the beginning of the plan to, in this case, the 12th week. So you can see here I can set the start hours, I can set the end hours, and it has a recommended, and I can do that for every day. And then your plan will, like you see up here, it will gradually increase. Then",
+        "available": true
+      },
+      "screenshot": {
+        "analysis": "1. **UI Elements:**\n   - A bar chart displaying data over 12 weeks.\n   - Tabs labeled \"Progressive Sweet Spot,\" \"Base,\" \"Base+,\" \"Base++,\" and \"custom\" for different training plans.\n   - Day checkboxes (Tuesday, Wednesday, Saturday, Sunday) with dropdown options for selecting \"Outdoor\" activities.\n   - Time selection dropdowns for choosing duration.\n   - A section titled \"Here's Your Full Plan\" with a detailed schedule.\n   - Scrollable week sections indicating specific workout plans.\n\n2. **Data/Content Shown:**\n   - Weekly workout plans starting from July 7th, 2025, including indoor and outdoor activities with specified durations.\n   - Weekly totals for duration and stress score.\n   - Descriptions of each workout type, such as \"SFR #1 + CAD\" and \"THRESHOLD #1.\"\n\n3. **User Action/Feature Demonstrated:**\n   - Customizing a training plan by selecting different options for each day.\n   - Viewing and adjusting workout schedules with specific timeframes.\n\n4. **Notable Visual Indicators/States:**\n   - Highlighted bars in the chart indicate training intensity.\n   - Change in dropdown arrow color indicates selection options.\n   - Specific labels such as \"Endurance\" and \"Threshold\" emphasize workout objectives.\n   - Checkbox selections for selecting active days. \n\nThese elements and actions demonstrate a user customizing and reviewing a detailed training plan for upcoming weeks.",
+        "screenshot_file": "1_screenshot_2.png",
+        "timestamp": 45.9333335,
+        "available": true
+      },
+      "data_completeness": {
+        "has_transcription": true,
+        "has_screenshot": true,
+        "ready_for_script_generation": true
+      }
+    },
+    {
+      "chapter_index": 2,
+      "chapter_info": {
+        "title": "2",
+        "start_time": 68.266667,
+        "end_time": 91.566,
+        "duration": 23.299333000000004
+      },
+      "transcription": {
+        "text": "day. And then your plan will, like you see up here, it will gradually increase. Then you have a rest day. So the hours will slowly increase over time, which is the best way to cause adaptions in the sense that you don't want to just increase TSS for adaptions. You want to, you know, focus more on hours if you can.",
+        "available": true
+      },
+      "screenshot": {
+        "analysis": "1. **UI Elements**:\n   - Buttons: Checkboxes for days of the week, selection for workout types (outdoor/indoor), \"Save & Next\" and \"Cancel\" buttons.\n   - Data Displays: Bar chart, textual descriptions, structured workout plan.\n   - Forms: Dropdowns for time duration and type of rides.\n   - Filters: Options to switch weeks (1-4, 5-8, 9-12).\n\n2. **Specific Data or Content**:\n   - A bar chart displaying a 12-week training structure.\n   - Description of \"The Serious Italian\" training plan.\n   - Weekly schedule with detailed workout activities such as \"SFR #1 + CAD,\" \"Threshold #1,\" and more, including rest days.\n\n3. **User Action or Feature**:\n   - The user is customizing a workout plan, with options to toggle outdoor/indoor sessions and adjust times for each weekday.\n   - Navigating the structured training plan by selecting different week intervals for specific workout schedules.\n\n4. **Notable Visual Indicators or States**:\n   - Active checkboxes for outdoor workouts on specified days.\n   - Highlighted sections for weeks with specified start dates.\n   - Visual representation of stress levels (quantified scores) and total weekly hours.\n\nThis setup allows the user to tailor a 12-week cycling plan by adjusting workout environments and duration, utilizing a guided workout strategy.",
+        "screenshot_file": "1_screenshot_3.png",
+        "timestamp": 79.91633350000001,
+        "available": true
+      },
+      "data_completeness": {
+        "has_transcription": true,
+        "has_screenshot": true,
+        "ready_for_script_generation": true
+      }
+    }
+  ],
+  "summary": {
+    "total_chapters": 3,
+    "chapters_with_transcription": 3,
+    "chapters_with_screenshots": 3,
+    "chapters_ready_for_script": 3,
+    "has_github_context": false
+  }
+}

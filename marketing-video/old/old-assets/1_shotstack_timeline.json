@@ -1,0 +1,132 @@
+{
+  "background": "#000000",
+  "tracks": [
+    {
+      "clips": [
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zd1g4-21kj0-s757q-4ay8nt/source.mp4",
+            "trim": 0,
+            "volume": 0
+          },
+          "start": 0,
+          "length": 4.44,
+          "transition": {
+            "in": "fade",
+            "out": "none"
+          }
+        },
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zd1g4-21kj0-s757q-4ay8nt/source.mp4",
+            "trim": 4.340000000000001,
+            "volume": 0
+          },
+          "start": 4.44,
+          "length": 6.56,
+          "transition": {
+            "in": "none",
+            "out": "fade"
+          }
+        },
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zcbh2-5xtys-xh594-7kj6pj/source.mp4",
+            "trim": 0.0,
+            "volume": 0
+          },
+          "start": 10,
+          "length": 21.02,
+          "transition": {
+            "in": "fade",
+            "out": "fade"
+          }
+        },
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zcbh2-5xtys-xh594-7kj6pj/source.mp4",
+            "trim": 23.6,
+            "volume": 0
+          },
+          "start": 29.02,
+          "length": 29.36,
+          "transition": {
+            "in": "fade",
+            "out": "fade"
+          }
+        },
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zcbh2-5xtys-xh594-7kj6pj/source.mp4",
+            "trim": 68.266667,
+            "volume": 0
+          },
+          "start": 57.379999999999995,
+          "length": 20.36,
+          "transition": {
+            "in": "fade",
+            "out": "fade"
+          }
+        },
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zd1g4-21kj0-s757q-4ay8nt/source.mp4",
+            "trim": 0,
+            "volume": 0
+          },
+          "start": 77.74,
+          "length": 4.44,
+          "transition": {
+            "in": "fade",
+            "out": "none"
+          }
+        },
+        {
+          "asset": {
+            "type": "video",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zd1g4-21kj0-s757q-4ay8nt/source.mp4",
+            "trim": 0,
+            "volume": 0
+          },
+          "start": 82.17999999999999,
+          "length": 3.5600000000000023,
+          "transition": {
+            "in": "none",
+            "out": "fade"
+          }
+        }
+      ]
+    },
+    {
+      "clips": [
+        {
+          "asset": {
+            "type": "audio",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zdxrt-qd5ap-6dvtf-qf2jj0/source.wav"
+          },
+          "start": 0,
+          "length": 20.02
+        },
+        {
+          "asset": {
+            "type": "audio",
+            "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zeb54-g7mxz-92b46-v46zts/source.wav"
+          },
+          "start": 20.52,
+          "length": 28.36
+        }
+      ]
+    }
+  ],
+  "soundtrack": {
+    "src": "https://shotstack-ingest-api-stage-sources.s3.ap-southeast-2.amazonaws.com/3szy0nl5bd/zzz01jzd-zdfg8-zgr07-b2sss-6xfbe9/source.mp3",
+    "effect": "fadeIn",
+    "volume": 0.3
+  }
+}
