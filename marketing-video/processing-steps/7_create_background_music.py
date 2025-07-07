@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
-Step 8: Create Final Audio Track
-- A-roll background music (subtle, for voice-over sections)
-- B-roll background music (energetic, for intro/outro)
-- Advanced volume mixing and fade transitions
-- Complete final audio with voice integration
-- Template-based configuration
+Step 7: Create Background Music Track
+- Generate background music from A-roll and B-roll music files
+- Apply professional audio processing (normalization, limiting)
+- Create background_music.wav for final assembly
+- Template-based audio configuration
 """
 
 import sys
@@ -206,8 +205,8 @@ def create_final_audio_track(timing_structure, background_music_file, a_roll_fil
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python 8_create_final_audio.py <directory>")
-        print("Example: python 8_create_final_audio.py current-project/")
+        print("Usage: python 7_create_background_music.py <directory>")
+        print("Example: python 7_create_background_music.py current-project/")
         sys.exit(1)
     
     directory = Path(sys.argv[1])
@@ -266,36 +265,24 @@ def main():
         print(f"  B-roll: {template_config['music']['b_roll_background']}")
         sys.exit(1)
     
-    # Create final audio with voice mixed in
-    voice_file = directory / "resemble-a-roll.wav"
-    final_audio_file = temp_dir / "audio_final.wav"
-    
-    if voice_file.exists():
-        voice_volume = template_config['audio_levels']['voice_volume']
-        voice_success = create_final_audio_track(timing_structure, background_music_file, voice_file, final_audio_file, voice_volume)
-        if voice_success:
-            print(f"  ✓ audio_final.wav (background music + voice)")
-    else:
-        print(f"  ⚠ Voice file not found: {voice_file.name}")
-        voice_success = True
+    # Background music creation completed
+    print(f"✓ Background music track created successfully")
     
     print("\n" + "=" * 50)
-    print("STEP 8 COMPLETED!")
+    print("STEP 7 COMPLETED!")
     print("=" * 50)
     print("Created files:")
     print(f"  ✓ {background_music_file.name} (mixed B-roll + A-roll)")
     print(f"  ✓ temp_broll.wav (B-roll only)")
     print(f"  ✓ temp_aroll.wav (A-roll only)")
     
-    print(f"\nAdvanced music setup:")
+    print(f"\nBackground music setup:")
     print(f"  A-roll music: {template_config['music']['a_roll_background']}")
     print(f"  B-roll music: {template_config['music']['b_roll_background']}")
     print(f"  Total duration: {timing_structure['total_duration']:.1f}s")
     print(f"  Fade transitions: B-roll 2.0s (9-11s), A-roll 2.0s (10-12s)")
     print(f"  B-roll starts at full volume from beginning")
-    if voice_success:
-        print(f"  Voice starts at {timing_structure['voice_start_time']:.1f}s")
-    print(f"\nNext: python 9_final_assembly.py {directory}/")
+    print(f"\nNext: python 8_process_voice.py {directory}/")
 
 if __name__ == "__main__":
     main()

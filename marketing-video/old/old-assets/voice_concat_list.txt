@@ -1,3 +1,0 @@
-file '/Users/alex/Documents/Projects/marketing/marketing-video/temp-assets/1_1.wav'
-file '/Users/alex/Documents/Projects/marketing/marketing-video/temp-assets/1_2.wav'
-file '/Users/alex/Documents/Projects/marketing/marketing-video/temp-assets/1_3.wav'

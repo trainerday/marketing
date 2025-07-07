@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
-Step 9: Final Assembly
-- Combine music, b-roll intro/outro, and chapter files
-- Future: Overlays (talking head, titles)
+Step 9: Final Assembly and Add Overlays
+- Combine background music, b-roll intro/outro, and chapter files
+- Add title and logo overlays with precise timing
+- Optimized single-pass audio mixing (voice + background music)
+- Output professional ProRes 422 final video
 """
 
 import sys
@@ -72,53 +74,23 @@ def create_video_concat_list(directory, timing_data, source_temp_dir, output_tem
     
     return concat_list
 
-def create_audio_track(directory, timing_data, temp_dir):
-    """Create complete audio track with timing."""
+def create_audio_inputs_for_filter(directory, timing_data, temp_dir):
+    """Prepare audio input files for single-pass filter processing."""
     chapter_timings = timing_data['chapter_timings']
-    
-    # Calculate timing
-    broll_intro_duration = 10.0
-    total_chapter_duration = sum(timing['duration'] for timing in chapter_timings)
-    voice_start_time = broll_intro_duration + 1.0  # Start voice 1 second after b-roll ends
-    
-    # Create voice track with delay
-    voice_concat_list = temp_dir / "voice_concat.txt"
     chapters_dir = temp_dir / "chapters"
-    with open(voice_concat_list, 'w') as f:
-        for timing in chapter_timings:
-            chapter_num = timing['chapter']
-            chapter_audio = chapters_dir / f"chapter_{chapter_num}.wav"
-            if chapter_audio.exists():
-                f.write(f"file '{chapter_audio.resolve()}'\n")
-            else:
-                print(f"  ✗ Chapter audio not found: {chapter_audio}")
-                return None
     
-    # Concatenate voice files
-    voice_combined = temp_dir / "voice_combined.wav"
-    cmd = [
-        'ffmpeg', '-f', 'concat', '-safe', '0', '-i', str(voice_concat_list),
-        '-c', 'copy', '-y', str(voice_combined)
-    ]
+    # Verify all chapter audio files exist
+    chapter_files = []
+    for timing in chapter_timings:
+        chapter_num = timing['chapter']
+        chapter_audio = chapters_dir / f"chapter_{chapter_num}.wav"
+        if chapter_audio.exists():
+            chapter_files.append(chapter_audio)
+        else:
+            print(f"  ✗ Chapter audio not found: {chapter_audio}")
+            return None
     
-    if not run_command(cmd, "Combining voice chapters"):
-        return None
-    
-    # Create delayed voice track
-    voice_delayed = temp_dir / "voice_delayed.wav"
-    delay_ms = int(voice_start_time * 1000)
-    total_duration = broll_intro_duration + total_chapter_duration + 10.0 + 2.0  # Extra padding
-    
-    cmd = [
-        'ffmpeg', '-i', str(voice_combined),
-        '-filter_complex', f'[0:a]adelay={delay_ms}|{delay_ms}[delayed]; [delayed]atrim=0:{total_duration}[out]',
-        '-map', '[out]', '-y', str(voice_delayed)
-    ]
-    
-    if not run_command(cmd, f"Adding {voice_start_time:.1f}s delay to voice"):
-        return None
-    
-    return voice_delayed
+    return chapter_files
 
 def generate_overlays(directory, config, temp_dir):
     """Generate all overlay assets from config."""
@@ -171,42 +143,71 @@ def generate_overlays(directory, config, temp_dir):
     
     return overlays
 
-def combine_final_video(concat_list, voice_track, background_music, overlays, output_file):
-    """Combine video with audio tracks and overlays in single pass."""
+def combine_final_video_optimized(concat_list, chapter_audio_files, background_music, overlays, timing_data, output_file):
+    """Combine video with audio tracks and overlays in single pass using filter graphs."""
     
-    # Build FFmpeg command with overlays
-    inputs = [
-        '-f', 'concat', '-safe', '0', '-i', str(concat_list),  # 0: video
-        '-i', str(voice_track),                                 # 1: voice
-        '-i', str(background_music)                            # 2: music
-    ]
+    # Build FFmpeg inputs
+    inputs = ['-f', 'concat', '-safe', '0', '-i', str(concat_list)]  # 0: video
     
-    input_index = 3
+    # Add chapter audio inputs
+    audio_input_indices = []
+    for i, audio_file in enumerate(chapter_audio_files, 1):
+        inputs.extend(['-i', str(audio_file)])
+        audio_input_indices.append(i)
+    
+    # Add background music
+    music_index = len(audio_input_indices) + 1
+    inputs.extend(['-i', str(background_music)])
+    
+    # Add overlay inputs
+    input_index = music_index + 1
+    overlay_indices = {}
+    if 'title' in overlays:
+        inputs.extend(['-i', str(overlays['title'])])
+        overlay_indices['title'] = input_index
+        input_index += 1
+    if 'logo' in overlays:
+        inputs.extend(['-i', str(overlays['logo'])])
+        overlay_indices['logo'] = input_index
+        input_index += 1
+    
+    # Build filter complex for single-pass processing
     filter_parts = []
     
-    # Start with base video
+    # Audio processing: concatenate chapters with proper timing
+    broll_intro_duration = 11.0  # Actual B-roll duration
+    voice_start_time = broll_intro_duration + 1.0
+    delay_ms = int(voice_start_time * 1000)
+    
+    # Concatenate chapter audio files
+    if len(audio_input_indices) > 1:
+        concat_inputs = ''.join(f'[{i}:a]' for i in audio_input_indices)
+        filter_parts.append(f'{concat_inputs}concat=n={len(audio_input_indices)}:v=0:a=1[voice_concat]')
+        voice_stream = '[voice_concat]'
+    else:
+        voice_stream = f'[{audio_input_indices[0]}:a]'
+    
+    # Add delay to voice and mix with background music (reduced volume)
+    filter_parts.append(f'{voice_stream}adelay={delay_ms}|{delay_ms}[voice_delayed]')
+    filter_parts.append(f'[{music_index}:a]volume=0.3[music_low]')  # Reduce music to 30% volume
+    filter_parts.append(f'[voice_delayed][music_low]amix=inputs=2:duration=longest[final_audio]')
+    
+    # Video processing: start with base video
     current_video = '[0:v]'
     
     # Add title overlay (first 5 seconds)
-    if 'title' in overlays:
-        inputs.extend(['-i', str(overlays['title'])])
-        filter_parts.append(f'{current_video}[{input_index}:v]overlay=0:0:enable=\'between(t,0,5)\'[titled]')
+    if 'title' in overlay_indices:
+        filter_parts.append(f'{current_video}[{overlay_indices["title"]}:v]overlay=0:0:enable=\'between(t,0,5)\'[titled]')
         current_video = '[titled]'
-        input_index += 1
     
     # Add logo overlay (first 5 seconds, top-right)
-    if 'logo' in overlays:
-        inputs.extend(['-i', str(overlays['logo'])])
-        filter_parts.append(f'{current_video}[{input_index}:v]overlay=W-w-20:-20:enable=\'between(t,0,5)\'[final_video]')
+    if 'logo' in overlay_indices:
+        filter_parts.append(f'{current_video}[{overlay_indices["logo"]}:v]overlay=W-w-20:20:enable=\'between(t,0,5)\'[final_video]')
         current_video = '[final_video]'
-        input_index += 1
     else:
         # Rename current for consistency
         filter_parts.append(f'{current_video}copy[final_video]')
         current_video = '[final_video]'
-    
-    # Audio mixing
-    filter_parts.append('[1:a][2:a]amix=inputs=2:duration=longest[final_audio]')
     
     # Combine all filters
     filter_complex = '; '.join(filter_parts)
@@ -222,12 +223,12 @@ def combine_final_video(concat_list, voice_track, background_music, overlays, ou
         '-y', str(output_file)
     ]
     
-    return run_command(cmd, "Final assembly with overlays")
+    return run_command(cmd, "Single-pass final assembly with optimized audio processing")
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python 9_final_assembly.py <directory>")
-        print("Example: python 9_final_assembly.py current-project/")
+        print("Usage: python 9_final_assembly_and_add_overlays.py <directory>")
+        print("Example: python 9_final_assembly_and_add_overlays.py current-project/")
         sys.exit(1)
     
     directory = Path(sys.argv[1])
@@ -253,7 +254,7 @@ def main():
     
     if not background_music_file.exists():
         print(f"✗ Background music not found: {background_music_file}")
-        print("Run step 8 first: python 8_create_music.py temp-assets/")
+        print("Run step 7 first: python 7_create_background_music.py current-project/")
         sys.exit(1)
     
     if not timed_videos_dir.exists():
@@ -281,9 +282,9 @@ def main():
     if not concat_list:
         sys.exit(1)
     
-    # Create audio track
-    voice_track = create_audio_track(directory, timing_data, temp_dir)
-    if not voice_track:
+    # Prepare audio inputs for optimized processing  
+    chapter_audio_files = create_audio_inputs_for_filter(directory, timing_data, temp_dir)
+    if not chapter_audio_files:
         sys.exit(1)
     
     # Generate overlays
@@ -297,7 +298,7 @@ def main():
     final_output_dir.mkdir(exist_ok=True)
     output_file = final_output_dir / "final_video.mov"
     
-    if combine_final_video(concat_list, voice_track, background_music_file, overlays, output_file):
+    if combine_final_video_optimized(concat_list, chapter_audio_files, background_music_file, overlays, timing_data, output_file):
         # Clean up temp files
         import shutil
         shutil.rmtree(temp_final_dir)
