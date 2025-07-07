@@ -48,50 +48,36 @@ def get_audio_duration(audio_file):
     return None
 
 def match_video_to_audio(chapter_video, chapter_audio, output_file):
-    """Match video duration to audio duration + 1 second."""
+    """Combine video and audio with matching duration."""
     video_duration = get_video_duration(chapter_video)
     audio_duration = get_audio_duration(chapter_audio)
     
     if not video_duration or not audio_duration:
         return False
     
-    target_duration = audio_duration + 1.0  # Audio + 1 second
+    print(f"    Video: {video_duration:.1f}s, Audio: {audio_duration:.1f}s")
     
-    print(f"    Video: {video_duration:.1f}s, Audio: {audio_duration:.1f}s, Target: {target_duration:.1f}s")
-    
-    if video_duration >= target_duration:
-        # Video is longer - trim it and add audio
-        cmd = [
-            'ffmpeg', '-i', str(chapter_video), '-i', str(chapter_audio),
-            '-t', str(target_duration),
-            '-c:v', 'copy', '-c:a', 'aac', '-y', str(output_file)
-        ]
-        return run_command(cmd, f"Trimming video to {target_duration:.1f}s and adding audio")
-    
-    else:
-        # Video is shorter - extend with freeze frame and add audio
-        freeze_duration = target_duration - video_duration
-        
-        cmd = [
-            'ffmpeg', '-i', str(chapter_video), '-i', str(chapter_audio),
-            '-filter_complex', 
-            f'[0:v]split[main][freeze]; [freeze]trim=start={video_duration-0.1},setpts=PTS-STARTPTS,loop=loop=-1:size=1:start=0,trim=duration={freeze_duration}[frozen]; [main][frozen]concat=n=2:v=1:a=0[out]',
-            '-map', '[out]', '-map', '1:a', '-c:a', 'aac', '-y', str(output_file)
-        ]
-        return run_command(cmd, f"Extending video with freeze frame (+{freeze_duration:.1f}s) and adding audio")
+    # Use shortest duration to avoid quality issues with freeze frames
+    cmd = [
+        'ffmpeg', '-i', str(chapter_video), '-i', str(chapter_audio),
+        '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
+        '-c:a', 'pcm_s16le', '-shortest', '-y', str(output_file)
+    ]
+    return run_command(cmd, f"Combining video and audio ({min(video_duration, audio_duration):.1f}s)")
 
 def process_chapter_videos(chapters_dir, timing_data, temp_dir):
     """Process all chapter videos to match audio timing."""
     chapter_timings = timing_data['chapter_timings']
     timed_videos = []
+    chapters_audio_dir = temp_dir / "chapters"
     
     for timing in chapter_timings:
         chapter_num = timing['chapter']
         
         # Find corresponding files
-        chapter_video = chapters_dir / f"chapter_{chapter_num}.mp4"
-        chapter_audio = temp_dir / f"chapter_{chapter_num}.wav"
-        timed_video = temp_dir / "timed_chapter_videos" / f"chapter_{chapter_num}.mp4"
+        chapter_video = chapters_dir / f"chapter_{chapter_num}.mov"
+        chapter_audio = chapters_audio_dir / f"chapter_{chapter_num}.wav"
+        timed_video = temp_dir / "timed_chapter_videos" / f"chapter_{chapter_num}.mov"
         
         if not chapter_video.exists():
             print(f"✗ Chapter video not found: {chapter_video}")

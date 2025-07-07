@@ -33,27 +33,41 @@ def create_video_concat_list(directory, timing_data, source_temp_dir, output_tem
     concat_list = output_temp_dir / "video_concat.txt"
     
     with open(concat_list, 'w') as f:
-        # B-roll intro (10 seconds)
-        broll_file = directory / "b-roll.mp4"
-        if broll_file.exists():
-            f.write(f"file '{broll_file.resolve()}'\n")
-        else:
-            print(f"  ⚠ B-roll file not found: {broll_file}")
-            print(f"  Please download 10-second b-roll from Artgrid and save as: {broll_file}")
-            return None
+        # B-roll intro (10 seconds) - use ProRes version for compatibility
+        broll_file = source_temp_dir / "b-roll_prores.mov"
+        if not broll_file.exists():
+            # Convert original B-roll to ProRes if needed
+            original_broll = directory / "original-content/b-roll.mp4"
+            if original_broll.exists():
+                print(f"  Converting B-roll to ProRes format...")
+                cmd = [
+                    'ffmpeg', '-i', str(original_broll),
+                    '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
+                    '-r', '30', '-an', '-y', str(broll_file)
+                ]
+                result = subprocess.run(cmd, capture_output=True, text=True)
+                if result.returncode != 0:
+                    print(f"  ✗ Failed to convert B-roll: {result.stderr}")
+                    return None
+            else:
+                print(f"  ⚠ B-roll file not found: {original_broll}")
+                print(f"  Please download 10-second b-roll from Artgrid and save as: {original_broll}")
+                return None
+        
+        f.write(f"file '{broll_file.resolve()}'\n")
         
         # Chapter videos
         timed_videos_dir = source_temp_dir / "timed_chapter_videos"
         for timing in chapter_timings:
             chapter_num = timing['chapter']
-            chapter_file = timed_videos_dir / f"chapter_{chapter_num}.mp4"
+            chapter_file = timed_videos_dir / f"chapter_{chapter_num}.mov"
             if chapter_file.exists():
                 f.write(f"file '{chapter_file.resolve()}'\n")
             else:
                 print(f"  ✗ Chapter video not found: {chapter_file}")
                 return None
         
-        # B-roll outro (10 seconds) - reuse same b-roll
+        # B-roll outro (10 seconds) - reuse same ProRes b-roll
         f.write(f"file '{broll_file.resolve()}'\n")
     
     return concat_list
@@ -203,8 +217,8 @@ def combine_final_video(concat_list, voice_track, background_music, overlays, ou
     ] + inputs + [
         '-filter_complex', filter_complex,
         '-map', current_video, '-map', '[final_audio]',
-        '-c:v', 'libx264', '-crf', '23', '-preset', 'medium',
-        '-pix_fmt', 'yuv420p', '-c:a', 'aac',
+        '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
+        '-c:a', 'pcm_s16le',
         '-y', str(output_file)
     ]
     
@@ -279,7 +293,9 @@ def main():
         sys.exit(1)
     
     # Final assembly with overlays
-    output_file = directory / "final_video.mp4"
+    final_output_dir = directory / "final-output"
+    final_output_dir.mkdir(exist_ok=True)
+    output_file = final_output_dir / "final_video.mov"
     
     if combine_final_video(concat_list, voice_track, background_music_file, overlays, output_file):
         # Clean up temp files

@@ -133,12 +133,12 @@ def split_video_by_chapters(video_file, chapters_file, temp_dir):
         start_time = chapter['start_time']
         duration = chapter['duration']
         
-        chapter_file = chapters_dir / f"chapter_{chapter_num}.mp4"
+        chapter_file = chapters_dir / f"chapter_{chapter_num}.mov"
         
         cmd = [
             'ffmpeg', '-i', str(video_file),
             '-ss', str(start_time), '-t', str(duration),
-            '-c:v', 'copy', '-an',  # Copy video, remove audio
+            '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le', '-an',
             '-y', str(chapter_file)
         ]
         
@@ -160,7 +160,11 @@ def main():
         print(f"✗ Video file not found: {video_file}")
         sys.exit(1)
     
-    project_dir = video_file.parent
+    # Use project root (go up from original-content to main directory)
+    if "original-content" in str(video_file):
+        project_dir = video_file.parent.parent
+    else:
+        project_dir = video_file.parent
     temp_dir = project_dir / "temp"
     temp_dir.mkdir(exist_ok=True)
     

@@ -267,7 +267,7 @@ def main():
         sys.exit(1)
     
     # Create final audio with voice mixed in
-    voice_file = directory / "a-roll.wav"
+    voice_file = directory / "resemble-a-roll.wav"
     final_audio_file = temp_dir / "audio_final.wav"
     
     if voice_file.exists():
