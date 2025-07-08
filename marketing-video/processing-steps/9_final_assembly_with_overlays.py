@@ -298,7 +298,15 @@ def generate_overlays(directory, config, temp_dir, assembly_template):
     
     # Generate title overlay
     print("  Generating title overlay...")
-    template_file = directory.parent / "video-templates/video_title_template.svg"
+    # Get template path from assembly template, resolve "from-project" to project config
+    title_overlay_config = assembly_template.get('overlay_sections', {}).get('title', {})
+    template_path = title_overlay_config.get('svg_template', 'video-templates/video_title_template.svg')
+    
+    if template_path == "from-project":
+        # Get the actual path from project config
+        template_path = config.get('title_svg_template', 'assets/overlays/video_title1.svg')
+    
+    template_file = directory.parent / template_path
     title_svg = overlay_dir / "title_overlay.svg"
     title_png = overlay_dir / "title_overlay.png"
     

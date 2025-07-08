@@ -120,9 +120,9 @@ def create_advanced_music_track(template_config, timing_structure, output_file, 
     voice_start = timing_structure['voice_start_time']
     voice_end = timing_structure['voice_end_time']
     
-    # Volume levels from template
-    bg_volume = audio_levels['background_music_volume']  # 0.3 for A-roll background
-    broll_volume = audio_levels['b_roll_music_volume']   # 0.8 for B-roll sections
+    # Keep at full volume - volume reduction will happen in step 9 final mixing
+    bg_volume = 1.0  # Full volume for temp files
+    broll_volume = 1.0  # Full volume for temp files
     
     # Simple timing structure based on actual files
     intro_duration = timing_structure['intro_duration']

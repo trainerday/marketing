@@ -108,7 +108,7 @@
   },
   "overlay_sections": {
     "title": {
-      "svg_template": "video-templates/video_title_template.svg",
+      "svg_template": "from-project",
       "position": "0:0",
       "start_time": 0.0,
       "duration": "calculated",
