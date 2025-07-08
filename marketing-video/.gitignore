@@ -47,3 +47,7 @@ temp_*/
 
 # Logs
 *.log
+
+# YouTube API credentials (sensitive)
+credentials.json
+.youtube_credentials.pickle

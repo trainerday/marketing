@@ -1,0 +1,7 @@
+# YouTube API dependencies
+google-api-python-client>=2.100.0
+google-auth-httplib2>=0.1.0
+google-auth-oauthlib>=0.7.0
+
+# Optional: for progress bars and better UX
+tqdm>=4.64.0
