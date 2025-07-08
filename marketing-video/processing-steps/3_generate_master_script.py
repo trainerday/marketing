@@ -11,6 +11,10 @@ import json
 import glob
 from pathlib import Path
 from openai import OpenAI
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def generate_script(transcript_data, chapters_data):
     """Generate polished script using GPT."""
@@ -114,7 +118,7 @@ def main():
     temp_dir = directory / "temp"
     if not temp_dir.exists():
         print(f"✗ Temp directory not found: {temp_dir}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mov")
         sys.exit(1)
     
     # Check required files
@@ -128,7 +132,7 @@ def main():
     
     if not chapters_file.exists():
         print(f"✗ Chapters file not found: {chapters_file}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mov")
         sys.exit(1)
     
     # Load data
@@ -140,24 +144,33 @@ def main():
     
     script_review_file = directory / "script-for-review-sentences.txt"  # Keep in main dir for review
     script_generated_file = directory / "script-generated.txt"  # Auto-generated, can be overwritten
-    script_final_file = directory / "resemble-a-roll.txt"  # Manual edits - matches resemble-a-roll.wav
+    # Check both locations for resemble-a-roll.txt
+    script_final_file = directory / "human-provided-content" / "resemble-a-roll.txt"  # Manual edits - matches resemble-a-roll.wav
+    legacy_script_file = directory / "resemble-a-roll.txt"
+    
+    # Move from legacy location if needed
+    if legacy_script_file.exists() and not script_final_file.exists():
+        print(f"  Moving resemble-a-roll.txt to human-provided-content/")
+        script_final_file.parent.mkdir(exist_ok=True)
+        legacy_script_file.rename(script_final_file)
     
     print("Step 3: Generate Master Script")
     print("=" * 50)
     
     # Check for project-config.json and create from template if needed
-    project_config_file = directory / "project-config.json"
+    project_config_file = directory / "human-provided-content" / "project-config.json"
     if not project_config_file.exists():
         print("  Setting up project configuration...")
         template_file = directory.parent / "video-templates" / "project-config-template.json"
         if template_file.exists():
             import shutil
+            project_config_file.parent.mkdir(exist_ok=True)
             shutil.copy2(template_file, project_config_file)
             print(f"  ✓ Created {project_config_file.name} from template")
-            print(f"  ⚠️  IMPORTANT: Update project-config.json with your project settings!")
+            print(f"  ⚠️  IMPORTANT: Update human-provided-content/project-config.json with your project settings!")
         else:
             print(f"  ⚠️  Template not found: {template_file}")
-            print(f"  Please create project-config.json manually in {directory}/")
+            print(f"  Please create project-config.json manually in {directory}/human-provided-content/")
     else:
         print(f"  ✓ Found existing {project_config_file.name}")
     
@@ -186,21 +199,6 @@ def main():
         # Parse JSON response
         script_data = json.loads(script_response)
         
-        # Create readable text file for review
-        script_text = "# Script for Review\n\n"
-        script_text += "## Generated Enhanced Scripts\n\n"
-        
-        for chapter in script_data['chapters']:
-            script_text += f"### Chapter {chapter['chapter']}: {chapter['title']}\n"
-            script_text += f"**Words:** {chapter['word_count']}\n\n"
-            script_text += f"**Enhanced Script:**\n{chapter['enhanced_script']}\n\n"
-            script_text += f"**Original Text:**\n{chapter['original_text']}\n\n"
-            script_text += "---\n\n"
-        
-        # Save review script
-        with open(script_review_file, 'w') as f:
-            f.write(script_text)
-        
         # Create simple final script file (one line per sentence, no chapter headers)
         final_script_lines = []
         for i, chapter in enumerate(script_data['chapters']):
@@ -212,9 +210,14 @@ def main():
                     final_script_lines.append(sentence)
                     final_script_lines.append("")  # Empty line after each sentence
             
-            # Add extra empty line between chapters (except after last chapter)
+            # Add extra empty lines between chapters (except after last chapter)
             if i < len(script_data['chapters']) - 1:
-                final_script_lines.append("")
+                final_script_lines.append("")  # Additional line break between chapters
+                final_script_lines.append("")  # Second line break for clear separation
+        
+        # Save review script in same format as resemble-a-roll.txt
+        with open(script_review_file, 'w') as f:
+            f.write('\n'.join(final_script_lines))
         
         # Save generated script (can be overwritten)
         with open(script_generated_file, 'w') as f:
@@ -222,12 +225,13 @@ def main():
         
         # Check if manual final script exists
         if script_final_file.exists():
-            print(f"  ✓ Preserving existing manual edits: {script_final_file.name}")
+            print(f"  ✓ Preserving existing manual edits: human-provided-content/resemble-a-roll.txt")
         else:
             # Copy generated script as starting point for manual editing
+            script_final_file.parent.mkdir(exist_ok=True)
             with open(script_final_file, 'w') as f:
                 f.write('\n'.join(final_script_lines))
-            print(f"  ✓ Created initial {script_final_file.name} for manual editing")
+            print(f"  ✓ Created initial human-provided-content/resemble-a-roll.txt for manual editing")
         
         print("\n" + "=" * 50)
         print("STEP 3 COMPLETED!")
@@ -235,16 +239,16 @@ def main():
         print("Created files:")
         print(f"  ✓ {script_review_file.name} (for review)")
         print(f"  ✓ {script_generated_file.name} (auto-generated)")
-        if not script_final_file.exists():
-            print(f"  ✓ {script_final_file.name} (copy for manual editing)")
+        if script_final_file.exists():
+            print(f"  → human-provided-content/resemble-a-roll.txt (preserved manual edits)")
         else:
-            print(f"  → {script_final_file.name} (preserved manual edits)")
+            print(f"  ✓ human-provided-content/resemble-a-roll.txt (copy for manual editing)")
         print(f"\nScript summary:")
         for chapter in script_data['chapters']:
             print(f"  Chapter {chapter['chapter']}: {chapter['word_count']} words")
         
         print(f"\n🔧 PROJECT CONFIGURATION:")
-        print(f"   1. UPDATE project-config.json with your project settings:")
+        print(f"   1. UPDATE human-provided-content/project-config.json with your project settings:")
         print(f"      - Update branding (title_line1, title_line2)")
         print(f"      - Set audio levels if needed")
         print(f"      - Verify intro/outro file paths")
@@ -252,14 +256,14 @@ def main():
         print(f"")
         print(f"📝 ITERATIVE SCRIPT REFINEMENT PROCESS:")
         print(f"   2. Review script quality in '{script_review_file.name}'")
-        print(f"   3. Edit/update the script in '{script_final_file.name}'")
+        print(f"   3. Edit/update the script in 'human-provided-content/resemble-a-roll.txt'")
         print(f"   4. Run verification: python 4_verify_script.py {directory}/")
         print(f"   5. REPEAT steps 3-4 until you achieve the quality score you want")
         print(f"      (Keep editing and verifying until perfect)")
         print(f"")
         print(f"📢 VOICE GENERATION PROCESS:")
         print(f"   6. Listen to script in Resemble.ai preview before generating")
-        print(f"   7. Make final edits to '{script_final_file.name}' if needed")
+        print(f"   7. Make final edits to 'human-provided-content/resemble-a-roll.txt' if needed")
         print(f"   8. Re-verify with step 4 after any final edits")
         print(f"   9. Generate chapter audio files using Resemble.ai:")
         print(f"      - Create separate audio files for each chapter")
@@ -270,8 +274,8 @@ def main():
         print(f"       (This is optional - chapter files are the primary requirement)")
         print(f"")
         print(f"✅ FINAL READINESS CHECK:")
-        print(f"   - Ensure project-config.json is updated with your settings")
-        print(f"   - Ensure '{script_final_file.name}' contains your final script")
+        print(f"   - Ensure human-provided-content/project-config.json is updated with your settings")
+        print(f"   - Ensure 'human-provided-content/resemble-a-roll.txt' contains your final script")
         print(f"   - Ensure resemble-chapters/N.wav files exist for all chapters")
         print(f"   - OPTIONAL: Ensure '{directory}/a-roll.wav' exists if you want full audio")
         print(f"   - Then run: python 5_audio_timing.py {directory}/")

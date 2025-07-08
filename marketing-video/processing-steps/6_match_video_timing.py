@@ -75,11 +75,11 @@ def match_video_to_audio(chapter_video, chapter_audio, output_file):
         if not run_command(extract_cmd, "Extracting last frame"):
             return False
         
-        # Create freeze frame video
+        # Create freeze frame video at 4K resolution
         freeze_cmd = [
             'ffmpeg', '-loop', '1', '-i', str(temp_frame),
             '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
-            '-t', str(extension_duration), '-r', '30', '-y', str(temp_freeze_video)
+            '-t', str(extension_duration), '-r', '30', '-s', '1920x1080', '-y', str(temp_freeze_video)
         ]
         
         if not run_command(freeze_cmd, f"Creating freeze frame video ({extension_duration:.1f}s)"):
@@ -94,7 +94,7 @@ def match_video_to_audio(chapter_video, chapter_audio, output_file):
         concat_cmd = [
             'ffmpeg', '-f', 'concat', '-safe', '0', '-i', str(concat_file),
             '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
-            '-an', '-y', str(output_file)
+            '-s', '1920x1080', '-an', '-y', str(output_file)
         ]
         
         result = run_command(concat_cmd, f"Concatenating with freeze frame")
@@ -106,45 +106,57 @@ def match_video_to_audio(chapter_video, chapter_audio, output_file):
         
         return result
     else:
-        # Trim video to match audio duration
+        # Trim video to match audio duration at 4K resolution
         cmd = [
             'ffmpeg', '-i', str(chapter_video),
             '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
-            '-t', str(audio_duration), '-an', '-y', str(output_file)
+            '-t', str(audio_duration), '-s', '1920x1080', '-an', '-y', str(output_file)
         ]
         return run_command(cmd, f"Trimming video to {audio_duration:.1f}s")
 
-def process_chapter_videos(chapters_dir, timing_data, temp_dir):
-    """Process all chapter videos to match audio timing."""
-    chapter_timings = timing_data['chapter_timings']
+def process_chapter_videos(chapters_dir, processed_voice_dir, temp_dir):
+    """Process all chapter videos to match audio timing (no hardcoded timing file)."""
     timed_videos = []
-    chapters_audio_dir = temp_dir / "timed_chapters"
+    timed_videos_dir = temp_dir / "timed_chapters"
+    timed_videos_dir.mkdir(exist_ok=True)
     
-    for timing in chapter_timings:
-        chapter_num = timing['chapter']
-        
+    # Detect chapters dynamically from processed voice files
+    chapter_num = 1
+    
+    while True:
         # Find corresponding files
         chapter_video = chapters_dir / f"chapter_{chapter_num}.mov"
-        chapter_audio = chapters_audio_dir / f"chapter_{chapter_num}.wav"
-        timed_video = temp_dir / "timed_chapters" / f"chapter_{chapter_num}.mov"
+        chapter_audio = processed_voice_dir / f"chapter_{chapter_num}_processed.wav"
+        timed_video = timed_videos_dir / f"chapter_{chapter_num}.mov"
+        timed_audio = timed_videos_dir / f"chapter_{chapter_num}.wav"
         
-        if not chapter_video.exists():
-            print(f"✗ Chapter video not found: {chapter_video}")
-            return None
+        # Break if no more chapters
+        if not chapter_video.exists() or not chapter_audio.exists():
+            if chapter_num == 1:
+                print(f"✗ No chapter files found!")
+                print(f"  Looking for: {chapter_video}")
+                print(f"  Looking for: {chapter_audio}")
+                return None
+            break
         
-        if not chapter_audio.exists():
-            print(f"✗ Chapter audio not found: {chapter_audio}")
-            return None
+        print(f"Processing chapter {chapter_num}...")
         
-        # Create output directory
-        timed_video.parent.mkdir(exist_ok=True)
+        # Copy processed audio to timed_chapters for assembly pipeline
+        if not timed_audio.exists():
+            import shutil
+            shutil.copy2(chapter_audio, timed_audio)
+            print(f"  ✓ Copied audio: {timed_audio.name}")
         
         # Match video to audio timing
         if match_video_to_audio(chapter_video, chapter_audio, timed_video):
             timed_videos.append(timed_video)
+            print(f"  ✓ Timed video: {timed_video.name}")
         else:
             return None
+        
+        chapter_num += 1
     
+    print(f"  Processed {len(timed_videos)} chapters")
     return timed_videos
 
 def main():
@@ -161,34 +173,29 @@ def main():
     temp_dir = directory / "temp"
     if not temp_dir.exists():
         print(f"✗ Temp directory not found: {temp_dir}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mov")
         sys.exit(1)
     
-    # Check required files and directories
-    timing_file = temp_dir / "audio_timing.json"
+    # Check required directories
     chapters_dir = temp_dir / "original-chapters"
-    
-    if not timing_file.exists():
-        print(f"✗ Timing file not found: {timing_file}")
-        print("Run step 5 first: python 5_audio_timing.py temp-assets/")
-        sys.exit(1)
+    processed_voice_dir = temp_dir / "processed_voice"
     
     if not chapters_dir.exists():
         print(f"✗ Chapters directory not found: {chapters_dir}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mov")
+        sys.exit(1)
+    
+    if not processed_voice_dir.exists():
+        print(f"✗ Processed voice directory not found: {processed_voice_dir}")
+        print("Run step 8 first: python 8_process_voice.py current-project/")
         sys.exit(1)
     
     print("Step 6: Match Video to Audio Timing")
     print("=" * 50)
+    print("Matching chapter videos to processed audio timing (no hardcoded timing file)")
     
-    # Load timing data
-    with open(timing_file, 'r') as f:
-        timing_data = json.load(f)
-    
-    print(f"Processing {len(timing_data['chapter_timings'])} chapters")
-    
-    # Process videos
-    timed_videos = process_chapter_videos(chapters_dir, timing_data, temp_dir)
+    # Process videos using dynamic detection
+    timed_videos = process_chapter_videos(chapters_dir, processed_voice_dir, temp_dir)
     if not timed_videos:
         sys.exit(1)
     

@@ -1,0 +1,22 @@
+{
+  "music": {
+    "a_roll_background": "assets/music/a-roll-background/ES_Falconeer - Lovren - Cut.mp3",
+    "b_roll_background": "assets/music/top-b-roll/ES_Spaghetti on the Island - Thompson Town Flowers.mp3"
+  },
+  "audio_levels": {
+    "background_music_volume": 0.3,
+    "b_roll_music_volume": 0.5
+  },
+  "branding": {
+    "title_line1": "COACH JACK",
+    "title_line2": "NEW DURATION PICKER"
+  },
+  "intro_outro": {
+    "intro_video": "assets/intros-and-outros/intro1.mov",
+    "intro_audio": "assets/intros-and-outros/intro1.wav",
+    "outro_video": "assets/intros-and-outros/outro1.mov",
+    "outro_audio": "assets/intros-and-outros/outro1.wav"
+  },
+  "b_roll_video": "assets/b-roll/658932_Cyclist_Cycling_Man_Road_By_David_Zalka_Artlist_HD.mp4",
+  "assembly_template": "assembly-template1.json"
+}

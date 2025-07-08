@@ -120,6 +120,24 @@
       "start_time": 0.0,
       "duration": "calculated",
       "calculation": "beginning.total_duration"
+    },
+    "bottom_logo": {
+      "source": "assets/logos/td_full_white_red.png",
+      "position": "(W-w)/2:(H*3/4)",
+      "scale": "0.9",
+      "start_time": "calculated",
+      "calculation": "beginning.total_duration + chapters.total_duration",
+      "duration": "calculated",
+      "calculation_duration": "end.total_duration"
+    },
+    "subscribe": {
+      "source": "assets/other/subscribe.png",
+      "type": "image",
+      "position": "0:0",
+      "start_time": "calculated",
+      "calculation": "beginning.total_duration + chapters.total_duration + goodbye_message.duration",
+      "duration": "calculated",
+      "calculation_duration": "outro_broll.duration"
     }
   },
   "conversion_settings": {
@@ -127,6 +145,7 @@
     "video_profile": "2", 
     "pixel_format": "yuv422p10le",
     "frame_rate": "30",
+    "resolution": "1920x1080",
     "audio_codec": "pcm_s16le",
     "audio_sample_rate": "44100",
     "audio_channels": "2"

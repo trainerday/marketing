@@ -55,10 +55,10 @@ def main():
         sys.exit(1)
     
     # Load project config to get intro/outro file paths
-    project_config_file = directory / "project-config.json"
+    project_config_file = directory / "human-provided-content" / "project-config.json"
     if not project_config_file.exists():
         print(f"✗ Project config file not found: {project_config_file}")
-        print("project-config.json is required to specify intro/outro files")
+        print("human-provided-content/project-config.json is required to specify intro/outro files")
         sys.exit(1)
     
     with open(project_config_file, 'r') as f:
@@ -81,7 +81,7 @@ def main():
     intro_outro_config = project_config.get('intro_outro', {})
     intro_audio_path = intro_outro_config.get('intro_audio')
     if intro_audio_path:
-        intro_audio_file = Path("..") / intro_audio_path
+        intro_audio_file = directory.parent / intro_audio_path
         if intro_audio_file.exists():
             intro_processed = processed_voice_dir / "intro1_processed.wav"
             if process_voice_file(intro_audio_file, intro_processed, "intro voice"):
@@ -91,19 +91,29 @@ def main():
     else:
         print("  ⚠ No intro audio file configured")
     
-    # Process chapter voices from timed_chapters
-    if timed_chapters_dir.exists():
+    # Process chapter voices from resemble-chapters (primary source)
+    resemble_chapters_dir = directory / "human-provided-content" / "resemble-chapters"
+    if resemble_chapters_dir.exists():
         for i in range(1, 10):  # Support up to 9 chapters
-            chapter_audio = timed_chapters_dir / f"chapter_{i}.wav"
+            chapter_audio = resemble_chapters_dir / f"{i}.wav"
             if chapter_audio.exists():
                 chapter_processed = processed_voice_dir / f"chapter_{i}_processed.wav"
                 if process_voice_file(chapter_audio, chapter_processed, f"chapter {i} voice"):
                     processed_files.append(f"chapter_{i}_processed.wav")
+    else:
+        # Fallback: check timed_chapters if resemble-chapters doesn't exist
+        if timed_chapters_dir.exists():
+            for i in range(1, 10):  # Support up to 9 chapters
+                chapter_audio = timed_chapters_dir / f"chapter_{i}.wav"
+                if chapter_audio.exists():
+                    chapter_processed = processed_voice_dir / f"chapter_{i}_processed.wav"
+                    if process_voice_file(chapter_audio, chapter_processed, f"chapter {i} voice"):
+                        processed_files.append(f"chapter_{i}_processed.wav")
     
     # Process outro voice (if configured and exists)
     outro_audio_path = intro_outro_config.get('outro_audio')
     if outro_audio_path:
-        outro_audio_file = Path("..") / outro_audio_path
+        outro_audio_file = directory.parent / outro_audio_path
         if outro_audio_file.exists():
             outro_processed = processed_voice_dir / "outro1_processed.wav"
             if process_voice_file(outro_audio_file, outro_processed, "outro voice"):

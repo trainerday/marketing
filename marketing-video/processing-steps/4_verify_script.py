@@ -12,6 +12,10 @@ import json
 import glob
 from pathlib import Path
 from openai import OpenAI
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 def verify_script_quality(script_content, chapters_data):
     """Verify script quality using GPT."""
@@ -115,11 +119,11 @@ def main():
     temp_dir = directory / "temp"
     if not temp_dir.exists():
         print(f"✗ Temp directory not found: {temp_dir}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mp4")
         sys.exit(1)
     
     # Check required files
-    script_final_file = directory / "resemble-a-roll.txt"
+    script_final_file = directory / "human-provided-content" / "resemble-a-roll.txt"
     chapters_file = temp_dir / "chapters.json"
     
     if not script_final_file.exists():
@@ -129,7 +133,7 @@ def main():
     
     if not chapters_file.exists():
         print(f"✗ Chapters file not found: {chapters_file}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mp4")
         sys.exit(1)
     
     print("Step 4: Script Verification")
@@ -182,11 +186,14 @@ def main():
     
     print(f"\n📝 NEXT STEPS:")
     print(f"   1. Review the verification report in '{report_file.name}'")
-    print(f"   2. Make any recommended edits to '{script_final_file.name}' if needed")
+    print(f"   2. Make any recommended edits to 'human-provided-content/resemble-a-roll.txt' if needed")
     print(f"   3. Re-run this step if you make significant changes")
-    print(f"   4. Generate voice using Resemble.ai with the final script")
-    print(f"   5. Save generated voice as: {directory}/a-roll.wav")
-    print(f"      ⚠️  IMPORTANT: File must be named exactly 'a-roll.wav'")
+    print(f"   4. Generate chapter audio files using Resemble.ai:")
+    print(f"      - Create separate audio files for each chapter")
+    print(f"      - Save as: resemble-chapters/1.wav, 2.wav, 3.wav, etc.")
+    print(f"      - ⚠️  CRITICAL: Files must be in 'resemble-chapters/' folder")
+    print(f"      - ⚠️  CRITICAL: Files must be named 'N.wav' (N = chapter number)")
+    print(f"   5. OPTIONAL: Generate full A-roll audio as: {directory}/a-roll.wav")
     print(f"   6. Then run: python 5_audio_timing.py {directory}/")
     print(f"\n💡 TIP: This verification helps ensure your script is")
     print(f"    professional and effective before voice generation.")

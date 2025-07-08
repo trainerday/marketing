@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Step 1: Extract Audio & Chapters
-- Extract audio track from MP4 video files
+- Extract audio track from MP4 video files (MP4 required for chapter markers)
 - Get chapter markers from ScreenFlow recordings  
 - Split MP4 into individual chapter video files
 """
@@ -152,7 +152,7 @@ def split_video_by_chapters(video_file, chapters_file, temp_dir):
 def main():
     if len(sys.argv) != 2:
         print("Usage: python 1_extract_audio_chapters.py <video_file>")
-        print("Example: python 1_extract_audio_chapters.py current-project/orig-video.mp4")
+        print("Example: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mp4")
         sys.exit(1)
     
     video_file = Path(sys.argv[1])
@@ -160,8 +160,8 @@ def main():
         print(f"✗ Video file not found: {video_file}")
         sys.exit(1)
     
-    # Use project root (go up from original-content to main directory)
-    if "original-content" in str(video_file):
+    # Use project root (go up from human-provided-content to main directory)
+    if "human-provided-content" in str(video_file):
         project_dir = video_file.parent.parent
     else:
         project_dir = video_file.parent

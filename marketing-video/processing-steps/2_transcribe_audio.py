@@ -9,6 +9,10 @@ import sys
 import json
 from pathlib import Path
 from openai import OpenAI
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def transcribe_audio(audio_file):
     """Transcribe audio using OpenAI Whisper."""
@@ -50,13 +54,13 @@ def main():
     temp_dir = directory / "temp"
     if not temp_dir.exists():
         print(f"✗ Temp directory not found: {temp_dir}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mov")
         sys.exit(1)
     
     audio_file = temp_dir / "audio.wav"
     if not audio_file.exists():
         print(f"✗ Audio file not found: {audio_file}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mov")
         sys.exit(1)
     
     transcript_file = temp_dir / "transcript.json"

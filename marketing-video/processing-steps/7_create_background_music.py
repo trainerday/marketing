@@ -46,7 +46,7 @@ def get_video_timing_structure_from_files(project_dir, project_config):
     intro_duration = 0.0
     intro_video_path = intro_outro_config.get('intro_video')
     if intro_video_path:
-        intro_file = Path("..") / intro_video_path
+        intro_file = project_dir.parent / intro_video_path
         if intro_file.exists():
             intro_duration = detect_file_duration(intro_file)
             print(f"  Detected intro duration: {intro_duration:.1f}s")
@@ -73,7 +73,7 @@ def get_video_timing_structure_from_files(project_dir, project_config):
     outro_duration = 0.0
     outro_video_path = intro_outro_config.get('outro_video')
     if outro_video_path:
-        outro_file = Path("..") / outro_video_path
+        outro_file = project_dir.parent / outro_video_path
         if outro_file.exists():
             outro_duration = detect_file_duration(outro_file)
             print(f"  Detected outro duration: {outro_duration:.1f}s")
@@ -159,7 +159,14 @@ def create_advanced_music_track(template_config, timing_structure, output_file, 
     outro_fade_in_duration = 1.0  # 1 second fade-in
     outro_fade_out_duration = 2.0  # 2 second fade-out at end
     outro_duration = total_duration - broll_fadein_start  # Duration of outro section
-    outro_fadeout_start = outro_duration - outro_fade_out_duration  # Start fade-out 2s before end
+    
+    # Prevent negative fade times
+    if outro_duration <= outro_fade_out_duration:
+        # If outro section is too short, adjust fade durations
+        outro_fade_out_duration = max(0.5, outro_duration * 0.5)  # Use half of available time, min 0.5s
+        outro_fadeout_start = max(0, outro_duration - outro_fade_out_duration)
+    else:
+        outro_fadeout_start = outro_duration - outro_fade_out_duration
     
     cmd_broll_outro = [
         'ffmpeg', '-i', str(b_roll_music),
@@ -173,12 +180,21 @@ def create_advanced_music_track(template_config, timing_structure, output_file, 
     
     # Step 3: Create A-roll track with fades and delay
     aroll_track = temp_dir / "temp_aroll.wav"
+    a_roll_start = voice_start
+    a_roll_end = voice_end
     aroll_duration = a_roll_end - a_roll_start
+    
+    # Get fade durations from assembly template
+    assembly_data = template_config.get('assembly_template_data', {})
+    music_sections = assembly_data.get('music_sections', {})
+    chapters_music = music_sections.get('chapters_music', {})
+    aroll_fade_in_duration = chapters_music.get('fade_in', {}).get('duration', 5.0)
+    aroll_fade_out_duration = chapters_music.get('fade_out', {}).get('duration', 1.0)
     
     # Create A-roll starting at 9s with 2s fade-in (9-11s)
     cmd_aroll = [
         'ffmpeg', '-i', str(a_roll_music),
-        '-af', f'volume={bg_volume},afade=t=in:d={aroll_fade_duration},afade=t=out:st={aroll_duration-aroll_fade_duration}:d={aroll_fade_duration},adelay={a_roll_start*1000}|{a_roll_start*1000}',
+        '-af', f'volume={bg_volume},afade=t=in:d={aroll_fade_in_duration},afade=t=out:st={aroll_duration-aroll_fade_out_duration}:d={aroll_fade_out_duration},adelay={a_roll_start*1000}|{a_roll_start*1000}',
         '-t', str(total_duration),
         '-y', str(aroll_track)
     ]
@@ -261,7 +277,7 @@ def main():
     temp_dir = directory / "temp"
     if not temp_dir.exists():
         print(f"✗ Temp directory not found: {temp_dir}")
-        print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
+        print("Run step 1 first: python 1_extract_audio_chapters.py current-project/human-provided-content/orig_screencast.mov")
         sys.exit(1)
     
     # Check if processed voice files exist
@@ -272,7 +288,7 @@ def main():
         sys.exit(1)
     
     # Check for project config (needed for music file paths and volume levels)
-    config_file = directory / "project-config.json"
+    config_file = directory / "human-provided-content" / "project-config.json"
     if not config_file.exists():
         print(f"✗ Project config file not found: {config_file}")
         print("Project config file is required for music file paths and volume levels")
@@ -285,6 +301,17 @@ def main():
     # Load minimal config (just music paths and volumes)
     with open(config_file, 'r') as f:
         project_config = json.load(f)
+    
+    # Load assembly template for fade durations
+    assembly_template_name = project_config.get('assembly_template', 'assembly-template1.json')
+    assembly_template_file = directory.parent / "video-templates" / assembly_template_name
+    if assembly_template_file.exists():
+        with open(assembly_template_file, 'r') as f:
+            assembly_template = json.load(f)
+        project_config['assembly_template_data'] = assembly_template
+    else:
+        print(f"⚠ Assembly template not found: {assembly_template_file}")
+        project_config['assembly_template_data'] = {}
     
     # Calculate timing structure from actual files
     timing_structure = get_video_timing_structure_from_files(directory, project_config)
