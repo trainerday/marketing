@@ -27,33 +27,74 @@ def run_command(cmd, description):
         print(f"  ✗ Error in {description}: {e}")
         return False
 
-def get_video_timing_structure(timing_data, template_config):
-    """Calculate video timing structure with intro, chapters, and outro."""
-    timing_config = template_config['timing']
+def detect_file_duration(file_path):
+    """Get duration of audio/video file using ffprobe."""
+    try:
+        cmd = ['ffprobe', '-v', 'quiet', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(file_path)]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode == 0:
+            return float(result.stdout.strip())
+    except Exception as e:
+        print(f"  ⚠ Could not detect duration for {file_path}: {e}")
+    return 0.0
+
+def get_video_timing_structure_from_files(project_dir, project_config):
+    """Calculate video timing structure from actual processed files."""
+    intro_outro_config = project_config.get('intro_outro', {})
     
-    # Get durations from template
-    b_roll_intro = timing_config['b_roll_intro_duration']
-    b_roll_outro = timing_config['b_roll_outro_duration'] 
-    voice_delay = timing_config['voice_delay_after_intro']
+    # Detect intro duration (if configured)
+    intro_duration = 0.0
+    intro_video_path = intro_outro_config.get('intro_video')
+    if intro_video_path:
+        intro_file = Path("..") / intro_video_path
+        if intro_file.exists():
+            intro_duration = detect_file_duration(intro_file)
+            print(f"  Detected intro duration: {intro_duration:.1f}s")
+        else:
+            print(f"  ⚠ Intro video file not found: {intro_file}")
+    else:
+        print("  ⚠ No intro video file configured")
     
-    # Calculate chapter timing
-    chapter_timings = timing_data['chapter_timings']
-    total_chapter_duration = sum(timing['duration'] + 1.0 for timing in chapter_timings)
+    # Detect chapter durations from processed audio files
+    processed_voice_dir = project_dir / "temp" / "processed_voice"
+    total_chapters_duration = 0.0
+    chapter_count = 0
     
-    # Voice actually starts after intro + delay
-    voice_start_time = b_roll_intro + voice_delay
-    voice_end_time = voice_start_time + sum(timing['duration'] for timing in chapter_timings)
+    if processed_voice_dir.exists():
+        for i in range(1, 10):  # Support up to 9 chapters
+            chapter_file = processed_voice_dir / f"chapter_{i}_processed.wav"
+            if chapter_file.exists():
+                duration = detect_file_duration(chapter_file)
+                total_chapters_duration += duration
+                chapter_count += 1
+                print(f"  Detected chapter {i} duration: {duration:.1f}s")
     
-    # Total video duration
-    total_duration = b_roll_intro + total_chapter_duration + b_roll_outro
+    # Detect outro duration (if configured)
+    outro_duration = 0.0
+    outro_video_path = intro_outro_config.get('outro_video')
+    if outro_video_path:
+        outro_file = Path("..") / outro_video_path
+        if outro_file.exists():
+            outro_duration = detect_file_duration(outro_file)
+            print(f"  Detected outro duration: {outro_duration:.1f}s")
+        else:
+            print(f"  ⚠ Outro video file not found: {outro_file}")
+    else:
+        print("  ⚠ No outro video file configured")
+    
+    # Calculate timing structure
+    voice_start_time = intro_duration
+    voice_end_time = voice_start_time + total_chapters_duration
+    total_duration = intro_duration + total_chapters_duration + outro_duration
     
     return {
-        'b_roll_intro_duration': b_roll_intro,
-        'b_roll_outro_duration': b_roll_outro,
+        'intro_duration': intro_duration,
+        'outro_duration': outro_duration, 
         'voice_start_time': voice_start_time,
         'voice_end_time': voice_end_time,
-        'total_chapter_duration': total_chapter_duration,
-        'total_duration': total_duration
+        'total_chapters_duration': total_chapters_duration,
+        'total_duration': total_duration,
+        'chapter_count': chapter_count
     }
 
 def create_advanced_music_track(template_config, timing_structure, output_file, directory):
@@ -83,17 +124,20 @@ def create_advanced_music_track(template_config, timing_structure, output_file, 
     bg_volume = audio_levels['background_music_volume']  # 0.3 for A-roll background
     broll_volume = audio_levels['b_roll_music_volume']   # 0.8 for B-roll sections
     
-    # Config-driven timing
-    timing_config = template_config['timing']
-    b_roll_start_length = timing_config.get('b_roll_start_length', 10.0)
-    broll_fade_duration = 2.0  # B-roll fade out over 2 seconds  
-    aroll_fade_duration = 2.0  # A-roll fade in over 2 seconds (10-12s, but voice starts at 11s)
-    fadeout_start = voice_start - broll_fade_duration  # 11 - 2 = 9s
-    aroll_fadein_start = b_roll_start_length  # Start A-roll exactly at b_roll_start_length (10s)
-    fadein_start = voice_end
-    # Start A-roll at 10s and fade in over 2 seconds (10-12s) 
-    a_roll_start = aroll_fadein_start  # 10s
-    a_roll_end = voice_end + 2.0
+    # Simple timing structure based on actual files
+    intro_duration = timing_structure['intro_duration']
+    outro_duration = timing_structure['outro_duration']
+    
+    # Fade settings
+    fade_duration = 2.0  # Standard fade duration
+    
+    # Music sections:
+    # 1. B-roll music during intro (with fade out before voice)
+    # 2. A-roll background music during chapters (lower volume)
+    # 3. B-roll music during outro (with fade in after voice)
+    
+    broll_fadeout_start = max(0, voice_start - fade_duration) if intro_duration > 0 else 0
+    broll_fadein_start = voice_end if outro_duration > 0 else voice_end
     
     # Step 1: Create intro B-roll track (fades out at beginning)
     temp_dir = output_file.parent
@@ -102,7 +146,7 @@ def create_advanced_music_track(template_config, timing_structure, output_file, 
     # Create intro B-roll with fade out from 9s to 11s, then silence
     cmd_broll_intro = [
         'ffmpeg', '-i', str(b_roll_music),
-        '-af', f'volume={broll_volume},afade=t=out:st={fadeout_start}:d={broll_fade_duration}',
+        '-af', f'volume={broll_volume},afade=t=out:st={broll_fadeout_start}:d={fade_duration}',
         '-t', str(voice_start),  # Only until voice starts
         '-y', str(broll_intro_track)
     ]
@@ -114,12 +158,12 @@ def create_advanced_music_track(template_config, timing_structure, output_file, 
     broll_outro_track = temp_dir / "temp_broll_outro.wav"
     outro_fade_in_duration = 1.0  # 1 second fade-in
     outro_fade_out_duration = 2.0  # 2 second fade-out at end
-    outro_duration = total_duration - fadein_start  # Duration of outro section
+    outro_duration = total_duration - broll_fadein_start  # Duration of outro section
     outro_fadeout_start = outro_duration - outro_fade_out_duration  # Start fade-out 2s before end
     
     cmd_broll_outro = [
         'ffmpeg', '-i', str(b_roll_music),
-        '-af', f'volume={broll_volume},afade=t=in:d={outro_fade_in_duration},afade=t=out:st={outro_fadeout_start}:d={outro_fade_out_duration},adelay={fadein_start*1000}|{fadein_start*1000}',
+        '-af', f'volume={broll_volume},afade=t=in:d={outro_fade_in_duration},afade=t=out:st={outro_fadeout_start}:d={outro_fade_out_duration},adelay={int(broll_fadein_start*1000)}|{int(broll_fadein_start*1000)}',
         '-t', str(total_duration),
         '-y', str(broll_outro_track)
     ]
@@ -220,49 +264,48 @@ def main():
         print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
         sys.exit(1)
     
-    # Check required files
-    timing_file = temp_dir / "audio_timing.json"
-    template_file = directory / "video-template.json"
-    
-    if not timing_file.exists():
-        print(f"✗ Timing file not found: {timing_file}")
-        print("Run step 5 first: python 5_audio_timing.py current-project/")
+    # Check if processed voice files exist
+    processed_voice_dir = temp_dir / "processed_voice"
+    if not processed_voice_dir.exists():
+        print(f"✗ Processed voice directory not found: {processed_voice_dir}")
+        print("Run step 8 first: python 8_process_voice.py current-project/")
         sys.exit(1)
     
-    if not template_file.exists():
-        print(f"✗ Template file not found: {template_file}")
-        print("Template file is required for advanced music mixing")
+    # Check for project config (needed for music file paths and volume levels)
+    config_file = directory / "project-config.json"
+    if not config_file.exists():
+        print(f"✗ Project config file not found: {config_file}")
+        print("Project config file is required for music file paths and volume levels")
         sys.exit(1)
     
-    print("Step 8: Create Final Audio Track")
+    print("Step 7: Create Final Audio Track")
     print("=" * 50)
+    print("Detecting timing from actual processed files...")
     
-    # Load configuration
-    with open(timing_file, 'r') as f:
-        timing_data = json.load(f)
+    # Load minimal config (just music paths and volumes)
+    with open(config_file, 'r') as f:
+        project_config = json.load(f)
     
-    with open(template_file, 'r') as f:
-        template_config = json.load(f)
-    
-    # Calculate video timing structure
-    timing_structure = get_video_timing_structure(timing_data, template_config)
+    # Calculate timing structure from actual files
+    timing_structure = get_video_timing_structure_from_files(directory, project_config)
     
     print(f"Video timing structure:")
-    print(f"  B-roll intro: {timing_structure['b_roll_intro_duration']:.1f}s")
-    print(f"  Voice section: {timing_structure['voice_start_time']:.1f}s - {timing_structure['voice_end_time']:.1f}s")
-    print(f"  B-roll outro: {timing_structure['b_roll_outro_duration']:.1f}s")
+    print(f"  Intro: {timing_structure['intro_duration']:.1f}s")
+    print(f"  Chapters: {timing_structure['voice_start_time']:.1f}s - {timing_structure['voice_end_time']:.1f}s ({timing_structure['total_chapters_duration']:.1f}s total)")
+    print(f"  Outro: {timing_structure['outro_duration']:.1f}s")
     print(f"  Total duration: {timing_structure['total_duration']:.1f}s")
+    print(f"  Found {timing_structure['chapter_count']} chapters")
     
     # Focus on just creating the individual tracks for debugging
     background_music_file = temp_dir / "background_music.wav"
     
-    if not create_advanced_music_track(template_config, timing_structure, background_music_file, directory):
+    if not create_advanced_music_track(project_config, timing_structure, background_music_file, directory):
         print("\n" + "=" * 50)
         print("STEP 8 FAILED")
         print("=" * 50)
         print("Please check that music files exist:")
-        print(f"  A-roll: {template_config['music']['a_roll_background']}")
-        print(f"  B-roll: {template_config['music']['b_roll_background']}")
+        print(f"  A-roll: {project_config['music']['a_roll_background']}")
+        print(f"  B-roll: {project_config['music']['b_roll_background']}")
         sys.exit(1)
     
     # Background music creation completed
@@ -277,8 +320,8 @@ def main():
     print(f"  ✓ temp_aroll.wav (A-roll only)")
     
     print(f"\nBackground music setup:")
-    print(f"  A-roll music: {template_config['music']['a_roll_background']}")
-    print(f"  B-roll music: {template_config['music']['b_roll_background']}")
+    print(f"  A-roll music: {project_config['music']['a_roll_background']}")
+    print(f"  B-roll music: {project_config['music']['b_roll_background']}")
     print(f"  Total duration: {timing_structure['total_duration']:.1f}s")
     print(f"  Fade transitions: B-roll 2.0s (9-11s), A-roll 2.0s (10-12s)")
     print(f"  B-roll starts at full volume from beginning")

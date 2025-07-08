@@ -11,6 +11,10 @@ import json
 import subprocess
 from pathlib import Path
 from openai import OpenAI
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def get_audio_duration(audio_file):
     """Get audio file duration."""
@@ -24,7 +28,7 @@ def get_audio_duration(audio_file):
     return None
 
 def parse_script_final(script_final_file):
-    """Parse script-final.txt into structured data (no chapter headers, double spaced)."""
+    """Parse resemble-a-roll.txt into structured data (no chapter headers, double spaced)."""
     try:
         with open(script_final_file, 'r') as f:
             content = f.read().strip()
@@ -63,41 +67,55 @@ def create_audio_timing(master_script_data, a_roll_duration, chapters_data):
         
         print("  Generating audio timing with GPT...")
         
-        prompt = f"""You need to create precise timing markers for splitting a {a_roll_duration:.1f} second audio file into chapter segments.
+        # Extract the last sentence of each chapter for timing analysis
+        chapter_ending_sentences = []
+        for i, chapter in enumerate(chapters):
+            chapter_text = chapter['enhanced_script'].strip()
+            # Split into sentences and get the last one
+            sentences = [s.strip() for s in chapter_text.split('.') if s.strip()]
+            if sentences:
+                last_sentence = sentences[-1] + '.'
+                chapter_ending_sentences.append({
+                    'chapter': chapter['chapter'],
+                    'last_sentence': last_sentence
+                })
+                
+        print(f"  Looking for {len(chapter_ending_sentences)} chapter ending sentences")
 
-CHAPTERS TO TIME:
-{json.dumps(chapters, indent=2)}
+        # Get the full script content for subtitle generation
+        full_script = ""
+        for chapter in chapters:
+            full_script += chapter['enhanced_script'] + " "
+        
+        prompt = f"""Create a detailed subtitle/timing document for this script that will be read as a {a_roll_duration:.1f} second audio file.
 
-ORIGINAL VIDEO TIMING (for reference):
-{json.dumps(video_chapters, indent=2)}
+SCRIPT TO TIME:
+{full_script.strip()}
 
-The a-roll.wav file contains the enhanced script read sequentially. Create timing markers that:
-
-1. **Start at 0.0 seconds** - First chapter begins immediately
-2. **Account for natural pauses** - Add 0.5-1.0 second gaps between chapters for breathing
-3. **Distribute proportionally** - Base timing on script word counts and complexity
-4. **End at {a_roll_duration:.1f} seconds** - Must use full audio duration
+Generate a JSON subtitle document with sentence-by-sentence timing estimates based on:
+- Normal speaking pace (140-160 words per minute)
+- Natural pauses between sentences (0.5-1 second)
+- Chapter breaks with longer pauses (1-2 seconds)
+- Total duration must be exactly {a_roll_duration:.1f} seconds
 
 Return a JSON object with this structure:
 {{
   "total_duration": {a_roll_duration},
-  "chapter_timings": [
+  "subtitles": [
     {{
-      "chapter": 1,
       "start_time": 0.0,
-      "end_time": 25.5,
-      "duration": 25.5
+      "end_time": 3.2,
+      "text": "First sentence here."
     }},
     {{
-      "chapter": 2,
-      "start_time": 26.0,
-      "end_time": 48.3,
-      "duration": 22.3
+      "start_time": 3.7,
+      "end_time": 7.1,
+      "text": "Second sentence here."
     }}
   ]
 }}
 
-Make sure all chapters fit within the total duration and timings are logical."""
+Include EVERY sentence with start_time and end_time. The last subtitle should end at exactly {a_roll_duration:.1f} seconds."""
 
         response = client.chat.completions.create(
             model="gpt-4",
@@ -138,13 +156,13 @@ def main():
         sys.exit(1)
     
     # Check required files
-    a_roll_file = directory / "a-roll.wav"  # Manual file stays in main dir
-    script_final_file = directory / "script-final.txt"
+    a_roll_file = directory / "resemble-a-roll.wav"  # Voice file matches script file
+    script_final_file = directory / "resemble-a-roll.txt"
     chapters_file = temp_dir / "chapters.json"
     
     if not a_roll_file.exists():
         print(f"✗ Audio file not found: {a_roll_file}")
-        print("Generate voice using Resemble.ai and save as 'a-roll.wav'")
+        print("Generate voice using Resemble.ai and save as 'resemble-a-roll.wav'")
         sys.exit(1)
     
     if not script_final_file.exists():
@@ -199,8 +217,35 @@ def main():
         else:
             json_text = response_text
         
-        # Parse timing response
-        timing_data = json.loads(json_text)
+        # Parse subtitle response
+        subtitle_data = json.loads(json_text)
+        
+        # Find chapter endings in the subtitle data
+        chapter_end_times = []
+        for sentence_info in chapter_ending_sentences:
+            last_sentence = sentence_info['last_sentence'].strip()
+            # Find this sentence in the subtitles
+            for subtitle in subtitle_data['subtitles']:
+                if last_sentence.lower() in subtitle['text'].lower() or subtitle['text'].lower() in last_sentence.lower():
+                    chapter_end_times.append(subtitle['end_time'])
+                    print(f"  Found Chapter {sentence_info['chapter']} ending at {subtitle['end_time']:.1f}s: \"{subtitle['text']}\"")
+                    break
+        
+        # Convert to chapter timing format
+        timing_data = {
+            "total_duration": subtitle_data['total_duration'],
+            "chapter_timings": []
+        }
+        
+        for i, end_time in enumerate(chapter_end_times):
+            start_time = 0.0 if i == 0 else chapter_end_times[i-1]
+            duration = end_time - start_time
+            
+            timing_data["chapter_timings"].append({
+                "chapter": i + 1,
+                "start_time": start_time,
+                "duration": duration
+            })
         
         # Save timing data
         timing_file = temp_dir / "audio_timing.json"

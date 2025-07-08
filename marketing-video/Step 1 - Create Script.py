@@ -9,13 +9,17 @@ import sys
 import subprocess
 from pathlib import Path
 
-def run_step(step_file, project_dir, description):
+def run_step(step_file, project_dir, description, video_file=None):
     """Run a processing step."""
     print(f"\n🚀 {description}")
     print("-" * 60)
     
     step_path = Path("processing-steps") / step_file
-    cmd = ["python3", str(step_path), project_dir]
+    # Step 1 needs the video file path, others need project directory
+    if step_file == "1_extract_audio_chapters.py" and video_file:
+        cmd = ["python3", str(step_path), video_file]
+    else:
+        cmd = ["python3", str(step_path), project_dir]
     result = subprocess.run(cmd)
     
     if result.returncode == 0:
@@ -37,6 +41,13 @@ def main():
         print(f"✗ Project directory not found: {project_dir}")
         sys.exit(1)
     
+    # Find the video file
+    video_file = Path(project_dir) / "original-content" / "video.mp4"
+    if not video_file.exists():
+        print(f"✗ Video file not found: {video_file}")
+        print("Please ensure video.mp4 exists in original-content/ folder")
+        sys.exit(1)
+    
     print("=" * 60)
     print("STEP 1: CREATE MARKETING SCRIPT FROM DEMO VIDEO")
     print("=" * 60)
@@ -54,7 +65,7 @@ def main():
     ]
     
     for step_file, description in steps:
-        if not run_step(step_file, project_dir, description):
+        if not run_step(step_file, project_dir, description, str(video_file)):
             print(f"\n❌ STEP 1 FAILED at: {description}")
             sys.exit(1)
     

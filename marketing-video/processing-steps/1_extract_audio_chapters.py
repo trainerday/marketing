@@ -119,7 +119,7 @@ def split_video_by_chapters(video_file, chapters_file, temp_dir):
     chapter_videos = []
     
     # Create chapters directory and clean up existing files
-    chapters_dir = temp_dir / "chapters"
+    chapters_dir = temp_dir / "original-chapters"
     if chapters_dir.exists():
         # Remove all existing chapter files
         for existing_file in chapters_dir.glob("chapter_*.mp4"):

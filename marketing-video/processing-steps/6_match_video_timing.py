@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 7: Match Video to Audio Timing
+Step 6: Match Video to Audio Timing
 - Extend or trim video chapters to match audio length + 1 second
 - Use freeze frame extension or cutting as needed
 """
@@ -48,7 +48,7 @@ def get_audio_duration(audio_file):
     return None
 
 def match_video_to_audio(chapter_video, chapter_audio, output_file):
-    """Combine video and audio with matching duration."""
+    """Match video duration to audio duration (video-only output)."""
     video_duration = get_video_duration(chapter_video)
     audio_duration = get_audio_duration(chapter_audio)
     
@@ -57,19 +57,68 @@ def match_video_to_audio(chapter_video, chapter_audio, output_file):
     
     print(f"    Video: {video_duration:.1f}s, Audio: {audio_duration:.1f}s")
     
-    # Use shortest duration to avoid quality issues with freeze frames
-    cmd = [
-        'ffmpeg', '-i', str(chapter_video), '-i', str(chapter_audio),
-        '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
-        '-c:a', 'pcm_s16le', '-shortest', '-y', str(output_file)
-    ]
-    return run_command(cmd, f"Combining video and audio ({min(video_duration, audio_duration):.1f}s)")
+    # Create video-only file matching audio duration (no audio track)
+    # If video is shorter, extend with freeze frame; if longer, trim to audio duration
+    if video_duration < audio_duration:
+        # Extend video with freeze frame (hold last frame) to match audio duration
+        extension_duration = audio_duration - video_duration
+        temp_frame = output_file.parent / f"temp_lastframe_{output_file.stem}.png"
+        temp_freeze_video = output_file.parent / f"temp_freeze_{output_file.stem}.mov"
+        
+        # Extract frame from ~20 frames before the end (to avoid black frames)
+        frame_time = max(0, video_duration - (20/30))  # 20 frames at 30fps = 0.67s before end
+        extract_cmd = [
+            'ffmpeg', '-ss', str(frame_time), '-i', str(chapter_video),
+            '-vframes', '1', '-q:v', '1', '-y', str(temp_frame)
+        ]
+        
+        if not run_command(extract_cmd, "Extracting last frame"):
+            return False
+        
+        # Create freeze frame video
+        freeze_cmd = [
+            'ffmpeg', '-loop', '1', '-i', str(temp_frame),
+            '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
+            '-t', str(extension_duration), '-r', '30', '-y', str(temp_freeze_video)
+        ]
+        
+        if not run_command(freeze_cmd, f"Creating freeze frame video ({extension_duration:.1f}s)"):
+            return False
+        
+        # Concatenate original + freeze frame
+        concat_file = output_file.parent / f"temp_concat_{output_file.stem}.txt"
+        with open(concat_file, 'w') as f:
+            f.write(f"file '{chapter_video.resolve()}'\n")
+            f.write(f"file '{temp_freeze_video.resolve()}'\n")
+        
+        concat_cmd = [
+            'ffmpeg', '-f', 'concat', '-safe', '0', '-i', str(concat_file),
+            '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
+            '-an', '-y', str(output_file)
+        ]
+        
+        result = run_command(concat_cmd, f"Concatenating with freeze frame")
+        
+        # Clean up temp files
+        for temp_file in [temp_frame, temp_freeze_video, concat_file]:
+            if temp_file.exists():
+                temp_file.unlink()
+        
+        return result
+    else:
+        # Trim video to match audio duration
+        cmd = [
+            'ffmpeg', '-i', str(chapter_video),
+            '-c:v', 'prores_ks', '-profile:v', '2', '-pix_fmt', 'yuv422p10le',
+            '-t', str(audio_duration), '-an', '-y', str(output_file)
+        ]
+        return run_command(cmd, f"Trimming video to {audio_duration:.1f}s")
 
 def process_chapter_videos(chapters_dir, timing_data, temp_dir):
     """Process all chapter videos to match audio timing."""
     chapter_timings = timing_data['chapter_timings']
     timed_videos = []
-    chapters_audio_dir = temp_dir / "chapters"
+    chapters_audio_dir = temp_dir / "timed_chapters"
     
     for timing in chapter_timings:
         chapter_num = timing['chapter']
@@ -77,7 +126,7 @@ def process_chapter_videos(chapters_dir, timing_data, temp_dir):
         # Find corresponding files
         chapter_video = chapters_dir / f"chapter_{chapter_num}.mov"
         chapter_audio = chapters_audio_dir / f"chapter_{chapter_num}.wav"
-        timed_video = temp_dir / "timed_chapter_videos" / f"chapter_{chapter_num}.mov"
+        timed_video = temp_dir / "timed_chapters" / f"chapter_{chapter_num}.mov"
         
         if not chapter_video.exists():
             print(f"✗ Chapter video not found: {chapter_video}")
@@ -100,8 +149,8 @@ def process_chapter_videos(chapters_dir, timing_data, temp_dir):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python 7_match_video_timing.py <directory>")
-        print("Example: python 7_match_video_timing.py temp-assets/")
+        print("Usage: python 6_match_video_timing.py <directory>")
+        print("Example: python 6_match_video_timing.py temp-assets/")
         sys.exit(1)
     
     directory = Path(sys.argv[1])
@@ -117,7 +166,7 @@ def main():
     
     # Check required files and directories
     timing_file = temp_dir / "audio_timing.json"
-    chapters_dir = temp_dir / "chapters"
+    chapters_dir = temp_dir / "original-chapters"
     
     if not timing_file.exists():
         print(f"✗ Timing file not found: {timing_file}")
@@ -129,7 +178,7 @@ def main():
         print("Run step 1 first: python 1_extract_audio_chapters.py orig-video.mp4")
         sys.exit(1)
     
-    print("Step 7: Match Video to Audio Timing")
+    print("Step 6: Match Video to Audio Timing")
     print("=" * 50)
     
     # Load timing data
@@ -144,7 +193,7 @@ def main():
         sys.exit(1)
     
     print("\n" + "=" * 50)
-    print("STEP 7 COMPLETED!")
+    print("STEP 6 COMPLETED!")
     print("=" * 50)
     print("Created files in timed_chapter_videos/:")
     for video_file in timed_videos:

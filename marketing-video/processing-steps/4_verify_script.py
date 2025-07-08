@@ -119,7 +119,7 @@ def main():
         sys.exit(1)
     
     # Check required files
-    script_final_file = directory / "script-final.txt"
+    script_final_file = directory / "resemble-a-roll.txt"
     chapters_file = temp_dir / "chapters.json"
     
     if not script_final_file.exists():

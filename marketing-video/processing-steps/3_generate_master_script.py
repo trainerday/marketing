@@ -138,16 +138,33 @@ def main():
     with open(chapters_file, 'r') as f:
         chapters_data = json.load(f)
     
-    script_review_file = directory / "script-for-review.txt"  # Keep in main dir for review
-    script_final_file = directory / "script-final.txt"  # Keep in main dir for manual editing
+    script_review_file = directory / "script-for-review-sentences.txt"  # Keep in main dir for review
+    script_generated_file = directory / "script-generated.txt"  # Auto-generated, can be overwritten
+    script_final_file = directory / "resemble-a-roll.txt"  # Manual edits - matches resemble-a-roll.wav
     
     print("Step 3: Generate Master Script")
     print("=" * 50)
     
-    # Clean up any existing output files
+    # Check for project-config.json and create from template if needed
+    project_config_file = directory / "project-config.json"
+    if not project_config_file.exists():
+        print("  Setting up project configuration...")
+        template_file = directory.parent / "video-templates" / "project-config-template.json"
+        if template_file.exists():
+            import shutil
+            shutil.copy2(template_file, project_config_file)
+            print(f"  ✓ Created {project_config_file.name} from template")
+            print(f"  ⚠️  IMPORTANT: Update project-config.json with your project settings!")
+        else:
+            print(f"  ⚠️  Template not found: {template_file}")
+            print(f"  Please create project-config.json manually in {directory}/")
+    else:
+        print(f"  ✓ Found existing {project_config_file.name}")
+    
+    # Clean up any existing auto-generated files (but never resemble-a-roll.txt)
     cleanup_patterns = [
-        str(directory / "script-for-review.txt"),
-        str(directory / "script-final.txt")
+        str(directory / "script-for-review-sentences.txt"),
+        str(directory / "script-generated.txt")
     ]
     
     for pattern in cleanup_patterns:
@@ -199,38 +216,64 @@ def main():
             if i < len(script_data['chapters']) - 1:
                 final_script_lines.append("")
         
-        # Save final script
-        with open(script_final_file, 'w') as f:
+        # Save generated script (can be overwritten)
+        with open(script_generated_file, 'w') as f:
             f.write('\n'.join(final_script_lines))
+        
+        # Check if manual final script exists
+        if script_final_file.exists():
+            print(f"  ✓ Preserving existing manual edits: {script_final_file.name}")
+        else:
+            # Copy generated script as starting point for manual editing
+            with open(script_final_file, 'w') as f:
+                f.write('\n'.join(final_script_lines))
+            print(f"  ✓ Created initial {script_final_file.name} for manual editing")
         
         print("\n" + "=" * 50)
         print("STEP 3 COMPLETED!")
         print("=" * 50)
         print("Created files:")
         print(f"  ✓ {script_review_file.name} (for review)")
-        print(f"  ✓ {script_final_file.name} (for manual editing)")
+        print(f"  ✓ {script_generated_file.name} (auto-generated)")
+        if not script_final_file.exists():
+            print(f"  ✓ {script_final_file.name} (copy for manual editing)")
+        else:
+            print(f"  → {script_final_file.name} (preserved manual edits)")
         print(f"\nScript summary:")
         for chapter in script_data['chapters']:
             print(f"  Chapter {chapter['chapter']}: {chapter['word_count']} words")
         
-        print(f"\n📝 ITERATIVE SCRIPT REFINEMENT PROCESS:")
-        print(f"   1. Review script quality in '{script_review_file.name}'")
-        print(f"   2. Edit/update the script in '{script_final_file.name}'")
-        print(f"   3. Run verification: python 4_verify_script.py {directory}/")
-        print(f"   4. REPEAT steps 2-3 until you achieve the quality score you want")
+        print(f"\n🔧 PROJECT CONFIGURATION:")
+        print(f"   1. UPDATE project-config.json with your project settings:")
+        print(f"      - Update branding (title_line1, title_line2)")
+        print(f"      - Set audio levels if needed")
+        print(f"      - Verify intro/outro file paths")
+        print(f"      - Check music and b-roll video paths")
+        print(f"")
+        print(f"📝 ITERATIVE SCRIPT REFINEMENT PROCESS:")
+        print(f"   2. Review script quality in '{script_review_file.name}'")
+        print(f"   3. Edit/update the script in '{script_final_file.name}'")
+        print(f"   4. Run verification: python 4_verify_script.py {directory}/")
+        print(f"   5. REPEAT steps 3-4 until you achieve the quality score you want")
         print(f"      (Keep editing and verifying until perfect)")
         print(f"")
         print(f"📢 VOICE GENERATION PROCESS:")
-        print(f"   5. Listen to script in Resemble.ai preview before generating")
-        print(f"   6. Make final edits to '{script_final_file.name}' if needed")
-        print(f"   7. Re-verify with step 4 after any final edits")
-        print(f"   8. Generate final voice using Resemble.ai")
-        print(f"   9. Save generated voice as: {directory}/a-roll.wav")
-        print(f"      ⚠️  CRITICAL: File must be named exactly 'a-roll.wav'")
+        print(f"   6. Listen to script in Resemble.ai preview before generating")
+        print(f"   7. Make final edits to '{script_final_file.name}' if needed")
+        print(f"   8. Re-verify with step 4 after any final edits")
+        print(f"   9. Generate chapter audio files using Resemble.ai:")
+        print(f"      - Create separate audio files for each chapter")
+        print(f"      - Save as: resemble-chapters/1.wav, 2.wav, 3.wav, etc.")
+        print(f"      - ⚠️  CRITICAL: Files must be in 'resemble-chapters/' folder")
+        print(f"      - ⚠️  CRITICAL: Files must be named 'N.wav' (N = chapter number)")
+        print(f"   10. OPTIONAL: Generate full A-roll audio as: {directory}/a-roll.wav")
+        print(f"       (This is optional - chapter files are the primary requirement)")
         print(f"")
         print(f"✅ FINAL READINESS CHECK:")
+        print(f"   - Ensure project-config.json is updated with your settings")
         print(f"   - Ensure '{script_final_file.name}' contains your final script")
-        print(f"   - Ensure '{directory}/a-roll.wav' exists and sounds good")
+        print(f"   - Ensure resemble-chapters/N.wav files exist for all chapters")
+        print(f"   - OPTIONAL: Ensure '{directory}/a-roll.wav' exists if you want full audio")
         print(f"   - Then run: python 5_audio_timing.py {directory}/")
         print(f"\n💡 TIP: The review file shows original vs enhanced text.")
         print(f"    The verification step helps ensure professional quality.")

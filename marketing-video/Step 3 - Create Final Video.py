@@ -59,7 +59,7 @@ def main():
         ("6_match_video_timing.py", "Step 6: Combine video chapters with audio", False),
         ("7_create_background_music.py", "Step 7: Create professional background music", False),
         ("8_process_voice.py", "Step 8: Process voice with Resemble AI", False),
-        ("9_final_assembly_and_add_overlays.py", "Step 9: Final assembly + overlays", False)
+        ("9.1_final_assembly_with_overlays.py", "Step 9: Final assembly + overlays", False)
     ]
     
     for step_file, description, skip_on_fail in steps:
