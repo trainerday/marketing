@@ -41,7 +41,7 @@ def main():
         sys.exit(1)
     
     print("=" * 60)
-    print("STEP 3: CREATE FINAL MARKETING VIDEO")
+    print("STEP 5: CREATE FINAL MARKETING VIDEO")
     print("=" * 60)
     print("This will run automated processing steps 4,6-9:")
     print("  4. Verify script quality (optional)")
@@ -62,7 +62,7 @@ def main():
     
     for step_file, description, skip_on_fail in steps:
         if not run_step(step_file, project_dir, description, skip_on_fail):
-            print(f"\n❌ STEP 3 FAILED at: {description}")
+            print(f"\n❌ STEP 5 FAILED at: {description}")
             sys.exit(1)
     
     # Get final video info

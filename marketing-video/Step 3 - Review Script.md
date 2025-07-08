@@ -28,7 +28,11 @@
 
 ## Next Step
 
-Only proceed when script is perfect:
+When your script is perfect, proceed to create the final video:
 ```bash
 python3 "Step 5 - Create Final Video.py" current-project/
 ```
+
+## Support
+
+Need help with the video pipeline? Visit our support forums: https://forums.trainerday.com

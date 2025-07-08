@@ -82,15 +82,9 @@ def generate_metadata_from_config(config):
 
 In this video, I'll walk you through the latest updates and features.
 
-⏰ Timestamps:
-00:00 - Introduction
-00:10 - Feature Overview
-01:00 - Detailed Demo
-01:30 - Conclusion
-
 🔗 Links:
 - Website: https://trainerday.com
-- Support: https://support.trainerday.com
+- Support: https://forums.trainerday.com
 
 #TrainerDay #FeatureUpdate #CyclingTech #TrainingApp"""
 

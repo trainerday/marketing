@@ -31,4 +31,10 @@ python3 "Step 1 - Validate Configuration.py" current-project/
 This will check all files exist and configuration is valid.
 
 ## Ready? Start Step 2:
-Follow the instructions in **Step 2 - Create Script.md** to run the processing steps.
+Run the script creation process:
+```bash
+python3 "Step 2 - Create Script.py" current-project/
+```
+
+## Support:
+Need help with the video pipeline? Visit our support forums: https://forums.trainerday.com
