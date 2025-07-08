@@ -292,13 +292,38 @@ def combine_final_video_optimized(concat_list, intro1_audio, outro1_audio, chapt
     inputs.extend(['-i', str(background_music)])
     current_index += 1
     
-    # Add b-roll music if available
-    broll_music_file = temp_dir / "temp_broll_intro.wav"
+    # Add b-roll music - use original file directly for proper duration
+    # Try temp file first, fallback to original if temp is too short
+    broll_music_file = temp_dir / "temp_broll_intro.wav" 
+    # Calculate path to original B-roll music relative to temp_dir
+    project_dir = temp_dir.parent  # temp_dir is project/temp, so parent is project/
+    assets_dir = project_dir.parent  # project parent contains assets/
+    original_broll_music = assets_dir / config.get('music', {}).get('b_roll_background', 'assets/music/top-b-roll/ES_Spaghetti on the Island - Thompson Town Flowers_edit.mp3')
+    
     broll_music_index = None
     if broll_music_file.exists():
-        inputs.extend(['-i', str(broll_music_file)])
+        # Check if temp file is long enough (should be > 12 seconds for our needs)
+        result = subprocess.run(['ffprobe', '-v', 'quiet', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(broll_music_file)], capture_output=True, text=True)
+        temp_duration = float(result.stdout.strip()) if result.returncode == 0 else 0
+        
+        if temp_duration >= 12.5:
+            # Use temp file if it's long enough
+            inputs.extend(['-i', str(broll_music_file)])
+            broll_music_index = current_index
+            current_index += 1
+            print(f"  Using temp B-roll music file: {temp_duration:.1f}s")
+        else:
+            # Use original file if temp is too short
+            inputs.extend(['-i', str(original_broll_music)])
+            broll_music_index = current_index
+            current_index += 1
+            print(f"  Using original B-roll music file (temp file too short: {temp_duration:.1f}s)")
+    elif original_broll_music.exists():
+        # Use original file if temp doesn't exist
+        inputs.extend(['-i', str(original_broll_music)])
         broll_music_index = current_index
         current_index += 1
+        print(f"  Using original B-roll music file (temp file not found)")
     
     # Add overlay inputs
     input_index = current_index
@@ -397,9 +422,19 @@ def combine_final_video_optimized(concat_list, intro1_audio, outro1_audio, chapt
         broll_full_volume = config.get('audio_levels', {}).get('b_roll_music_volume', beginning_music["volume"])
         broll_reduced_volume = 0.3  # Reduced volume during voice sections
         
-        # Create b-roll intro music with proper volume levels
+        # Calculate B-roll music duration from template (beginning.total_duration + 3.0)
+        # Parse the template calculation: "beginning.total_duration + 3.0"
+        template_calculation = beginning_music.get("calculation", "")
+        if "beginning.total_duration + 3.0" in template_calculation:
+            broll_music_duration = intro_duration + 3.0
+            print(f"  Using extended B-roll duration: {broll_music_duration:.1f}s (intro: {intro_duration:.1f}s + 3.0s)")
+        else:
+            broll_music_duration = intro_duration  # fallback
+            print(f"  Using default B-roll duration: {broll_music_duration:.1f}s")
+        
+        # Create b-roll intro music with proper volume levels and extended duration
         # Full volume during b-roll, reduced volume during intro1 voice
-        filter_parts.append(f'[{broll_music_index}:a]atrim=start=0:end={intro_duration},volume=enable=\'lt(t,{fade_start_time})\':volume={broll_full_volume},volume=enable=\'gte(t,{fade_start_time})\':volume={broll_reduced_volume}[broll_intro_music]')
+        filter_parts.append(f'[{broll_music_index}:a]atrim=start=0:end={broll_music_duration},volume=enable=\'lt(t,{fade_start_time})\':volume={broll_full_volume},volume=enable=\'gte(t,{fade_start_time})\':volume={broll_reduced_volume}[broll_intro_music]')
         
         # B-roll music for outro section (starts after outro1 voice ends)
         # Get actual outro1 duration if available
@@ -423,8 +458,11 @@ def combine_final_video_optimized(concat_list, intro1_audio, outro1_audio, chapt
         # Background music starts with chapters (from assembly template)
         bg_start_delay_ms = chapter_delay_ms
         
-        # Apply background music with calculated delay
-        filter_parts.append(f'[{music_index}:a]volume={bg_volume},adelay={bg_start_delay_ms}|{bg_start_delay_ms}[music_low]')
+        # Get fade-in duration from template (should be 5.0 seconds)
+        fade_in_duration = chapters_music.get("fade_in", {}).get("duration", 1.0)
+        
+        # Apply background music with calculated delay and fade-in
+        filter_parts.append(f'[{music_index}:a]volume={bg_volume},afade=t=in:st=0:d={fade_in_duration},adelay={bg_start_delay_ms}|{bg_start_delay_ms}[music_low]')
         
         # Combine all audio layers:
         # - broll_intro_music: plays during intro section (full volume) and intro1 voice (reduced volume)

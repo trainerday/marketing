@@ -1,0 +1,134 @@
+{
+  "video_sections": {
+    "beginning": {
+      "total_duration": 10.0,
+      "segments": [
+        {
+          "name": "intro_broll",
+          "type": "broll",
+          "duration": "calculated",
+          "calculation": "beginning.total_duration - hello_message.duration"
+        },
+        {
+          "name": "hello_message",
+          "type": "talking_head", 
+          "duration": "auto_detected"
+        }
+      ]
+    },
+    "chapters": {
+      "total_duration": "calculated",
+      "calculation": "sum_of_timed_chapter_videos",
+      "segments": [
+        {
+          "name": "generated_content",
+          "type": "generated_content",
+          "duration": "calculated",
+          "calculation": "sum_of_timed_chapter_videos"
+        }
+      ]
+    },
+    "end": {
+      "total_duration": "calculated", 
+      "calculation": "goodbye_message.duration + outro_broll.duration",
+      "segments": [
+        {
+          "name": "goodbye_message", 
+          "type": "talking_head",
+          "duration": "auto_detected"
+        },
+        {
+          "name": "outro_broll",
+          "type": "broll",
+          "duration": 5.0
+        }
+      ]
+    }
+  },
+  "voice_sections": {
+    "hello_voice": {
+      "volume": 1.0,
+      "start_time": "calculated",
+      "calculation": "beginning.total_duration - hello_message.duration",
+      "duration": "hello_message.duration"
+    },
+    "chapter_voice": {
+      "volume": 1.0, 
+      "start_time": "calculated",
+      "calculation": "beginning.total_duration",
+      "duration": "sum_of_chapter_audio_durations"
+    },
+    "goodbye_voice": {
+      "volume": 1.0,
+      "start_time": "calculated",
+      "calculation": "beginning.total_duration + chapters.total_duration",
+      "duration": "goodbye_message.duration"
+    }
+  },
+  "music_sections": {
+    "beginning_music": {
+      "volume": 0.3,
+      "start_time": 0.0,
+      "end_time": "calculated",
+      "calculation": "beginning.total_duration + 3.0",
+      "fade_out": {
+        "duration": 1.0,
+        "start_at": "end_time - fade_duration"
+      }
+    },
+    "chapters_music": {
+      "volume": 0.3,
+      "start_time": "calculated",
+      "calculation": "beginning.total_duration",
+      "end_time": "calculated", 
+      "calculation_end": "beginning.total_duration + chapters.total_duration + 1.0",
+      "fade_in": {
+        "duration": 5.0,
+        "start_at": "start_time"
+      },
+      "fade_out": {
+        "duration": 1.0,
+        "start_at": "end_time - fade_duration"
+      }
+    },
+    "end_music": {
+      "volume": 1.2,
+      "start_time": "calculated",
+      "calculation": "beginning.total_duration + chapters.total_duration + 1.0",
+      "end_time": "total_video_duration",
+      "fade_in": {
+        "duration": 1.0,
+        "start_at": "start_time"
+      },
+      "fade_out": {
+        "duration": 2.0,
+        "start_at": "end_time - fade_duration"
+      }
+    }
+  },
+  "overlay_sections": {
+    "title": {
+      "svg_template": "video-templates/video_title_template.svg",
+      "position": "0:0",
+      "start_time": 0.0,
+      "duration": "calculated",
+      "calculation": "beginning.total_duration"
+    },
+    "logo": {
+      "source": "assets/logos/td.png",
+      "position": "W-w-20:20",
+      "start_time": 0.0,
+      "duration": "calculated",
+      "calculation": "beginning.total_duration"
+    }
+  },
+  "conversion_settings": {
+    "video_codec": "prores_ks",
+    "video_profile": "2", 
+    "pixel_format": "yuv422p10le",
+    "frame_rate": "30",
+    "audio_codec": "pcm_s16le",
+    "audio_sample_rate": "44100",
+    "audio_channels": "2"
+  }
+}
