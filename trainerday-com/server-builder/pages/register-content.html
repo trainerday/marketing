@@ -1,0 +1,176 @@
+        <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .register-content {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 40px auto;
+            max-width: 500px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .register-title {
+            color: #333;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .register-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+        .register-form {
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #F60406;
+            box-shadow: 0 0 0 2px rgba(246, 4, 6, 0.1);
+        }
+        .submit-btn {
+            background-color: #F60406;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: #d40305;
+        }
+        .login-link {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+        }
+        .login-link a {
+            color: #1e3a8a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .app-info {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .app-info h3 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .app-info p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .download-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .download-links a {
+            display: inline-block;
+        }
+        .download-links img {
+            height: 40px;
+            transition: opacity 0.3s ease;
+        }
+        .download-links img:hover {
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            .register-content {
+                margin: 20px;
+                padding: 40px 20px;
+            }
+            .register-title {
+                font-size: 1.6rem;
+            }
+            .download-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+        </style>
+
+        <!-- Registration Section -->
+        <section class="register" style="padding: 80px 0;">
+            <div class="container">
+                <div class="register-content">
+                    <h1 class="register-title">Join TrainerDay</h1>
+                    <p class="register-subtitle">Start your cycling training journey with thousands of free workouts and training plans</p>
+                    
+                    <div class="app-info">
+                        <h3>Get the TrainerDay App</h3>
+                        <p>Download our mobile app to get started with your training right away</p>
+                        <div class="download-links">
+                            <a href="https://apps.apple.com/us/app/id1500401973">
+                                <img src="/assets/images/apple.svg" alt="Download on App Store">
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=trainerday.turbo">
+                                <img src="/assets/images/play.svg" alt="Get it on Google Play">
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <form class="register-form" action="/wp-login.php?action=register" method="POST">
+                        <div class="form-group">
+                            <label for="user_login">Username</label>
+                            <input type="text" id="user_login" name="user_login" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user_email">Email Address</label>
+                            <input type="email" id="user_email" name="user_email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="user_pass">Password</label>
+                            <input type="password" id="user_pass" name="user_pass" required minlength="6">
+                        </div>
+                        
+                        <input type="hidden" name="wp-submit" value="Register">
+                        <input type="hidden" name="redirect_to" value="https://app.trainerday.com">
+                        
+                        <button type="submit" class="submit-btn">Create Account</button>
+                    </form>
+                    
+                    <div class="login-link">
+                        Already have an account? <a href="/login/">Sign in here</a>
+                    </div>
+                </div>
+            </div>
+        </section>

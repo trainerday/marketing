@@ -1,0 +1,304 @@
+        <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .pricing-container {
+            background-color: #ffffff;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+            max-width: 100%;
+            padding: 60px 0;
+            width: 100%;
+        }
+        .section-title {
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        .pricing-card {
+            background-color: #ffffff !important;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .pricing-card.premium {
+            background-color: #ffffff !important;
+            border-color: #007bff;
+            box-shadow: 0 2px 6px rgba(0,123,255,0.2);
+        }
+        .plan-features h3 {
+            color: #333;
+            font-weight: 600;
+        }
+        .plan-features ul li {
+            color: #555;
+        }
+        .plan-features p {
+            color: #666;
+        }
+        .plan-features .discount-link {
+            text-decoration: none !important;
+        }
+        .compatibility-text {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .plan-name, .plan-price .currency, .plan-price .amount, .plan-price .period {
+            color: #333 !important;
+        }
+        .testimonial-content p {
+            color: #555 !important;
+        }
+        .testimonial-author {
+            color: #333 !important;
+        }
+        .pricing-container .testimonials {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #e9ecef;
+        }
+        .pricing-container .testimonials .section-title {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .pricing-container .final-cta {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid #e9ecef;
+        }
+        /* Remove pricing page compatibility styles - will use main CSS styles */
+        .pricing-container .testimonials,
+        .pricing-container .final-cta {
+            background-color: #ffffff !important;
+        }
+        .testimonials {
+            background-color: #ffffff !important;
+        }
+        .testimonial {
+            background-color: #ffffff !important;
+        }
+        .testimonial-content {
+            background-color: #ffffff !important;
+        }
+        .pricing-card .btn-primary {
+            background-color: #F60406 !important;
+            color: #ffffff !important;
+            border: 1px solid #F60406 !important;
+        }
+        .pricing-card .btn-primary:hover {
+            background-color: #d40305 !important;
+            border-color: #d40305 !important;
+        }
+        .pricing-container .btn-secondary {
+            background-color: #6c757d !important;
+            color: #ffffff !important;
+            border: 1px solid #6c757d !important;
+        }
+        .pricing-container .final-cta .btn-primary {
+            background-color: #F60406 !important;
+            color: #ffffff !important;
+            border: 1px solid #F60406 !important;
+        }
+        .pricing-container .final-cta .btn-primary:hover {
+            background-color: #d40305 !important;
+            border-color: #d40305 !important;
+        }
+        .testimonials {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+            margin: 80px 0;
+            padding: 60px;
+            border: 1px solid #e9ecef;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+        }
+        .testimonials::before {
+            content: '⭐⭐⭐⭐⭐';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 16px;
+            opacity: 0.6;
+        }
+        .testimonials .section-title {
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 24px;
+            text-align: center;
+        }
+        .testimonial {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid #e9ecef;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .testimonial-content p {
+            font-size: 22px !important;
+            color: #555 !important;
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+        .testimonial-content p::before {
+            content: '"';
+            font-size: 40px;
+            color: #007bff;
+            position: absolute;
+            left: -20px;
+            top: -10px;
+            font-family: serif;
+        }
+        .testimonial-content p::after {
+            content: '"';
+            font-size: 40px;
+            color: #007bff;
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-family: serif;
+        }
+        .testimonial-author {
+            color: #333 !important;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .pricing-container {
+                margin: 0;
+                padding: 40px 0;
+            }
+            .compatibility-logos {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+        </style>
+
+        <!-- Pricing Section -->
+        <section class="pricing" style="padding-top: 80px;">
+            <div class="pricing-container">
+                <div class="container">
+                    <h2 class="section-title">Pricing Plans</h2>
+                <div class="pricing-grid">
+                    <!-- Free Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h2 class="plan-name">Free</h2>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                            </div>
+                        </div>
+                        <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                        <div class="plan-features">
+                            <h3>Community Workouts & Plans</h3>
+                            <ul>
+                                <li>30,000 downloadable workouts</li>
+                                <li>Mobile training app *</li>
+                                <li>The fastest workout creator on the planet</li>
+                                <li>100's of cycling plans</li>
+                            </ul>
+                            <p class="disclaimer">* limited to 20-included workouts</p>
+                        </div>
+                    </div>
+
+                    <!-- Pro Plan -->
+                    <div class="pricing-card premium">
+                        <div class="pricing-header">
+                            <h2 class="plan-name">Pro</h2>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">4.99</span>
+                                <span class="period">per month</span>
+                            </div>
+                        </div>
+                        <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                        <div class="plan-features">
+                            <h3>Full Mobile App & Coach Jack</h3>
+                            <ul>
+                                <li>Coach Jack Plan Builder</li>
+                                <li>Full Featured Mobile App</li>
+                                <li>Send Plans to TP, Intervals, Garmin</li>
+                                <li>Training Calendar</li>
+                                <li>Lots more…</li>
+                            </ul>
+                            <p class="discount-link"><strong>$39.99/year.</strong> Available on checkout.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compatible with -->
+                <div class="compatibility">
+                    <p class="compatibility-text">Compatible with</p>
+                    <div class="compatibility-logos">
+                        <div class="logo-item">
+                            <img src="/assets/images/wahoo.svg" alt="Wahoo" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/strava.png" alt="Strava" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/garmin.png" alt="Garmin" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/trainingpeaks.svg" alt="TrainingPeaks" class="compatibility-logo">
+                        </div>
+                    </div>
+                </div>
+                    
+                    <!-- Simple Testimonial -->
+                    <div class="testimonials">
+                        <h3 class="section-title">What Our Users Say</h3>
+                        <div class="testimonials-grid">
+                            <div class="testimonial">
+                                <div class="testimonial-avatar">
+                                    <img src="/assets/images/Carl.png" alt="Carl" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>The utility of this platform is incredibly helpful. Thanks for all your fine work!</p>
+                                </div>
+                                <div class="testimonial-author">Carl</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final CTA -->
+                    <div class="final-cta">
+                        <div class="cta-buttons">
+                            <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                            <a href="/login/" class="btn btn-secondary auth-link">
+                                <span class="icon">👤</span>
+                                Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

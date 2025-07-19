@@ -1,0 +1,29 @@
+# Example .htaccess rules for serving static HTML pages
+# Add these rules to your WordPress .htaccess file
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Serve HTML login/register pages with WordPress form submission
+RewriteRule ^login/?$ login.html [L,QSA]
+RewriteRule ^register/?$ register.html [L,QSA]
+
+# Other existing static page rewrites
+RewriteRule ^download/?$ download.html [L,QSA]
+RewriteRule ^pricing/?$ pricing.html [L,QSA]
+RewriteRule ^contact-us/?$ contact.html [L,QSA]
+RewriteRule ^api/?$ api.html [L,QSA]
+RewriteRule ^terms-and-conditions/?$ terms-and-conditions.html [L,QSA]
+RewriteRule ^jetblack/?$ jetblack.html [L,QSA]
+RewriteRule ^jb/?$ jetblack.html [L,QSA]
+RewriteRule ^privacy-policy/?$ privacy-policy.html [L,QSA]
+RewriteRule ^coach-jack/?$ coach-jack.html [L,QSA]
+
+# WordPress rules (keep at bottom)
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>

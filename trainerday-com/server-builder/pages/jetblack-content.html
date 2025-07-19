@@ -1,0 +1,146 @@
+        <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #000;
+        }
+        
+        .jetblack-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+        }
+        
+        .jetblack-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background-color: #000;
+            color: white;
+            text-align: center;
+        }
+        
+        .jetblack-right {
+            flex: 1;
+            background-image: url('/assets/images/JetBlack-Cycling-Cycle-Trainers-and-accessories.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .jetblack-logo {
+            width: 300px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+        
+        .partnership-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        .offer-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #fff;
+            line-height: 1.2;
+        }
+        
+        .offer-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: #ccc;
+        }
+        
+        .download-btn-jetblack {
+            background-color: #F60406;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+        
+        .download-btn-jetblack:hover {
+            background-color: #d40305;
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Override header/footer for full screen effect */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer, .minimal-footer {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .jetblack-container {
+                flex-direction: column;
+            }
+            
+            .jetblack-left {
+                flex: none;
+                height: 60vh;
+                padding: 30px 20px;
+            }
+            
+            .jetblack-right {
+                flex: none;
+                height: 40vh;
+            }
+            
+            .jetblack-logo {
+                width: 200px;
+                margin-bottom: 20px;
+            }
+            
+            .offer-title {
+                font-size: 2rem;
+            }
+            
+            .partnership-text {
+                font-size: 1rem;
+            }
+            
+            .offer-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+            }
+            
+            .download-btn-jetblack {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        </style>
+
+        <div class="jetblack-container">
+            <div class="jetblack-left">
+                <img src="/assets/images/jetblack.svg" alt="JetBlack" class="jetblack-logo">
+                <p class="partnership-text">JetBlack in partnership with TrainerDay is pleased to offer you</p>
+                <h1 class="offer-title">20 Free training sessions</h1>
+                <p class="offer-subtitle">to help you achieve your fitness goals</p>
+                <a href="/download/" class="download-btn-jetblack">Download TrainerDay</a>
+            </div>
+            <div class="jetblack-right"></div>
+        </div>

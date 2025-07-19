@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - TrainerDay</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TrainerDay Analytics -->
+    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <script>
+        var analytics = mixpanel;
+        // Initialize with TrainerDay production settings
+        analytics.init('td-web', {
+            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+        });
+        
+        // Track page view
+        analytics.track('Page View', {
+            page: window.location.pathname,
+            title: document.title,
+            url: window.location.href
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/assets/images/td_white.svg" alt="TrainerDay" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-desktop">
+                    <a href="/download/" class="btn btn-primary download-cta">Download Mobile App</a>
+                    <div class="auth-section">
+                        <a href="/register/" class="auth-link-text">Sign Up</a>
+                        <span class="auth-separator">|</span>
+                        <a href="/login/" class="auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="auth-link-text webapp-link" style="display: none;">Go to Web App</a>
+                    </div>
+                </div>
+                <div class="nav-mobile">
+                    <div class="mobile-nav-content">
+                        <a href="/download/" class="btn btn-primary download-cta-mobile">Download Mobile App</a>
+                        <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+                    <div class="mobile-menu">
+                        <a href="/register/" class="mobile-menu-item auth-link-text">Sign Up</a>
+                        <a href="/login/" class="mobile-menu-item auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="mobile-menu-item webapp-link" style="display: none;">Go to Web App</a>
+                        <a href="/pricing/" class="mobile-menu-item">Pricing</a>
+                        <a href="/contact-us/" class="mobile-menu-item">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cookie Check Script -->
+    <script>
+    (function() {
+        function getCookie(name) {
+            const value = "; " + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+            return "";
+        }
+        
+        function checkTokenAndToggleNav() {
+            const token = getCookie("token");
+            const authLinks = document.querySelectorAll(".auth-link, .auth-link-text");
+            const webappLinks = document.querySelectorAll(".webapp-link");
+            const upgradeLinks = document.querySelectorAll(".upgrade-link");
+            
+            if (token && token.length > 3) {
+                // Hide auth links (Sign Up/Login)
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        link.style.display = "none";
+                    }
+                });
+                // Hide separator when logged in
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "none";
+                // Show webapp links (both desktop and mobile)
+                webappLinks.forEach(link => {
+                    if (link.classList.contains("mobile-menu-item")) {
+                        link.style.display = "block";
+                    } else {
+                        link.style.display = "inline-block";
+                    }
+                });
+                // Show upgrade links
+                upgradeLinks.forEach(link => link.style.display = "inline-block");
+            } else {
+                // Show auth links
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        if (link.classList.contains("mobile-menu-item")) {
+                            link.style.display = "block";
+                        } else {
+                            link.style.display = "inline-block";
+                        }
+                    }
+                });
+                // Show separator when logged out
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "inline-block";
+                // Hide webapp links
+                webappLinks.forEach(link => link.style.display = "none");
+                // Hide upgrade links
+                upgradeLinks.forEach(link => link.style.display = "none");
+            }
+        }
+        
+        // Run on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkTokenAndToggleNav);
+        } else {
+            checkTokenAndToggleNav();
+        }
+    })();
+    
+    // Mobile menu functions
+    function toggleMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+    
+    function closeMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+    </script>
+
+    <!-- Main Content -->
+    <main>        <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px 60px;
+            line-height: 1.6;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .privacy-content h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .privacy-content h2 {
+            color: #333;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .privacy-content h3 {
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .privacy-content p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .privacy-content ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        .privacy-content li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .highlight {
+            background-color: #e3f2fd;
+            padding: 2px 4px;
+            font-weight: 600;
+        }
+        .minimal-footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .minimal-footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .minimal-footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .minimal-footer a:hover {
+            text-decoration: underline;
+        }
+        </style>
+
+        <div class="privacy-content">
+            <h1>TrainerDay Privacy Policy</h1>
+            
+            <h2>Who we are</h2>
+            <p>TrainerDay Inc</p>
+            
+            <h3>We won't sell or provide your personal information</h3>
+            <p>To any 3rd-party without your consent. Ok if we sell the company then I guess they will get it too but you will know about that if it happens.</p>
+            
+            <h2>What personal data we collect and why we collect it?</h2>
+            
+            <h3>Comments</h3>
+            <p>When visitors leave comments on the site, we collect the data shown in the comments form, and also the visitor's IP address and browser user agent string to help spam detection.</p>
+            <p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here. After approval of your comment, your profile picture is visible to the public in your comment.</p>
+            
+            <h3>Plans & Workouts</h3>
+            <p>This is a community workout website. We store this information so be careful not to include anything you don't want someone else to see.</p>
+            
+            <h3>Mobile Training App Data Collection</h3>
+            
+            <p><strong>1. Types of Data Collected:</strong><br>
+            Our app collects the following types of personal and sensitive user data:</p>
+            <p><strong>Personal Information:</strong> This includes data like email addresses, names, and performance metrics (workout data, heart rate, power output, etc.).</p>
+            <p><strong>Sensitive Information:</strong> Our app collects health-related data that is crucial to performance analysis, such as heart rate, power output, and other fitness metrics. Our app also collects location information partically because connecting to bluetooth requires location services, and secondly we collect user IP and related location information (City, Country…) for generalized user demographic reviews.</p>
+            
+            <p><strong>2. Data Usage:</strong><br>
+            The personal and sensitive user data we collect is used solely for:</p>
+            <p><strong>Enhancing User Experience:</strong> By analyzing performance metrics, we deliver personalized workout recommendations.</p>
+            <p><strong>Analytics and Reporting:</strong> We use Mixpanel to track app performance, usage statistics, and user interactions to improve our services and app experience.</p>
+            
+            <p><strong>3. Third-Party Sharing:</strong><br>
+            We do not share your personal or sensitive data with any third-party companies for advertising or marketing purposes. The only third party with access to some of the anonymized app data is:</p>
+            <p><strong>Mixpanel:</strong> Used exclusively for reporting and analytics purposes. No personally identifiable information is shared. The data sent to Mixpanel is used solely to improve the app and user experience.</p>
+            
+            <p><strong>4. Data Storage and Security:</strong><br>
+            All user data is stored on private servers hosted by Digital Ocean, which are secured by x509 certificates to ensure encrypted and secure transmission of data. This means that all communication between our app and our servers is encrypted, protecting user data from unauthorized access or breaches.</p>
+            
+            <p><strong>5. Data Retention and Deletion:</strong><br>
+            We retain personal and sensitive data for as long as you use the app. Upon request or account deletion:</p>
+            <ul>
+                <li>All personal data will be permanently deleted from our servers.</li>
+                <li>Any performance metrics or sensitive data associated with your account will also be removed.</li>
+                <li>Anonymous usage data may be retained for internal analysis to improve the app but will not be tied to any individual user.</li>
+                <li>We provide users with full control over their data, including the ability to delete all personal data upon request.</li>
+            </ul>
+            
+            <p><strong>6. Secure Data Handling Procedures:</strong><br>
+            To ensure that your data is handled securely, we have implemented the following measures:</p>
+            <ul>
+                <li><strong>Encryption:</strong> All sensitive data is encrypted both in transit.</li>
+                <li><strong>Access Control:</strong> Access to stored data is restricted to authorized personnel only.</li>
+                <li><strong>Regular Audits:</strong> We conduct periodic audits of our security protocols to ensure compliance with data protection regulations.</li>
+            </ul>
+            
+            <h3>Cookies</h3>
+            <p>If you leave a comment on our site, you may opt-in to save your name, email address and website in cookies. These are so you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p>
+            <p>If you have an account and you log in to this site, we create a cookie that has information about your account but not any personally identifiable information about you.</p>
+            <p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies and screen options cookies last for a year.</p>
+            <p>We also track anonymous site usage information via standard 3rd-party analytics services.</p>
+            
+            <h3>Embedded content from other websites</h3>
+            <p>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the same way as if the visitor has visited the other website.</p>
+            <p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p>
+            
+            <h3>Analytics</h3>
+            
+            <h2>How long do we keep your data?</h2>
+            <p>If you leave a comment, register or create a workout, the data and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p>
+            <p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information. We also keep all workout and plans you create indefinitely.</p>
+            
+            <h2>What rights you have over your data</h2>
+            <p>If you have an account on this site or have left comments, created a workout, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we must keep for administrative, legal, or security purposes.</p>
+            
+            <h2>Where we send your data</h2>
+            <p>We may check visitor comments through an automated spam detection service.</p>
+            
+            <h2>Your contact information</h2>
+            <p>TrainerDay Inc<br>
+            2531 Sahalee Drive West<br>
+            Sammamish, WA 98074<br>
+            hello@trainerday.com</p>
+        </div>    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="minimal-footer">
+        <div class="container">
+            <p>&copy; 2024 TrainerDay. <a href="/terms-and-conditions/">Terms</a> | <a href="/privacy-policy/">Privacy</a> | <a href="/contact-us/">Contact</a></p>
+        </div>
+    </footer>
+</body>
+</html>

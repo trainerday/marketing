@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - TrainerDay</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TrainerDay Analytics -->
+    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <script>
+        var analytics = mixpanel;
+        // Initialize with TrainerDay production settings
+        analytics.init('td-web', {
+            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+        });
+        
+        // Track page view
+        analytics.track('Page View', {
+            page: window.location.pathname,
+            title: document.title,
+            url: window.location.href
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/assets/images/td_white.svg" alt="TrainerDay" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-desktop">
+                    <a href="/download/" class="btn btn-primary download-cta">Download Mobile App</a>
+                    <div class="auth-section">
+                        <a href="/register/" class="auth-link-text">Sign Up</a>
+                        <span class="auth-separator">|</span>
+                        <a href="/login/" class="auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="auth-link-text webapp-link" style="display: none;">Go to Web App</a>
+                    </div>
+                </div>
+                <div class="nav-mobile">
+                    <div class="mobile-nav-content">
+                        <a href="/download/" class="btn btn-primary download-cta-mobile">Download Mobile App</a>
+                        <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+                    <div class="mobile-menu">
+                        <a href="/register/" class="mobile-menu-item auth-link-text">Sign Up</a>
+                        <a href="/login/" class="mobile-menu-item auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="mobile-menu-item webapp-link" style="display: none;">Go to Web App</a>
+                        <a href="/pricing/" class="mobile-menu-item">Pricing</a>
+                        <a href="/contact-us/" class="mobile-menu-item">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cookie Check Script -->
+    <script>
+    (function() {
+        function getCookie(name) {
+            const value = "; " + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+            return "";
+        }
+        
+        function checkTokenAndToggleNav() {
+            const token = getCookie("token");
+            const authLinks = document.querySelectorAll(".auth-link, .auth-link-text");
+            const webappLinks = document.querySelectorAll(".webapp-link");
+            const upgradeLinks = document.querySelectorAll(".upgrade-link");
+            
+            if (token && token.length > 3) {
+                // Hide auth links (Sign Up/Login)
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        link.style.display = "none";
+                    }
+                });
+                // Hide separator when logged in
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "none";
+                // Show webapp links (both desktop and mobile)
+                webappLinks.forEach(link => {
+                    if (link.classList.contains("mobile-menu-item")) {
+                        link.style.display = "block";
+                    } else {
+                        link.style.display = "inline-block";
+                    }
+                });
+                // Show upgrade links
+                upgradeLinks.forEach(link => link.style.display = "inline-block");
+            } else {
+                // Show auth links
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        if (link.classList.contains("mobile-menu-item")) {
+                            link.style.display = "block";
+                        } else {
+                            link.style.display = "inline-block";
+                        }
+                    }
+                });
+                // Show separator when logged out
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "inline-block";
+                // Hide webapp links
+                webappLinks.forEach(link => link.style.display = "none");
+                // Hide upgrade links
+                upgradeLinks.forEach(link => link.style.display = "none");
+            }
+        }
+        
+        // Run on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkTokenAndToggleNav);
+        } else {
+            checkTokenAndToggleNav();
+        }
+    })();
+    
+    // Mobile menu functions
+    function toggleMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+    
+    function closeMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+    </script>
+
+    <!-- Main Content -->
+    <main>        <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .pricing-container {
+            background-color: #ffffff;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+            max-width: 100%;
+            padding: 60px 0;
+            width: 100%;
+        }
+        .section-title {
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        .pricing-card {
+            background-color: #ffffff !important;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .pricing-card.premium {
+            background-color: #ffffff !important;
+            border-color: #007bff;
+            box-shadow: 0 2px 6px rgba(0,123,255,0.2);
+        }
+        .plan-features h3 {
+            color: #333;
+            font-weight: 600;
+        }
+        .plan-features ul li {
+            color: #555;
+        }
+        .plan-features p {
+            color: #666;
+        }
+        .plan-features .discount-link {
+            text-decoration: none !important;
+        }
+        .compatibility-text {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .plan-name, .plan-price .currency, .plan-price .amount, .plan-price .period {
+            color: #333 !important;
+        }
+        .testimonial-content p {
+            color: #555 !important;
+        }
+        .testimonial-author {
+            color: #333 !important;
+        }
+        .pricing-container .testimonials {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #e9ecef;
+        }
+        .pricing-container .testimonials .section-title {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .pricing-container .final-cta {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid #e9ecef;
+        }
+        /* Remove pricing page compatibility styles - will use main CSS styles */
+        .pricing-container .testimonials,
+        .pricing-container .final-cta {
+            background-color: #ffffff !important;
+        }
+        .testimonials {
+            background-color: #ffffff !important;
+        }
+        .testimonial {
+            background-color: #ffffff !important;
+        }
+        .testimonial-content {
+            background-color: #ffffff !important;
+        }
+        .pricing-card .btn-primary {
+            background-color: #F60406 !important;
+            color: #ffffff !important;
+            border: 1px solid #F60406 !important;
+        }
+        .pricing-card .btn-primary:hover {
+            background-color: #d40305 !important;
+            border-color: #d40305 !important;
+        }
+        .pricing-container .btn-secondary {
+            background-color: #6c757d !important;
+            color: #ffffff !important;
+            border: 1px solid #6c757d !important;
+        }
+        .pricing-container .final-cta .btn-primary {
+            background-color: #F60406 !important;
+            color: #ffffff !important;
+            border: 1px solid #F60406 !important;
+        }
+        .pricing-container .final-cta .btn-primary:hover {
+            background-color: #d40305 !important;
+            border-color: #d40305 !important;
+        }
+        .testimonials {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+            margin: 80px 0;
+            padding: 60px;
+            border: 1px solid #e9ecef;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+        }
+        .testimonials::before {
+            content: '⭐⭐⭐⭐⭐';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 16px;
+            opacity: 0.6;
+        }
+        .testimonials .section-title {
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 24px;
+            text-align: center;
+        }
+        .testimonial {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid #e9ecef;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .testimonial-content p {
+            font-size: 22px !important;
+            color: #555 !important;
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+        .testimonial-content p::before {
+            content: '"';
+            font-size: 40px;
+            color: #007bff;
+            position: absolute;
+            left: -20px;
+            top: -10px;
+            font-family: serif;
+        }
+        .testimonial-content p::after {
+            content: '"';
+            font-size: 40px;
+            color: #007bff;
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-family: serif;
+        }
+        .testimonial-author {
+            color: #333 !important;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .pricing-container {
+                margin: 0;
+                padding: 40px 0;
+            }
+            .compatibility-logos {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+        </style>
+
+        <!-- Pricing Section -->
+        <section class="pricing" style="padding-top: 80px;">
+            <div class="pricing-container">
+                <div class="container">
+                    <h2 class="section-title">Pricing Plans</h2>
+                <div class="pricing-grid">
+                    <!-- Free Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h2 class="plan-name">Free</h2>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                            </div>
+                        </div>
+                        <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                        <div class="plan-features">
+                            <h3>Community Workouts & Plans</h3>
+                            <ul>
+                                <li>30,000 downloadable workouts</li>
+                                <li>Mobile training app *</li>
+                                <li>The fastest workout creator on the planet</li>
+                                <li>100's of cycling plans</li>
+                            </ul>
+                            <p class="disclaimer">* limited to 20-included workouts</p>
+                        </div>
+                    </div>
+
+                    <!-- Pro Plan -->
+                    <div class="pricing-card premium">
+                        <div class="pricing-header">
+                            <h2 class="plan-name">Pro</h2>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">4.99</span>
+                                <span class="period">per month</span>
+                            </div>
+                        </div>
+                        <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                        <div class="plan-features">
+                            <h3>Full Mobile App & Coach Jack</h3>
+                            <ul>
+                                <li>Coach Jack Plan Builder</li>
+                                <li>Full Featured Mobile App</li>
+                                <li>Send Plans to TP, Intervals, Garmin</li>
+                                <li>Training Calendar</li>
+                                <li>Lots more…</li>
+                            </ul>
+                            <p class="discount-link"><strong>$39.99/year.</strong> Available on checkout.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compatible with -->
+                <div class="compatibility">
+                    <p class="compatibility-text">Compatible with</p>
+                    <div class="compatibility-logos">
+                        <div class="logo-item">
+                            <img src="/assets/images/wahoo.svg" alt="Wahoo" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/strava.png" alt="Strava" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/garmin.png" alt="Garmin" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/trainingpeaks.svg" alt="TrainingPeaks" class="compatibility-logo">
+                        </div>
+                    </div>
+                </div>
+                    
+                    <!-- Simple Testimonial -->
+                    <div class="testimonials">
+                        <h3 class="section-title">What Our Users Say</h3>
+                        <div class="testimonials-grid">
+                            <div class="testimonial">
+                                <div class="testimonial-avatar">
+                                    <img src="/assets/images/Carl.png" alt="Carl" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>The utility of this platform is incredibly helpful. Thanks for all your fine work!</p>
+                                </div>
+                                <div class="testimonial-author">Carl</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final CTA -->
+                    <div class="final-cta">
+                        <div class="cta-buttons">
+                            <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                            <a href="/login/" class="btn btn-secondary auth-link">
+                                <span class="icon">👤</span>
+                                Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://blog.trainerday.com/trainerday-learn-everything-456af4730b36">Learn About TrainerDay</a></li>
+                            <li><a href="/pricing/">Pricing</a></li>
+                            <li><a href="https://trainerday.com/blog/">Blog</a></li>
+                            <li><a href="/api/">Developer API</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="https://forums.trainerday.com/">Forums</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="https://www.youtube.com/c/TrainerDayCyclingWorkoutsandPlans" class="social-link">Youtube</a>
+                            <a href="https://www.facebook.com/trainerday" class="social-link">Facebook</a>
+                            <a href="https://twitter.com/trainerdaycom" class="social-link">Twitter</a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Download App</h4>
+                        <div class="app-links">
+                            <a href="https://apps.apple.com/us/app/id1500401973" class="app-link">
+                                <img src="/assets/images/apple.svg" alt="Download on App Store" class="app-icon">
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=trainerday.turbo" class="app-link">
+                                <img src="/assets/images/play.svg" alt="Get it on Google Play" class="app-icon">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                <a href="https://app.trainerday.com" class="btn btn-primary webapp-link" style="display: none;">Go to Web App</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Minimal Footer -->
+    <div class="minimal-footer">
+        <div class="container">
+            <div class="minimal-footer-content">
+                <p>&copy; 2024 TrainerDay. All rights reserved.</p>
+                <div class="minimal-footer-links">
+                    <a href="/privacy-policy/">Privacy</a>
+                    <a href="/terms-and-conditions/">Terms</a>
+                    <a href="/contact-us/">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Clicky Analytics -->
+    <script async data-id="101125465" src="//static.getclicky.com/js"></script>
+</body>
+</html>

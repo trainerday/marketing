@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found - TrainerDay</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TrainerDay Analytics -->
+    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <script>
+        var analytics = mixpanel;
+        // Initialize with TrainerDay production settings
+        analytics.init('td-web', {
+            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+        });
+        
+        // Track page view
+        analytics.track('Page View', {
+            page: window.location.pathname,
+            title: document.title,
+            url: window.location.href
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/assets/images/td_white.svg" alt="TrainerDay" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-desktop">
+                    <a href="/download/" class="btn btn-primary download-cta">Download Mobile App</a>
+                    <div class="auth-section">
+                        <a href="/register/" class="auth-link-text">Sign Up</a>
+                        <span class="auth-separator">|</span>
+                        <a href="/login/" class="auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="auth-link-text webapp-link" style="display: none;">Go to Web App</a>
+                    </div>
+                </div>
+                <div class="nav-mobile">
+                    <div class="mobile-nav-content">
+                        <a href="/download/" class="btn btn-primary download-cta-mobile">Download Mobile App</a>
+                        <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+                    <div class="mobile-menu">
+                        <a href="/register/" class="mobile-menu-item auth-link-text">Sign Up</a>
+                        <a href="/login/" class="mobile-menu-item auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="mobile-menu-item webapp-link" style="display: none;">Go to Web App</a>
+                        <a href="/pricing/" class="mobile-menu-item">Pricing</a>
+                        <a href="/contact-us/" class="mobile-menu-item">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cookie Check Script -->
+    <script>
+    (function() {
+        function getCookie(name) {
+            const value = "; " + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+            return "";
+        }
+        
+        function checkTokenAndToggleNav() {
+            const token = getCookie("token");
+            const authLinks = document.querySelectorAll(".auth-link, .auth-link-text");
+            const webappLinks = document.querySelectorAll(".webapp-link");
+            const upgradeLinks = document.querySelectorAll(".upgrade-link");
+            
+            if (token && token.length > 3) {
+                // Hide auth links (Sign Up/Login)
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        link.style.display = "none";
+                    }
+                });
+                // Hide separator when logged in
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "none";
+                // Show webapp links (both desktop and mobile)
+                webappLinks.forEach(link => {
+                    if (link.classList.contains("mobile-menu-item")) {
+                        link.style.display = "block";
+                    } else {
+                        link.style.display = "inline-block";
+                    }
+                });
+                // Show upgrade links
+                upgradeLinks.forEach(link => link.style.display = "inline-block");
+            } else {
+                // Show auth links
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        if (link.classList.contains("mobile-menu-item")) {
+                            link.style.display = "block";
+                        } else {
+                            link.style.display = "inline-block";
+                        }
+                    }
+                });
+                // Show separator when logged out
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "inline-block";
+                // Hide webapp links
+                webappLinks.forEach(link => link.style.display = "none");
+                // Hide upgrade links
+                upgradeLinks.forEach(link => link.style.display = "none");
+            }
+        }
+        
+        // Run on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkTokenAndToggleNav);
+        } else {
+            checkTokenAndToggleNav();
+        }
+    })();
+    
+    // Mobile menu functions
+    function toggleMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+    
+    function closeMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+    </script>
+
+    <!-- Main Content -->
+    <main>        <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url('/assets/images/404_background-min.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .error-404-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+        .error-404-content {
+            text-align: center;
+            color: #333;
+            padding: 40px;
+            max-width: 500px;
+            margin: 0 20px;
+            transform: translateX(250px);
+        }
+        .lost-text-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+        }
+        .error-404-button {
+            background-color: #F60406;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .error-404-button:hover {
+            background-color: #d40305;
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Override header/footer for full screen effect */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .error-404-content {
+                padding: 20px 10px;
+                transform: translateX(0);
+                max-width: 90%;
+                margin: 0 auto;
+            }
+            .lost-text-image {
+                max-width: 90%;
+                margin-bottom: 20px;
+            }
+            .error-404-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        </style>
+
+        <div class="error-404-container">
+            <div class="error-404-content">
+                <img src="/assets/images/lost_text.png" alt="I Believe You Are Lost - Page Not Found - 404" class="lost-text-image">
+                <a href="/" class="error-404-button">Take Me Home</a>
+            </div>
+        </div>    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://blog.trainerday.com/trainerday-learn-everything-456af4730b36">Learn About TrainerDay</a></li>
+                            <li><a href="/pricing/">Pricing</a></li>
+                            <li><a href="https://trainerday.com/blog/">Blog</a></li>
+                            <li><a href="/api/">Developer API</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="https://forums.trainerday.com/">Forums</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="https://www.youtube.com/c/TrainerDayCyclingWorkoutsandPlans" class="social-link">Youtube</a>
+                            <a href="https://www.facebook.com/trainerday" class="social-link">Facebook</a>
+                            <a href="https://twitter.com/trainerdaycom" class="social-link">Twitter</a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Download App</h4>
+                        <div class="app-links">
+                            <a href="https://apps.apple.com/us/app/id1500401973" class="app-link">
+                                <img src="/assets/images/apple.svg" alt="Download on App Store" class="app-icon">
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=trainerday.turbo" class="app-link">
+                                <img src="/assets/images/play.svg" alt="Get it on Google Play" class="app-icon">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                <a href="https://app.trainerday.com" class="btn btn-primary webapp-link" style="display: none;">Go to Web App</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Minimal Footer -->
+    <div class="minimal-footer">
+        <div class="container">
+            <div class="minimal-footer-content">
+                <p>&copy; 2024 TrainerDay. All rights reserved.</p>
+                <div class="minimal-footer-links">
+                    <a href="/privacy-policy/">Privacy</a>
+                    <a href="/terms-and-conditions/">Terms</a>
+                    <a href="/contact-us/">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Clicky Analytics -->
+    <script async data-id="101125465" src="//static.getclicky.com/js"></script>
+</body>
+</html>

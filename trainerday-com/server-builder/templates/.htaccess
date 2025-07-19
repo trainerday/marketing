@@ -1,0 +1,36 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteRule ^privacy-policy/?$ privacy-policy.html [L,QSA]
+  RewriteRule ^terms-and-conditions/?$ terms-and-conditions.html [L,QSA]
+  RewriteRule ^api/?$ api.html [L,QSA]
+  RewriteRule ^pricing/?$ pricing.html [L,QSA]
+  RewriteRule ^coach-jack/?$ coach-jack.html [L,QSA]
+  RewriteRule ^404/?$ 404.html [L,QSA]
+  RewriteRule ^404-page/?$ 404.html [L,QSA]
+  RewriteRule ^download/?$ download.html [L,QSA]
+  RewriteRule ^jetblack/?$ jetblack.html [L,QSA]
+  RewriteRule ^contact-us/?$ contact.html [L,QSA]
+
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  RewriteBase /
+  RewriteRule ^index\.php$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.php [L]
+</IfModule>
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress

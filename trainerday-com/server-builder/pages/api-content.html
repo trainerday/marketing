@@ -1,0 +1,104 @@
+        <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .api-content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 60px 40px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .api-section {
+            margin-bottom: 50px;
+        }
+        .api-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .api-section p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            color: #333;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .captcha-display {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .api-content {
+                margin: 20px;
+                padding: 40px 20px;
+            }
+        }
+        </style>
+
+        <div class="api-content">
+            <div class="api-section">
+                <h2>API Documentation</h2>
+                <p><strong>One REST method "get workouts" is all you you should need.</strong></p>
+                <p>We are in the process of updating this documentation now. 1/20/2021. Hopefully we should have more here soon.</p>
+                <p>Are you thinking of building a competitor to our indoor training app? No problem. We really believe in sharing and letting cyclists train the way they want to train, not forcing them into using a specific training app.</p>
+            </div>
+
+            <div class="api-section">
+                <h2>Workout Object</h2>
+                <p>Below is an example of what our getWorkouts returns</p>
+                <div class="code-block">
+{<br>
+&nbsp;&nbsp;"workoutName": "tempo and hills 6/19",<br>
+&nbsp;&nbsp;"segments": [[8,50,50],[3,80,80],[1,45,45],[4,80,80],[1,45,45],[3,80,80],[1,45,45],[4,80,80],[2,45,45],[0.5,65,65],[0.5,65,65],[0.5,65,65],[0.5,65,65],[0.5,65,65],[0.5,65,65],[0.5,65,65],[0.5,65,65],[0.5,65,65],[0.5,65,65],[4,50,50],[0.5,60,60],[0.6,65,65],[0.5,70,70],[0.5,75,75],[1,45,45]]<br>
+}
+                </div>
+            </div>
+
+            <div class="api-section">
+                <h2>API Key Request</h2>
+                <p>Really we won't deny anyone access. We just want to track usage and understand if you may need additional methods or have any special requirements. We are also really curious. If your project is top secret you don't need to give away your secret sauce, just give a little information on the nature of what you are doing including the volume of calls you plan to do.</p>
+                
+                <p style="margin-top: 30px;">Please <a href="/contact-us/">contact us</a> to request an API key. Include details about how you plan to use the API and the volume of calls you expect to make.</p>
+            </div>
+        </div>

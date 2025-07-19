@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TrainerDay Analytics -->
+    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <script>
+        var analytics = mixpanel;
+        // Initialize with TrainerDay production settings
+        analytics.init('td-web', {
+            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+        });
+        
+        // Track page view
+        analytics.track('Page View', {
+            page: window.location.pathname,
+            title: document.title,
+            url: window.location.href
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/assets/images/td_white.svg" alt="TrainerDay" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-desktop">
+                    <a href="/download/" class="btn btn-primary download-cta">Download Mobile App</a>
+                    <div class="auth-section">
+                        <a href="/register/" class="auth-link-text">Sign Up</a>
+                        <span class="auth-separator">|</span>
+                        <a href="/login/" class="auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="auth-link-text webapp-link" style="display: none;">Go to Web App</a>
+                    </div>
+                </div>
+                <div class="nav-mobile">
+                    <div class="mobile-nav-content">
+                        <a href="/download/" class="btn btn-primary download-cta-mobile">Download Mobile App</a>
+                        <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+                    <div class="mobile-menu">
+                        <a href="/register/" class="mobile-menu-item auth-link-text">Sign Up</a>
+                        <a href="/login/" class="mobile-menu-item auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="mobile-menu-item webapp-link" style="display: none;">Go to Web App</a>
+                        <a href="/pricing/" class="mobile-menu-item">Pricing</a>
+                        <a href="/contact-us/" class="mobile-menu-item">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cookie Check Script -->
+    <script>
+    (function() {
+        function getCookie(name) {
+            const value = "; " + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+            return "";
+        }
+        
+        function checkTokenAndToggleNav() {
+            const token = getCookie("token");
+            const authLinks = document.querySelectorAll(".auth-link, .auth-link-text");
+            const webappLinks = document.querySelectorAll(".webapp-link");
+            const upgradeLinks = document.querySelectorAll(".upgrade-link");
+            
+            if (token && token.length > 3) {
+                // Hide auth links (Sign Up/Login)
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        link.style.display = "none";
+                    }
+                });
+                // Hide separator when logged in
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "none";
+                // Show webapp links (both desktop and mobile)
+                webappLinks.forEach(link => {
+                    if (link.classList.contains("mobile-menu-item")) {
+                        link.style.display = "block";
+                    } else {
+                        link.style.display = "inline-block";
+                    }
+                });
+                // Show upgrade links
+                upgradeLinks.forEach(link => link.style.display = "inline-block");
+            } else {
+                // Show auth links
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        if (link.classList.contains("mobile-menu-item")) {
+                            link.style.display = "block";
+                        } else {
+                            link.style.display = "inline-block";
+                        }
+                    }
+                });
+                // Show separator when logged out
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "inline-block";
+                // Hide webapp links
+                webappLinks.forEach(link => link.style.display = "none");
+                // Hide upgrade links
+                upgradeLinks.forEach(link => link.style.display = "none");
+            }
+        }
+        
+        // Run on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkTokenAndToggleNav);
+        } else {
+            checkTokenAndToggleNav();
+        }
+    })();
+    
+    // Mobile menu functions
+    function toggleMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+    
+    function closeMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+    </script>
+
+    <!-- Main Content -->
+    <main>

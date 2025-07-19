@@ -1,0 +1,156 @@
+server {
+    listen 127.0.0.1:80;
+    server_name td-testit2.test www.td-testit2.test *.td-testit2.test;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 127.0.0.1:443 ssl;
+    server_name td-testit2.test www.td-testit2.test *.td-testit2.test;
+    root /;
+    charset utf-8;
+    client_max_body_size 512M;
+    http2  on;
+
+    location /41c270e4-5535-4daa-b23e-c269744c2f45/ {
+        internal;
+        alias /;
+        try_files $uri $uri/;
+    }
+
+    ssl_certificate "/Users/alex/.config/valet/Certificates/td-testit2.test.crt";
+    ssl_certificate_key "/Users/alex/.config/valet/Certificates/td-testit2.test.key";
+
+    # Custom static file rewrites
+    location ~ ^/privacy-policy/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /privacy-policy.html =404;
+    }
+
+    location ~ ^/terms-and-conditions/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /terms-and-conditions.html =404;
+    }
+
+    location ~ ^/api/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /api.html =404;
+    }
+
+    location ~ ^/pricing/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /pricing.html =404;
+    }
+
+    location ~ ^/coach-jack/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /coach-jack.html =404;
+    }
+
+    location ~ ^/404/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /404.html =404;
+    }
+
+    location ~ ^/download/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /download.html =404;
+    }
+
+    location ~ ^/jetblack/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /jetblack.html =404;
+    }
+
+    location ~ ^/contact-us/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /contact.html =404;
+    }
+
+    location ~ ^/register/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /register.html =404;
+    }
+
+    location ~ ^/login/?$ {
+        root /Users/alex/Sites/td-testit2;
+        try_files /login.html =404;
+    }
+
+    # Serve index.html for root path
+    location = / {
+        root /Users/alex/Sites/td-testit2;
+        try_files /index.html @wordpress;
+    }
+
+    # WordPress fallback for everything else
+    location @wordpress {
+        rewrite ^ "/Users/alex/.config/composer/vendor/laravel/valet/server.php" last;
+    }
+
+    location / {
+        rewrite ^ "/Users/alex/.config/composer/vendor/laravel/valet/server.php" last;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    access_log off;
+    error_log "/Users/alex/.config/valet/Log/nginx-error.log";
+
+    error_page 404 "/Users/alex/.config/composer/vendor/laravel/valet/server.php";
+
+    location ~ [^/]\.php(/|$) {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass "unix:/Users/alex/.config/valet/valet.sock";
+        fastcgi_index "/Users/alex/.config/composer/vendor/laravel/valet/server.php";
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME "/Users/alex/.config/composer/vendor/laravel/valet/server.php";
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
+server {
+    listen 127.0.0.1:60;
+    server_name td-testit2.test www.td-testit2.test *.td-testit2.test;
+    root /;
+    charset utf-8;
+    client_max_body_size 128M;
+
+    add_header X-Robots-Tag 'noindex, nofollow, nosnippet, noarchive';
+
+    location /41c270e4-5535-4daa-b23e-c269744c2f45/ {
+        internal;
+        alias /;
+        try_files $uri $uri/;
+    }
+
+    location / {
+        rewrite ^ "/Users/alex/.config/composer/vendor/laravel/valet/server.php" last;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    access_log off;
+    error_log "/Users/alex/.config/valet/Log/nginx-error.log";
+
+    error_page 404 "/Users/alex/.config/composer/vendor/laravel/valet/server.php";
+
+    location ~ [^/]\.php(/|$) {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass "unix:/Users/alex/.config/valet/valet.sock";
+        fastcgi_index "/Users/alex/.config/composer/vendor/laravel/valet/server.php";
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME "/Users/alex/.config/composer/vendor/laravel/valet/server.php";
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}

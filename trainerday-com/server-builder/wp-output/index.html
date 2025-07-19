@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrainerDay - Cycling App</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TrainerDay Analytics -->
+    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <script>
+        var analytics = mixpanel;
+        // Initialize with TrainerDay production settings
+        analytics.init('td-web', {
+            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+        });
+        
+        // Track page view
+        analytics.track('Page View', {
+            page: window.location.pathname,
+            title: document.title,
+            url: window.location.href
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/assets/images/td_white.svg" alt="TrainerDay" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-desktop">
+                    <a href="/download/" class="btn btn-primary download-cta">Download Mobile App</a>
+                    <div class="auth-section">
+                        <a href="/register/" class="auth-link-text">Sign Up</a>
+                        <span class="auth-separator">|</span>
+                        <a href="/login/" class="auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="auth-link-text webapp-link" style="display: none;">Go to Web App</a>
+                    </div>
+                </div>
+                <div class="nav-mobile">
+                    <div class="mobile-nav-content">
+                        <a href="/download/" class="btn btn-primary download-cta-mobile">Download Mobile App</a>
+                        <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+                    <div class="mobile-menu">
+                        <a href="/register/" class="mobile-menu-item auth-link-text">Sign Up</a>
+                        <a href="/login/" class="mobile-menu-item auth-link-text">Login</a>
+                        <a href="https://app.trainerday.com" class="mobile-menu-item webapp-link" style="display: none;">Go to Web App</a>
+                        <a href="/pricing/" class="mobile-menu-item">Pricing</a>
+                        <a href="/contact-us/" class="mobile-menu-item">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cookie Check Script -->
+    <script>
+    (function() {
+        function getCookie(name) {
+            const value = "; " + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+            return "";
+        }
+        
+        function checkTokenAndToggleNav() {
+            const token = getCookie("token");
+            const authLinks = document.querySelectorAll(".auth-link, .auth-link-text");
+            const webappLinks = document.querySelectorAll(".webapp-link");
+            const upgradeLinks = document.querySelectorAll(".upgrade-link");
+            
+            if (token && token.length > 3) {
+                // Hide auth links (Sign Up/Login)
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        link.style.display = "none";
+                    }
+                });
+                // Hide separator when logged in
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "none";
+                // Show webapp links (both desktop and mobile)
+                webappLinks.forEach(link => {
+                    if (link.classList.contains("mobile-menu-item")) {
+                        link.style.display = "block";
+                    } else {
+                        link.style.display = "inline-block";
+                    }
+                });
+                // Show upgrade links
+                upgradeLinks.forEach(link => link.style.display = "inline-block");
+            } else {
+                // Show auth links
+                authLinks.forEach(link => {
+                    if (!link.classList.contains("webapp-link")) {
+                        if (link.classList.contains("mobile-menu-item")) {
+                            link.style.display = "block";
+                        } else {
+                            link.style.display = "inline-block";
+                        }
+                    }
+                });
+                // Show separator when logged out
+                const separator = document.querySelector(".auth-separator");
+                if (separator) separator.style.display = "inline-block";
+                // Hide webapp links
+                webappLinks.forEach(link => link.style.display = "none");
+                // Hide upgrade links
+                upgradeLinks.forEach(link => link.style.display = "none");
+            }
+        }
+        
+        // Run on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkTokenAndToggleNav);
+        } else {
+            checkTokenAndToggleNav();
+        }
+    })();
+    
+    // Mobile menu functions
+    function toggleMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+    
+    function closeMobileMenu() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const hamburger = document.querySelector('.hamburger-menu');
+        
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+    </script>
+
+    <!-- Main Content -->
+    <main>        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="/assets/images/home.jpeg" alt="Cyclist" class="hero-image">
+            </div>
+            <div class="hero-content">
+                <div class="container">
+                    <h1 class="hero-title">Flexible & Affordable</h1>
+                    <p class="hero-subtitle">Get faster with the most affordable and flexible training plans and workouts for cyclists.</p>
+                    
+                    <div class="app-info">
+                        <p class="app-name">TrainerDay Indoor Cycling App</p>
+                        <div class="rating">
+                            <img src="/assets/images/5-stars.svg" alt="5 stars" class="stars">
+                            <span class="rating-text">4.8 of 5.0 – 3k+ Reviews</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats section-charcoal">
+            <div class="container">
+                <div class="stats-content-centered">
+                    <div class="stat-item-centered">
+                        <img src="/assets/images/cycling-1.svg" alt="Cycling" class="stat-icon">
+                        <span class="stat-number">30,000</span>
+                        <span class="stat-label">Workouts</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing section-light">
+            <div class="container">
+                <div class="pricing-grid">
+                    <!-- Free Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h2 class="plan-name">Free</h2>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                            </div>
+                        </div>
+                        <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                        <div class="plan-features">
+                            <h3>Community Workouts & Plans</h3>
+                            <ul>
+                                <li>30,000 downloadable workouts</li>
+                                <li>Mobile training app *</li>
+                                <li>The fastest workout creator on the planet</li>
+                                <li>100's of cycling plans</li>
+                            </ul>
+                            <p class="disclaimer">* limited to 20-included workouts</p>
+                        </div>
+                    </div>
+
+                    <!-- Pro Plan -->
+                    <div class="pricing-card premium">
+                        <div class="pricing-header">
+                            <h2 class="plan-name">Pro</h2>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="amount">4.99</span>
+                                <span class="period">per month</span>
+                            </div>
+                        </div>
+                        <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                        <div class="plan-features">
+                            <h3>Full Mobile App & Coach Jack</h3>
+                            <ul>
+                                <li>Coach Jack Plan Builder</li>
+                                <li>Full Featured Mobile App</li>
+                                <li>Send Plans to TP, Intervals, Garmin</li>
+                                <li>Training Calendar</li>
+                                <li>Lots more…</li>
+                            </ul>
+                            <p class="discount-link">yearly discount available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compatible with -->
+                <div class="compatibility">
+                    <p class="compatibility-text">Compatible with</p>
+                    <div class="compatibility-logos">
+                        <div class="logo-item">
+                            <img src="/assets/images/wahoo.svg" alt="Wahoo" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/strava.png" alt="Strava" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/garmin.png" alt="Garmin" class="compatibility-logo">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/assets/images/trainingpeaks.svg" alt="TrainingPeaks" class="compatibility-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials section-light">
+            <div class="container">
+                <h2 class="section-title">Our App Rocks</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial">
+                        <div class="testimonial-author">Jon</div>
+                        <div class="testimonial-content">
+                            <p>Just wanted to say what a revelation your app is.</p>
+                            <p>I don't think there is an app that gets you up and running so quick with no messing.</p>
+                            <p>I generally use it more than Zwift and certainly use it instead of Zwift workouts</p>
+                            <p>I hope you guys get more notoriety in the same level as TrainerRoad as I think you have a better app and suite of utilities.</p>
+                            <p>Revolutionized my training, pop in my aimed TSS and Zones and stack my plan up for the week.</p>
+                            <p>Wishing you guys all the success you deserve 👍👍👍👍</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-author">SC</div>
+                        <div class="testimonial-content">
+                            <p>I used TrainerRoad religiously for 3 years and got some great results with it. The recent price hike encouraged me to check out the competition. I've now been on TrainerDay for 3 months. The workouts aren't as high intensity (as Alex says) and yet my FTP is up 50 watts in the first 11 weeks. For me that is the best increase I have ever experienced. I'm a convert!</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-author">Ken</div>
+                        <div class="testimonial-content">
+                            <p>I made the switch from TR and have to say the TD coach Jack plan works much better for my aging body. I do cherry pick some workouts from time to time to help out my B and C races but for the most part, stick to my Coach Jack plan.</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-author">Karl</div>
+                        <div class="testimonial-content">
+                            <p>I used to think of TD as being an excellent alternative to the over priced TR but now I would not go back to TR even if they were the same price.</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-author">Amanda</div>
+                        <div class="testimonial-content">
+                            <p>Thank you for the update email. I love TrainerDay!!</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-author">Emil Segerås</div>
+                        <div class="testimonial-content">
+                            <p>Excellent! I especially like that I can just start the app and immediately start pedalling, warming up while choosing a workout. No time wasted!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-store-links">
+                    <a href="https://apps.apple.com/us/app/id1500401973" class="app-store-link">
+                        <img src="/assets/images/apple.svg" alt="Download on App Store" class="app-store-icon">
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=trainerday.turbo" class="app-store-link">
+                        <img src="/assets/images/play.svg" alt="Get it on Google Play" class="app-store-icon">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Features Section -->
+        <section class="features section-charcoal">
+            <div class="container">
+                <h2 class="section-title">TrainerDay App Benefits</h2>
+                <div class="features-content">
+                    <div class="features-image">
+                        <img src="/assets/images/3-phones.webp" alt="TrainerDay App on Multiple Devices" class="phones-image">
+                    </div>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">⚡</div>
+                            <div class="feature-content">
+                                <h3>Simple</h3>
+                                <p>1-Click to start your workout. Use our TODAY feature to pick the perfect workout for you. You can also use TrainerDay, IntervalsICU or TrainingPeaks as the calendar of your choice.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🔧</div>
+                            <div class="feature-content">
+                                <h3>Flexible</h3>
+                                <p>Community workouts. Coach Jack's perfect training plans. Use TrainingPeaks or intervals ICU as your workout calendar.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🚀</div>
+                            <div class="feature-content">
+                                <h3>Faster</h3>
+                                <p>There is no faster way to do indoor training. Start your workout in 6-seconds.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-cta">
+                    <h3>$4.99/Month or FREE</h3>
+                    <p>Thousands of free <strong>downloadable</strong> community workouts and plans. * $3.33 month for annual contract.</p>
+                    <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                    <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products section-white">
+            <div class="container">
+                <h2 class="section-title">Simple, efficient, and <span class="highlight">flexible cycling training plans.</span></h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-content">
+                            <h3>Meet Coach Jack</h3>
+                            <p>The most flexible plan builder. Plans designed by Pro Coach Andrea Morelli.</p>
+                            <span class="product-link-wrapper">
+                                <span class="product-icon">🏃</span>
+                                <a href="/coach-jack/" class="product-link">Learn more</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-content">
+                            <h3>Search Workouts & Plans</h3>
+                            <p>TrainerDay – The largest structured cycling workout database on the planet. And it's free.</p>
+                            <span class="product-link-wrapper">
+                                <span class="product-icon">🔍</span>
+                                <a href="https://app.trainerday.com" class="product-link">Take a look</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-content">
+                            <h3>Flexible Training App</h3>
+                            <p>Merge workouts on the fly. Ultimate Zone 2 with auto power heart rate</p>
+                            <span class="product-link-wrapper">
+                                <span class="product-icon">📱</span>
+                                <a href="/download/" class="product-link">Learn more</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-content">
+                            <h3>Integration with TrainingPeaks</h3>
+                            <p>Distribute your workouts everywhere. See your TP calendar in our training app.</p>
+                            <span class="product-link-wrapper">
+                                <span class="product-icon">🔗</span>
+                                <a href="https://blog.trainerday.com/trainerday-and-trainingpeaks-48451053a7ef" class="product-link">Learn more</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-content">
+                            <h3>Beginners Start Here</h3>
+                            <p>Don't worry we have you covered.</p>
+                            <span class="product-link-wrapper">
+                                <span class="product-icon">📚</span>
+                                <a href="https://blog.trainerday.com/trainerday-learn-everything-456af4730b36" class="product-link">Learn more</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://blog.trainerday.com/trainerday-learn-everything-456af4730b36">Learn About TrainerDay</a></li>
+                            <li><a href="/pricing/">Pricing</a></li>
+                            <li><a href="https://trainerday.com/blog/">Blog</a></li>
+                            <li><a href="/api/">Developer API</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="https://forums.trainerday.com/">Forums</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="https://www.youtube.com/c/TrainerDayCyclingWorkoutsandPlans" class="social-link">Youtube</a>
+                            <a href="https://www.facebook.com/trainerday" class="social-link">Facebook</a>
+                            <a href="https://twitter.com/trainerdaycom" class="social-link">Twitter</a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Download App</h4>
+                        <div class="app-links">
+                            <a href="https://apps.apple.com/us/app/id1500401973" class="app-link">
+                                <img src="/assets/images/apple.svg" alt="Download on App Store" class="app-icon">
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=trainerday.turbo" class="app-link">
+                                <img src="/assets/images/play.svg" alt="Get it on Google Play" class="app-icon">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                <a href="https://app.trainerday.com" class="btn btn-primary webapp-link" style="display: none;">Go to Web App</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Minimal Footer -->
+    <div class="minimal-footer">
+        <div class="container">
+            <div class="minimal-footer-content">
+                <p>&copy; 2024 TrainerDay. All rights reserved.</p>
+                <div class="minimal-footer-links">
+                    <a href="/privacy-policy/">Privacy</a>
+                    <a href="/terms-and-conditions/">Terms</a>
+                    <a href="/contact-us/">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Clicky Analytics -->
+    <script async data-id="101125465" src="//static.getclicky.com/js"></script>
+</body>
+</html>
