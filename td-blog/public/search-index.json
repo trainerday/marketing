@@ -1,196 +1,1266 @@
 {
   "posts": [
     {
-      "title": "Zone 2 Training - Is Cycling Still an Aerobic Sport?",
-      "slug": "zone-2-training-hmmm-is-cycling-is-still-an-aerobic-sport-11b19d1e0f29",
-      "excerpt": "Learn about aerobic base building and the importance of Zone 2 training for cycling performance with insights from top coaches.",
+      "title": "2022 New Features in Trainerday",
+      "slug": "2022-new-features-in-trainerday-7ae40aa811c8",
+      "excerpt": "Here is a list of the most interesting new features we have delivered this year. There are lots of more small great changes including more...",
       "category": "Training",
       "difficulty": "intermediate",
-      "tags": ["zone2", "aerobic", "heart-rate", "endurance", "base-building", "polarized", "maffetone", "tadej-pogacar", "fat-burning"]
+      "tags": [
+        "intervals",
+        "heart-rate",
+        "power",
+        "recovery",
+        "outdoor",
+        "structured",
+        "mobile-app",
+        "calendar",
+        "coach-jack",
+        "workouts"
+      ]
     },
     {
-      "title": "Indoor Cycling 101 - Beginner Setup",
-      "slug": "indoor-cycling-101-beginners-setup-a3b1e17c7d6c",
-      "excerpt": "Complete guide to setting up your indoor cycling space, choosing trainers, and getting started with apps like Zwift and TrainerDay.",
+      "title": "a Cyclist and His Coach",
+      "slug": "a-cyclist-and-his-coach-2dd63b2dc453",
+      "excerpt": "In the beginning of TrainerDay it was called ERGdb, a free, simple cycling workout sharing platform. When I was creating blog posts there was "a kid"...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "mobile-app",
+        "coach-jack",
+        "workouts",
+        "training-plans"
+      ]
+    },
+    {
+      "title": "Adding Workouts to our Mobile App",
+      "slug": "adding-workouts-to-our-mobile-app-03555e2f7d6e",
+      "excerpt": "TrainerDay allows you to build up a workout library and plan library that you can store forever for free. Using those workouts in our app, or...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "power",
+        "mobile-app",
+        "workouts",
+        "training-plans",
+        "library"
+      ]
+    },
+    {
+      "title": "Coach Jack Block Types",
+      "slug": "coach-jack-block-types-dac5e6d91d27",
+      "excerpt": "Periodization 101 — Standard Block Types When you select "Specific Event Date" — Coach Jack supports up to 4 block types. Base, Build, Peak and Event...",
       "category": "Beginner",
       "difficulty": "beginner",
-      "tags": ["indoor", "setup", "smart-trainer", "beginner", "zwift", "trainer-setup", "space-planning", "bluetooth", "ant+"]
+      "tags": [
+        "zone2",
+        "aerobic",
+        "base-building",
+        "periodization",
+        "coach-jack"
+      ]
     },
     {
-      "title": "FTP Measures Aerobic - What About Anaerobic?",
-      "slug": "ftp-measures-aerobic-what-about-anaerobic-929722eb2016",
-      "excerpt": "Understanding the difference between aerobic FTP and anaerobic power capacity (W') for complete cycling fitness assessment.",
-      "category": "Training", 
-      "difficulty": "advanced",
-      "tags": ["ftp", "anaerobic", "w-prime", "critical-power", "vo2max", "intervals", "testing", "power-analysis", "energy-systems"]
-    },
-    {
-      "title": "Coach Jack Block Types - Periodization 101",
-      "slug": "coach-jack-block-types-dac5e6d91d27",
-      "excerpt": "Learn about Base, Build, Peak and Event training blocks for optimal periodization and peak performance timing.",
-      "category": "Training",
-      "difficulty": "intermediate", 
-      "tags": ["periodization", "coach-jack", "base", "build", "peak", "event-blocks", "planning", "season-planning"]
-    },
-    {
-      "title": "The Ultimate Training Plans for Zwift",
-      "slug": "the-ultimate-training-plans-for-zwift-e7c22439d7f0",
-      "excerpt": "Polarized training approach for Zwift with Coach Andrea Morelli's proven methods for elite cyclists.",
+      "title": "Coach Jack Plans How to Tweak Jacks Plans for a Perfect Build Period",
+      "slug": "coach-jack-plans-how-to-tweak-jacks-plans-for-a-perfect-build-period-5ac74acf09ed",
+      "excerpt": "There are 3 core block types in Coach Jack. Base, Build and Peak. These three blocks or periods were popularized by Joe Friel. While each block...",
       "category": "Training",
       "difficulty": "intermediate",
-      "tags": ["zwift", "polarized", "coach-andrea", "training-plans", "elite", "4w-kg", "structured-training"]
+      "tags": [
+        "endurance",
+        "base-building",
+        "recovery",
+        "coach-jack",
+        "workouts",
+        "training-plans"
+      ]
     },
     {
-      "title": "What Type of Training to Do This Winter",
-      "slug": "what-type-of-training-to-do-this-winter-fe8f9287cee2",
-      "excerpt": "Winter training options: high intensity, base building, periodization, or chasing squirrels - which is best for you?",
+      "title": "Coach Jack Ride Feel F6e3b06bf92",
+      "slug": "coach-jack-ride-feel-f6e3b06bf92",
+      "excerpt": "Coach Jack workouts are designed with 4-parts. Warm-up, main work, secondary work and cool down. We have a new feature called "Ride Feel." We have...",
       "category": "Training",
-      "difficulty": "intermediate",
-      "tags": ["winter-training", "reverse-periodization", "base", "high-intensity", "motivation", "season-planning", "burnout"]
-    },
-    {
-      "title": "Smart Bike Trainers Review", 
-      "slug": "smart-bike-trainers-review-1ecff67489ca",
-      "excerpt": "Comprehensive review of smart bike trainers, features, connectivity, and which trainer is best for your needs.",
-      "category": "Features",
       "difficulty": "beginner",
-      "tags": ["smart-trainer", "review", "equipment", "buying-guide", "features", "connectivity", "trainer-comparison"]
+      "tags": [
+        "aerobic",
+        "coach-jack",
+        "workouts"
+      ]
     },
     {
-      "title": "Indoor Cycling Trainers - Smart vs Non-Smart",
-      "slug": "indoor-cycling-trainers-smart-vs-non-smart-1a44ba928154", 
-      "excerpt": "Understanding the differences between smart and non-smart trainers to make the best purchase decision.",
-      "category": "Features",
+      "title": "Convertible Training Plans",
+      "slug": "convertible-training-plans-bd9de1bd177a",
+      "excerpt": "Many people believe a plan is something sacred, and "they" designed it for you to follow it exactly. Virtually all coaches and experts would agree,...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "recovery",
+        "workouts",
+        "training-plans",
+        "coaching"
+      ]
+    },
+    {
+      "title": "Creating Cycling Training Plans",
+      "slug": "creating-cycling-training-plans-82717cbb8f42",
+      "excerpt": "The fastest Training Plan Creator — VIDEO PART #1 This is the beginning of Open Source Training Plans. We have a lot of features planned. Watch the...",
+      "category": "Beginner",
       "difficulty": "beginner",
-      "tags": ["smart-trainer", "non-smart", "comparison", "buying-guide", "equipment", "beginner", "trainer-types"]
+      "tags": [
+        "trainingpeaks",
+        "calendar",
+        "workouts",
+        "training-plans",
+        "library"
+      ]
     },
     {
-      "title": "Indoor Cycling - Bluetooth vs ANT+",
-      "slug": "indoor-cycling-what-is-bluetooth-and-ant-3e971e2bfcfb",
-      "excerpt": "Technical guide to wireless protocols for connecting your trainer to cycling apps and devices.",
-      "category": "Features", 
-      "difficulty": "intermediate",
-      "tags": ["bluetooth", "ant+", "connectivity", "technical", "wireless", "setup", "compatibility", "devices"]
-    },
-    {
-      "title": "TrainerDay and TrainingPeaks Integration",
-      "slug": "trainerday-and-trainingpeaks-48451053a7ef",
-      "excerpt": "How to sync TrainerDay workouts with TrainingPeaks for seamless calendar integration and workout planning.",
-      "category": "Features",
-      "difficulty": "intermediate", 
-      "tags": ["trainingpeaks", "integration", "sync", "calendar", "workout-sync", "planning", "features"]
-    },
-    {
-      "title": "Garmin Connect - Send to Calendar",
-      "slug": "garmin-send-to-calendar-1cb36bf07a64",
-      "excerpt": "Step-by-step guide to sending TrainerDay workouts to your Garmin device and Garmin Connect calendar.",
-      "category": "Features",
-      "difficulty": "intermediate",
-      "tags": ["garmin", "calendar", "sync", "garmin-connect", "workout-sync", "device-integration", "setup"]
-    },
-    {
-      "title": "Push Workouts to Garmin",
-      "slug": "push-workouts-to-garmin-53f88acb2f4c",
-      "excerpt": "How to push structured workouts from TrainerDay directly to your Garmin cycling computer.",
-      "category": "Features", 
-      "difficulty": "intermediate",
-      "tags": ["garmin", "workout-push", "garmin-connect", "structured-workouts", "device-sync", "integration"]
-    },
-    {
-      "title": "TrainerDay Workouts in Zwift",
-      "slug": "trainer-day-workouts-in-zwift-100dd6d63694",
-      "excerpt": "Import and use TrainerDay custom workouts inside Zwift for the best of both platforms.",
-      "category": "Features",
-      "difficulty": "intermediate",
-      "tags": ["zwift", "workout-import", "custom-workouts", "zwo-files", "integration", "zwift-workouts"]
-    },
-    {
-      "title": "Using TrainerDay Workouts in Other Platforms", 
-      "slug": "using-trainerday-workouts-in-other-platforms-f927661d8550",
-      "excerpt": "Export TrainerDay workouts to TrainerRoad, Zwift, and other training platforms for maximum flexibility.",
-      "category": "Features",
-      "difficulty": "intermediate", 
-      "tags": ["export", "cross-platform", "workout-export", "compatibility", "trainerroad", "platform-integration"]
-    },
-    {
-      "title": "Improving FTP - Complete Guide",
-      "slug": "improving-ftp-230ad390e462", 
-      "excerpt": "Evidence-based strategies for improving your Functional Threshold Power through proper training and testing.",
-      "category": "Training",
-      "difficulty": "intermediate",
-      "tags": ["ftp", "threshold", "improvement", "testing", "power-training", "lactate-threshold", "performance"]
-    },
-    {
-      "title": "Why the Ramp Test is the Best FTP Test",
-      "slug": "why-the-ramp-test-is-the-best-ftp-test-170537206c1b",
-      "excerpt": "Scientific analysis of why ramp tests provide the most accurate and practical FTP measurements for cyclists.",
-      "category": "Training",
-      "difficulty": "intermediate",
-      "tags": ["ramp-test", "ftp-test", "testing", "accuracy", "protocols", "power-testing", "assessment"]
-    },
-    {
-      "title": "The Benefits of Polarized Training for Cycling",
-      "slug": "the-benefits-of-a-polarized-approach-to-cycling-training-0da0417cac5f",
-      "excerpt": "Understanding polarized training methodology and how 80/20 intensity distribution improves cycling performance.",
-      "category": "Training", 
-      "difficulty": "advanced",
-      "tags": ["polarized", "80-20", "intensity-distribution", "endurance", "methodology", "dr-seiler", "training-theory"]
-    },
-    {
-      "title": "Cycling Training Made Easy - Four Pillars of Performance",
+      "title": "Cycling Training Made Easy the Four Pillars of Performance",
       "slug": "cycling-training-made-easy-the-four-pillars-of-performance-586ade4b75e7",
-      "excerpt": "The four fundamental pillars every cyclist needs to focus on for optimal performance and training success.",
+      "excerpt": "You don't need software to make you faster. You don't need a coach. You need to ride your bike more. Here is my first video that I tried to present...",
       "category": "Training",
       "difficulty": "beginner",
-      "tags": ["fundamentals", "performance", "training-basics", "beginner", "pillars", "foundation", "methodology"]
+      "tags": [
+        "coaching"
+      ]
     },
     {
-      "title": "No Power Meter? No Problem - Heart Rate Training",
-      "slug": "no-power-meter-on-your-bike-no-problem-heart-rate-training-b901c7a11c06",
-      "excerpt": "Complete guide to effective training using heart rate zones when you don't have a power meter.",
+      "title": "Designing the Perfect Interval Workout Using Wbal Missing Videos",
+      "slug": "designing-the-perfect-interval-workout-using-wbal-missing-videos-20a0c039dfa0",
+      "excerpt": "Starting with Progressive Overload As most of you likely know, one of the key fundamentals of exercise is progressive overload. This means if you...",
+      "category": "Beginner",
+      "difficulty": "intermediate",
+      "tags": [
+        "ftp",
+        "intervals",
+        "aerobic",
+        "anaerobic",
+        "power",
+        "w-prime",
+        "workouts"
+      ]
+    },
+    {
+      "title": "Designing the Perfect Training Plan Part 1",
+      "slug": "designing-the-perfect-training-plan-part-1-cea48921cf4c",
+      "excerpt": "The Perfect Training Plan — Open source training plans. We refer to the individual periods of a plan as a block. Each block has a goal. So how do you...",
+      "category": "Beginner",
+      "difficulty": "intermediate",
+      "tags": [
+        "base-building",
+        "recovery",
+        "winter-training",
+        "zwift",
+        "import",
+        "workouts",
+        "training-plans",
+        "coaching"
+      ]
+    },
+    {
+      "title": "Developer Apis Available Now",
+      "slug": "developer-apis-available-now-760ac43c962d",
+      "excerpt": "Developer APIs You can access the developer API documentation on the menu at the bottom of the site or by going directly to...",
+      "category": "Features",
+      "difficulty": "advanced",
+      "tags": [
+        "api",
+        "developer"
+      ]
+    },
+    {
+      "title": "Enable Swimerg or Rowerg in Trainerday",
+      "slug": "enable-swimerg-or-rowerg-in-trainerday-59c29b76bc9e",
+      "excerpt": "2022/2023 are the year of multi-sport for TrainerDay. We have added Vasa SwimErg and RowErg to TrainerDay. This means swim and row workouts can be...",
       "category": "Training",
-      "difficulty": "beginner", 
-      "tags": ["heart-rate", "zones", "no-power-meter", "budget-training", "hr-zones", "beginner", "affordable"]
+      "difficulty": "beginner",
+      "tags": [
+        "calendar",
+        "workouts",
+        "cross-training"
+      ]
+    },
+    {
+      "title": "Ergdb is Growing Up Welcome Trainerday 2019",
+      "slug": "ergdb-is-growing-up-welcome-trainerday-2019-1c43ceec06d7",
+      "excerpt": "ERGdb's has been rebranded to TrainerDay For the many people we have talked to, don't worry, it's still the same Alex and team. We just have a shinny...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "workouts",
+        "training-plans",
+        "library"
+      ]
+    },
+    {
+      "title": "Everything You Need to Know About Training in 15 Minutes Dylan Johnson CTS",
+      "slug": "everything-you-need-to-know-about-training-in-15-minutes-dylan-johnson-cts-d6bd3dff859b",
+      "excerpt": "We are starting a series on evidence-based training. The primary goal is to inspire you to take full control of your training and be more confident...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "intervals",
+        "base-building",
+        "periodization",
+        "recovery",
+        "import",
+        "workouts",
+        "training-plans",
+        "library",
+        "tagging",
+        "review"
+      ]
+    },
+    {
+      "title": "Finally One Login for Website and Forum",
+      "slug": "finally-one-login-for-website-and-forum-25bfa4883756",
+      "excerpt": "It took way too long to do this!!! Now we share the same login for website and forum. It might be the safest to first login to our web site if you...",
+      "category": "Features",
+      "difficulty": "beginner",
+      "tags": []
+    },
+    {
+      "title": "Find and Use our Cycling Training Plans",
+      "slug": "find-and-use-our-cycling-training-plans-872aae29fac9",
+      "excerpt": "We are 100% focused on building the best or only platform for sharing training plans. TrainerDay has recently just added a calendar. It is our goal...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "intervals",
+        "garmin",
+        "trainingpeaks",
+        "calendar",
+        "integration",
+        "export",
+        "workouts",
+        "training-plans",
+        "coaching"
+      ]
+    },
+    {
+      "title": "Free Ride and Open Ended Intervals GARMIN ZWIFT",
+      "slug": "free-ride-and-open-ended-intervals-garmin-zwift-209a3c50db41",
+      "excerpt": "Garmin Open Ended Intervals Open-ended intervals means it will just keep going until you hit the lap button on your Garmin unit. If you add fr or...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "ftp",
+        "intervals",
+        "power",
+        "structured",
+        "garmin",
+        "zwift",
+        "trainingpeaks",
+        "workouts",
+        "slopes"
+      ]
+    },
+    {
+      "title": "FTP Measures Aerobic What About Anaerobic",
+      "slug": "ftp-measures-aerobic-what-about-anaerobic-929722eb2016",
+      "excerpt": "Need some extra power? In cycling, aerobic power, measured by FTP, is not optional, it's what gets you in the game. But if you want to excel in MTB,...",
+      "category": "Training",
+      "difficulty": "advanced",
+      "tags": [
+        "ftp",
+        "threshold",
+        "intervals",
+        "vo2max",
+        "aerobic",
+        "anaerobic",
+        "power",
+        "ramp-test",
+        "w-prime",
+        "workouts"
+      ]
+    },
+    {
+      "title": "GARMIN Connect Bulk Delete Workouts From your Training Library",
+      "slug": "garmin-connect-bulk-delete-workouts-from-your-training-library-25b2991ba2e6",
+      "excerpt": "Be very careful when you do this as it will also delete the workouts from your calendar. It will delete all training library workouts. (THIS WILL NOT...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "garmin",
+        "calendar",
+        "sync",
+        "coach-jack",
+        "workouts",
+        "library"
+      ]
+    },
+    {
+      "title": "GARMIN Send to Calendar",
+      "slug": "garmin-send-to-calendar-1cb36bf07a64",
+      "excerpt": "For Free Accounts You can send directly to Garmin Connect for free. Send to Garmin Library allows you to go to Garmin Connect and push your workouts...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "power",
+        "garmin",
+        "calendar",
+        "workouts",
+        "library",
+        "tagging"
+      ]
+    },
+    {
+      "title": "How Coached Cyclists Can Use Trainerday",
+      "slug": "how-coached-cyclists-can-use-trainerday-db5acb79e3ab",
+      "excerpt": "Below, you will see different ways that coaches can share plans and workouts with their students. The most popular is by putting a plan in a calendar...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "intervals",
+        "trainingpeaks",
+        "mobile-app",
+        "calendar",
+        "workouts",
+        "training-plans",
+        "coaching"
+      ]
+    },
+    {
+      "title": "How Reduce your Insulin Levels a CGM 10 Insulin Reducing Hacks",
+      "slug": "how-reduce-your-insulin-levels-a-cgm-10-insulin-reducing-hacks-6422a6d7de09",
+      "excerpt": "If you did not read it. Read this first about why insulin should be your focus. Ok so you read part-1 of this. It sounds reasonable that glucose and...",
+      "category": "Training",
+      "difficulty": "advanced",
+      "tags": [
+        "power",
+        "tagging",
+        "api",
+        "nutrition",
+        "weight-loss",
+        "coaching"
+      ]
+    },
+    {
+      "title": "How to Determine your W Missing Calculator",
+      "slug": "how-to-determine-your-w-missing-calculator-17967294a1e4",
+      "excerpt": "You must do these 2-things Ride as hard as you can for approximately 3-minutes, keep going if you can go longer than 3 Find an 8 to 20-minute max...",
+      "category": "Training",
+      "difficulty": "advanced",
+      "tags": [
+        "ftp",
+        "intervals",
+        "power",
+        "ramp-test",
+        "w-prime",
+        "trainingpeaks",
+        "workouts"
+      ]
+    },
+    {
+      "title": "How to Maximize your Indoor Training Space with Indoor Cycling Accessories",
+      "slug": "how-to-maximize-your-indoor-training-space-with-indoor-cycling-accessories-cafcad9079c1",
+      "excerpt": "To ride an indoor trainer, you only need two things: a bike and a trainer. Simple as that. But to have an enjoyable experience on the indoor trainer,...",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": [
+        "power",
+        "outdoor",
+        "wahoo",
+        "bluetooth",
+        "indoor",
+        "import",
+        "workouts",
+        "setup",
+        "rollers"
+      ]
+    },
+    {
+      "title": "How to Use Trainerday or Coach Jack on your Phone Outdoors",
+      "slug": "how-to-use-trainerday-or-coach-jack-on-your-phone-outdoors-3369115f1afc",
+      "excerpt": "Check it out!!! The CheckMyRide low cost outdoor training app allows you to use your TrainerDay calendar and Coach Jack outdoors. See your TrainerDay...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "outdoor",
+        "indoor",
+        "calendar",
+        "sync",
+        "coach-jack",
+        "workouts"
+      ]
+    },
+    {
+      "title": "How to Use Yourtrainingpeaks Calendar in our App",
+      "slug": "how-to-use-yourtrainingpeaks-calendar-in-our-app-dd0e87280b22",
+      "excerpt": "It should take 60-seconds to do this :) Just go to our apps and devices page on our website and connect to TrainingPeaks and turn on WOD feature. The...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "structured",
+        "trainingpeaks",
+        "calendar",
+        "workouts",
+        "cross-training"
+      ]
+    },
+    {
+      "title": "I Am Time Crunched our New Training App 906ea8b4876",
+      "slug": "i-am-time-crunched-our-new-training-app-906ea8b4876",
+      "excerpt": "Hello, this is Alex. Let me tell you a story. Like many of you, I have a very busy schedule. I have a great wife and six-year-old twin boys that I...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "endurance",
+        "outdoor",
+        "garmin",
+        "zwift",
+        "trainerroad",
+        "wahoo",
+        "indoor",
+        "import",
+        "workouts",
+        "training-plans"
+      ]
+    },
+    {
+      "title": "Importing a Route is Cool",
+      "slug": "importing-a-route-is-cool-db389b0a3921",
+      "excerpt": "This is a very simple import process, if your route has power it will show you the same targets you have. If it does not have power it will give...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "power",
+        "outdoor",
+        "zwift",
+        "indoor",
+        "import",
+        "routes",
+        "slopes"
+      ]
+    },
+    {
+      "title": "Improving FTP",
+      "slug": "improving-ftp-230ad390e462",
+      "excerpt": "You can search the internet and find lots of reasons why focusing on improving your FTP is a bad idea. I should say it's not the worst thing but...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "zone2",
+        "ftp",
+        "threshold",
+        "aerobic",
+        "anaerobic",
+        "heart-rate",
+        "power",
+        "base-building",
+        "periodization",
+        "ramp-test"
+      ]
+    },
+    {
+      "title": "Indoor Cycling 101 Beginners Setup",
+      "slug": "indoor-cycling-101-beginners-setup-a3b1e17c7d6c",
+      "excerpt": "Everything you need to know about setting up your indoor trainer Indoor cycling has never been more popular than in 2022. The global pandemic forced...",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": [
+        "intervals",
+        "power",
+        "outdoor",
+        "structured",
+        "smart-trainer",
+        "zwift",
+        "bluetooth",
+        "ant+",
+        "indoor",
+        "import"
+      ]
+    },
+    {
+      "title": "Indoor Cycling 101 Three Types Virtual Outdoor Structured Training Spin Classes",
+      "slug": "indoor-cycling-101-three-types-virtual-outdoor-structured-training-spin-classes-db7ad19af883",
+      "excerpt": "You may not have thought about it before, but there are a few different versions of 'indoor cycling.' While they all involve pedaling a stationary...",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": [
+        "intervals",
+        "heart-rate",
+        "power",
+        "outdoor",
+        "structured",
+        "smart-trainer",
+        "zwift",
+        "trainerroad",
+        "wahoo",
+        "indoor"
+      ]
+    },
+    {
+      "title": "Indoor Cycling Trainers Smart vs Non Smart",
+      "slug": "indoor-cycling-trainers-smart-vs-non-smart-1a44ba928154",
+      "excerpt": "Everything you need to know about Smart vs Non-Smart Indoor Trainers When it comes to choosing an indoor trainer, there are N+1 options to choose...",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": [
+        "intervals",
+        "power",
+        "structured",
+        "smart-trainer",
+        "zwift",
+        "indoor",
+        "workouts",
+        "tagging",
+        "rollers"
+      ]
+    },
+    {
+      "title": "Indoor Cycling What is Bluetooth and ANT",
+      "slug": "indoor-cycling-what-is-bluetooth-and-ant-3e971e2bfcfb",
+      "excerpt": "Indoor cycling can quickly overwhelm even the most tech-savvy minds. There are gobs of fancy terms and acronyms that you've never heard anywhere...",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": [
+        "ftp",
+        "heart-rate",
+        "power",
+        "smart-trainer",
+        "zwift",
+        "bluetooth",
+        "ant+",
+        "indoor",
+        "setup"
+      ]
+    },
+    {
+      "title": "Indoor Training for Beginners Overview",
+      "slug": "indoor-training-for-beginners-overview-ddb3a3cb6ae3",
+      "excerpt": "Hello, if you are just starting out, trying to understand how everything works can be a bit overwhelming. Let me try to make it simple. Apps You can...",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": [
+        "zone2",
+        "ftp",
+        "power",
+        "base-building",
+        "smart-trainer",
+        "zwift",
+        "trainerroad",
+        "wahoo",
+        "indoor"
+      ]
+    },
+    {
+      "title": "Intervals in the Sets Reps Editor",
+      "slug": "intervals-in-the-sets-reps-editor-55cc04733ad9",
+      "excerpt": "This is a hard workout, at least for me it would be . It's also a very long list of intervals. Compare below: On the right is our standard editor and...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "intervals",
+        "vo2max",
+        "workouts",
+        "rollers"
+      ]
+    },
+    {
+      "title": "Learn About Interval Comments",
+      "slug": "learn-about-interval-comments-49833ab07b92",
+      "excerpt": "For entertainment, education, and motivation Available for ZWO file downloads for Zwift only. More systems are coming soon. See in the image, it...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "intervals",
+        "zwift",
+        "trainerroad",
+        "import"
+      ]
+    },
+    {
+      "title": "Mixing and Matching Cycling Modes for Indoor Training",
+      "slug": "mixing-and-matching-cycling-modes-for-indoor-training-2993ef1d47ec",
+      "excerpt": "TrainerDay and other platforms have different modes for smart trainers and smart bikes. ERG is the most popular for workouts but even though we are...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "zone2",
+        "ftp",
+        "intervals",
+        "heart-rate",
+        "power",
+        "smart-trainer",
+        "zwift",
+        "indoor",
+        "workouts",
+        "slopes"
+      ]
+    },
+    {
+      "title": "My Calendar",
+      "slug": "my-calendar-d552a2975316",
+      "excerpt": "4-sources you can get your plan from in our training app. My Calendar is the default option if nothing else is selected and will show a few days of...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "intervals",
+        "garmin",
+        "trainingpeaks",
+        "calendar",
+        "sync",
+        "coach-jack",
+        "workouts",
+        "training-plans"
+      ]
+    },
+    {
+      "title": "My Plans vs Calendar",
+      "slug": "my-plans-vs-calendar-a823252be2e9",
+      "excerpt": "TrainerDay has "My Plans" which allow you to save your own re-usable, shareable plans. There is one unique feature with my plans which is if you set...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "mobile-app",
+        "calendar",
+        "workouts",
+        "training-plans"
+      ]
+    },
+    {
+      "title": "No Power Meter on your Bike No Problem Heart Rate Training",
+      "slug": "no-power-meter-on-your-bike-no-problem-heart-rate-training-b901c7a11c06",
+      "excerpt": "Power meters are great especially for short duration higher intensity intervals. But they are not a necessity for training smarter or getting faster....",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "intervals",
+        "polarized",
+        "heart-rate",
+        "power",
+        "garmin",
+        "trainingpeaks",
+        "indoor",
+        "calendar",
+        "coach-jack",
+        "workouts"
+      ]
+    },
+    {
+      "title": "Off Season Tune Up Ankles",
+      "slug": "off-season-tune-up-ankles-9e2377728dbc",
+      "excerpt": "Author: Alex Ackerley The limited Ankle range of motion we employ all season while cycling, can lead to reduced off-bike mobility. The body employs...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "power",
+        "integration",
+        "workouts",
+        "api",
+        "off-season"
+      ]
+    },
+    {
+      "title": "Other Types of Indoor Cycling Trainers Rollers and Bikes C65df8944f2",
+      "slug": "other-types-of-indoor-cycling-trainers-rollers-and-bikes-c65df8944f2",
+      "excerpt": "While direct drive trainers and wheel-on trainers are the most popular and well-known versions of indoor trainers for "cyclists," there are also many...",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": [
+        "intervals",
+        "power",
+        "winter-training",
+        "zwift",
+        "wahoo",
+        "indoor",
+        "workouts",
+        "rollers"
+      ]
+    },
+    {
+      "title": "Periodization 101 for Dummies",
+      "slug": "periodization-101-for-dummies-50d7b34a881b",
+      "excerpt": "I know many cyclists feel confused when thinking about the complexities of periodization. It does not need to be difficult. It just means don't do...",
+      "category": "Beginner",
+      "difficulty": "intermediate",
+      "tags": [
+        "ftp",
+        "threshold",
+        "aerobic",
+        "anaerobic",
+        "power",
+        "base-building",
+        "periodization",
+        "recovery",
+        "lactate-threshold",
+        "winter-training"
+      ]
+    },
+    {
+      "title": "Push Workouts to GARMIN",
+      "slug": "push-workouts-to-garmin-53f88acb2f4c",
+      "excerpt": "Video to watch the end to end process of getting your workouts on your Garmin Device. allowfullscreen> Three Easy Steps Go to My Profile, Apps and...",
+      "category": "Features",
+      "difficulty": "beginner",
+      "tags": [
+        "garmin",
+        "workouts",
+        "library"
+      ]
+    },
+    {
+      "title": "Ramps and Steps",
+      "slug": "ramps-and-steps-d2e75a3e78fd",
+      "excerpt": "TrainingPeaks and Garmin do not support ramps TrainerDay supports ramps which makes creating increasing or decreasing power targets simpler. MRC, ZWO...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "power",
+        "garmin",
+        "trainingpeaks",
+        "workouts"
+      ]
+    },
+    {
+      "title": "Recovery System Training What",
+      "slug": "recovery-system-training-what-ddec372e34cd",
+      "excerpt": "I don't know about you. But, I have been looking at recovery wrong! Not completely wrong, but what I now believe is was an incomplete view. We are...",
+      "category": "Beginner",
+      "difficulty": "intermediate",
+      "tags": [
+        "aerobic",
+        "anaerobic",
+        "recovery",
+        "garmin",
+        "import",
+        "workouts",
+        "training-plans",
+        "tagging",
+        "coaching"
+      ]
+    },
+    {
+      "title": "Simple Calendar",
+      "slug": "simple-calendar-727d7f488148",
+      "excerpt": "Our calendar is focused on simple but flexible training. You can easily add a week, delete a week, add workouts from your library or add Coach Jack...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "heart-rate",
+        "power",
+        "garmin",
+        "calendar",
+        "sync",
+        "coach-jack",
+        "workouts",
+        "training-plans",
+        "library"
+      ]
+    },
+    {
+      "title": "Smart Bike Trainers Review",
+      "slug": "smart-bike-trainers-review-1ecff67489ca",
+      "excerpt": "Our First App Review — It's Solid Tariq from smartbiketrainers.com has been testing our app for a while and pointed out some of its unique features....",
+      "category": "Features",
+      "difficulty": "beginner",
+      "tags": [
+        "review"
+      ]
+    },
+    {
+      "title": "Smart Slopes",
+      "slug": "smart-slopes-779c74a0c921",
+      "excerpt": "Smart Slopes — A New Way to Train Creating and riding slope based workouts is fun and new. You can only do smart slopes in our training app. Smart...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "ftp",
+        "intervals",
+        "power",
+        "outdoor",
+        "smart-trainer",
+        "zwift",
+        "workouts",
+        "slopes"
+      ]
+    },
+    {
+      "title": "Speed and Distance Indoors",
+      "slug": "speed-and-distance-indoors-09c9311729b8",
+      "excerpt": "Speed and distance indoors especially in ERG mode don't make a lot of sense. Now that said some people love to focus on achieving specific distance...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "power",
+        "indoor",
+        "routes",
+        "slopes",
+        "rollers",
+        "metrics"
+      ]
     },
     {
       "title": "Structured Training Outdoors",
       "slug": "structured-training-outdoors-5f654cd4beb7",
-      "excerpt": "How to effectively do structured interval training on outdoor rides and real-world conditions.",
+      "excerpt": "Structured training on the small screens on Garmin and Wahoo are not perfect. Also some people don't use a Garmin or Wahoo. If you like a bigger...",
       "category": "Training",
-      "difficulty": "intermediate",
-      "tags": ["outdoor", "structured", "intervals", "real-world", "outdoor-training", "power-outdoors", "flexibility"]
+      "difficulty": "beginner",
+      "tags": [
+        "outdoor",
+        "structured",
+        "garmin",
+        "wahoo",
+        "indoor"
+      ]
     },
     {
-      "title": "Designing the Perfect Interval Workout Using W'bal",
-      "slug": "designing-the-perfect-interval-workout-using-wbal-missing-videos-20a0c039dfa0",
-      "excerpt": "Learn how to design VO2max intervals using W' balance for precise training that matches your fitness profile.",
+      "title": "Tagging This Tagging That Organize your Workout Library",
+      "slug": "tagging-this-tagging-that-organize-your-workout-library-69bc339f41dc",
+      "excerpt": "We have multiple ways to organizing your workouts. Lists, plans, our calendar and now tagging. Tagging is a great feature that allows you to organize...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "calendar",
+        "workouts",
+        "training-plans",
+        "library",
+        "tagging"
+      ]
+    },
+    {
+      "title": "the 5 Must Dos to Get the Best Out of Yourself and your Bike",
+      "slug": "the-5-must-dos-to-get-the-best-out-of-yourself-and-your-bike-3a19b1f9d9c2",
+      "excerpt": "Written by Shannon Malseed Ex professional road cyclist | Transformation Coach | Spiritual Teacher 1. Be adaptable As athletes, we all love a...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "power",
+        "import",
+        "tagging",
+        "api",
+        "coaching",
+        "rollers"
+      ]
+    },
+    {
+      "title": "the Benefits of a Polarized Approach to Cycling Training",
+      "slug": "the-benefits-of-a-polarized-approach-to-cycling-training-0da0417cac5f",
+      "excerpt": "Endurance sports demand discipline, dedication, and a well-structured training regimen to achieve optimal performance. Over the years, various...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "intervals",
+        "aerobic",
+        "endurance",
+        "polarized",
+        "power",
+        "base-building",
+        "recovery",
+        "structured",
+        "coach-jack",
+        "workouts"
+      ]
+    },
+    {
+      "title": "the Fastest Workout Editor Needs Video Bc3f9b0f746",
+      "slug": "the-fastest-workout-editor-needs-video-bc3f9b0f746",
+      "excerpt": "Designed for one thing. Speed. That's it. It works just like Excel with copy and paste and arrow keys for moving. Try it out....",
+      "category": "Features",
+      "difficulty": "intermediate",
+      "tags": [
+        "heart-rate",
+        "power",
+        "smart-trainer",
+        "workout-editor",
+        "slopes"
+      ]
+    },
+    {
+      "title": "the Ultimate Training Plans for ZWIFT",
+      "slug": "the-ultimate-training-plans-for-zwift-e7c22439d7f0",
+      "excerpt": "Zwift, the popular indoor cycling platform, excites many cyclists for because of it's way to train and compete in the convience of your own home. One...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "zone2",
+        "endurance",
+        "polarized",
+        "zwift",
+        "trainingpeaks",
+        "indoor",
+        "calendar",
+        "sync",
+        "import",
+        "coach-jack"
+      ]
+    },
+    {
+      "title": "the Ultimate Way Zone 2 Training",
+      "slug": "the-ultimate-way-zone-2-training-cef54a104bee",
+      "excerpt": "The TrainerDay mobile app now has the ultimate way to do heart rate based training. This feature is similar to ERG mode. You set your target heart...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "zone2",
+        "ftp",
+        "threshold",
+        "intervals",
+        "heart-rate",
+        "power",
+        "smart-trainer",
+        "mobile-app",
+        "workouts",
+        "library"
+      ]
+    },
+    {
+      "title": "Trainer Day Wahoo Elemnt German",
+      "slug": "trainer-day-wahoo-elemnt-german-6e50cdf3384e",
+      "excerpt": "Andi did a short interview with us recently and wrote an article on how to use your Elemnt with ERGdb. Using google translate I checked it out and...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "wahoo",
+        "workouts"
+      ]
+    },
+    {
+      "title": "Trainer Day Workouts in ZWIFT",
+      "slug": "trainer-day-workouts-in-zwift-100dd6d63694",
+      "excerpt": "Here we include both a video and instructions on how to load MRC files into Zwift. Video on how to do get your workouts in Zwift allowfullscreen>...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "structured",
+        "zwift",
+        "sync",
+        "workouts"
+      ]
+    },
+    {
+      "title": "Trainerday and Trainingpeaks",
+      "slug": "trainerday-and-trainingpeaks-48451053a7ef",
+      "excerpt": "Using TrainerDay workouts in other apps and devices One of the easiest ways to use TrainerDay workouts is to create a free TrainingPeaks account and...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "zwift",
+        "trainingpeaks",
+        "trainerroad",
+        "wahoo",
+        "calendar",
+        "workouts",
+        "training-plans",
+        "library"
+      ]
+    },
+    {
+      "title": "Trainerday Learn Everything",
+      "slug": "trainerday-learn-everything-456af4730b36",
+      "excerpt": "How to use the premium version of our Training APP - SIMPLIFIED https://youtu.be/0IhJAC6YzCA LEARNING INTRODUCTION This is the place to learn...",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": [
+        "zone2",
+        "ftp",
+        "intervals",
+        "aerobic",
+        "anaerobic",
+        "polarized",
+        "base-building",
+        "periodization",
+        "recovery",
+        "w-prime"
+      ]
+    },
+    {
+      "title": "Trainerday Wahoo Elemnt",
+      "slug": "trainerday-wahoo-elemnt-73dbe5650934",
+      "excerpt": "You can manually load files and learn how below. We suggest you using our integration with TrainingPeaks. This works with both a free and paid...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "endurance",
+        "trainingpeaks",
+        "wahoo",
+        "calendar",
+        "sync",
+        "integration",
+        "workouts",
+        "training-plans"
+      ]
+    },
+    {
+      "title": "Trainerday Workouts in Trainerroad",
+      "slug": "trainerday-workouts-in-trainerroad-1dbba6187723",
+      "excerpt": "Watch the Video Below Step 1 — Install Trainer Road Workout Creator Download and install Workout creator. Here is a link. After installing it and...",
+      "category": "Features",
+      "difficulty": "intermediate",
+      "tags": [
+        "trainerroad",
+        "workouts"
+      ]
+    },
+    {
+      "title": "Trainerroad vs Trainerday",
+      "slug": "trainerroad-vs-trainerday-3af06a19cd2b",
+      "excerpt": "I created what I believe are the core differences between TrainerRoad and TrainerDay in this video. Even though I might have gotten the big picture,...",
+      "category": "Features",
+      "difficulty": "beginner",
+      "tags": [
+        "trainerroad",
+        "tagging"
+      ]
+    },
+    {
+      "title": "Trainingpeaks WOD Workout of the Day",
+      "slug": "trainingpeaks-wod-workout-of-the-day-4417961a24ef",
+      "excerpt": "Here is a quick-easy 5 step process for seeing your TP workouts inside of TrainerDay. allowfullscreen> If you connected to TrainingPeaks before Feb...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "trainingpeaks",
+        "workouts"
+      ]
+    },
+    {
+      "title": "Two Simple Options of How to Use Coach Jack Plans in the Trainerday Mobile App",
+      "slug": "two-simple-options-of-how-to-use-coach-jack-plans-in-the-trainerday-mobile-app-27d9fdc1b58f",
+      "excerpt": "Option #1 is Using the TrainerDay "My Calendar" When saving your plan. Just click Send to My Calendar and by default it will start the following...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "mobile-app",
+        "calendar",
+        "coach-jack",
+        "workouts",
+        "training-plans"
+      ]
+    },
+    {
+      "title": "Using Trainerday Workouts in Other Platforms",
+      "slug": "using-trainerday-workouts-in-other-platforms-f927661d8550",
+      "excerpt": "There are many ways you can use TrainerDay workouts and plans in other platforms. For free you can download files and many platforms like Zwift allow...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "intervals",
+        "garmin",
+        "zwift",
+        "trainingpeaks",
+        "calendar",
+        "sync",
+        "workouts",
+        "training-plans"
+      ]
+    },
+    {
+      "title": "View your Live Trainerday Training on a Big Screen",
+      "slug": "view-your-live-trainerday-training-on-a-big-screen-38745c7388b4",
+      "excerpt": "With this view workout in real-time setting in our app. You can now easily view your training on a bigger screen with an embedded youtube player See...",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": [
+        "mobile-app",
+        "workouts",
+        "coaching"
+      ]
+    },
+    {
+      "title": "W is Not with Good Over Under Examples",
+      "slug": "w-is-not-with-good-over-under-examples-378d6d7680df",
+      "excerpt": "W' does not tell you how hard a workout is. A 20-minute workout close to FTP is very hard, or very, very hard. W' won't tell you anything. Even...",
       "category": "Training",
       "difficulty": "advanced",
-      "tags": ["intervals", "wbal", "vo2max", "interval-design", "anaerobic", "training-design", "power-analysis", "advanced"]
+      "tags": [
+        "ftp",
+        "intervals",
+        "aerobic",
+        "anaerobic",
+        "recovery",
+        "workouts",
+        "tagging",
+        "coaching"
+      ]
     },
     {
-      "title": "Everything You Need to Know About Training in 15 Minutes",
-      "slug": "everything-you-need-to-know-about-training-in-15-minutes-dylan-johnson-cts-d6bd3dff859b",
-      "excerpt": "Dylan Johnson's comprehensive guide to cycling training fundamentals including VO2max, threshold, and polarized training.",
-      "category": "Training", 
+      "title": "Wbal Says Easy I Say It S Impossible",
+      "slug": "wbal-says-easy-i-say-it-s-impossible-ca703ed79fd1",
+      "excerpt": "Basically no one can do 60-minutes at FTP In theory, 60-minutes is possible, but in reality almost no one will unless their FTP is set too low. W'Bal...",
+      "category": "Training",
+      "difficulty": "advanced",
+      "tags": [
+        "ftp",
+        "intervals",
+        "vo2max",
+        "aerobic",
+        "anaerobic",
+        "w-prime",
+        "workouts"
+      ]
+    },
+    {
+      "title": "What Type of Training to Do This Winter",
+      "slug": "what-type-of-training-to-do-this-winter-fe8f9287cee2",
+      "excerpt": "Winter Cycling We see these main categories for winter training Higher Intensity Zone 2 — Low Intensity Polarized or mostly easy with some intensity...",
+      "category": "Training",
       "difficulty": "intermediate",
-      "tags": ["dylan-johnson", "fundamentals", "vo2max", "threshold", "polarized", "training-basics", "comprehensive", "cts"]
+      "tags": [
+        "zone2",
+        "threshold",
+        "intervals",
+        "endurance",
+        "polarized",
+        "heart-rate",
+        "base-building",
+        "periodization",
+        "recovery",
+        "80-20"
+      ]
+    },
+    {
+      "title": "Why Excess Calories Are Not your Problem",
+      "slug": "why-excess-calories-are-not-your-problem-b89b700c7b7e",
+      "excerpt": "As a cyclist, are you struggling to lose those last few pounds/kilograms? Or some of us are "fat cyclists," and have a more than a few to hit our...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "base-building",
+        "import",
+        "nutrition",
+        "weight-loss"
+      ]
+    },
+    {
+      "title": "Why FTP Based Training is Half Wrong",
+      "slug": "why-ftp-based-training-is-half-wrong-cdc48b62baeb",
+      "excerpt": "Sorry, but they sold you some bad gas It's not all bad, workouts designed around FTP are great for aerobic training. They are just poorly optimized...",
+      "category": "Training",
+      "difficulty": "advanced",
+      "tags": [
+        "ftp",
+        "intervals",
+        "aerobic",
+        "anaerobic",
+        "power",
+        "import",
+        "workouts"
+      ]
+    },
+    {
+      "title": "Why the Ramp Test is the Best FTP Test",
+      "slug": "why-the-ramp-test-is-the-best-ftp-test-170537206c1b",
+      "excerpt": "Three primary tests for normal people In theory, an 8-minute or even "better," a 20-minute FTP test are superior to a ramp test. But most of the...",
+      "category": "Beginner",
+      "difficulty": "intermediate",
+      "tags": [
+        "ftp",
+        "threshold",
+        "power",
+        "base-building",
+        "ramp-test",
+        "lactate-threshold",
+        "trainingpeaks",
+        "coach-jack",
+        "workouts",
+        "training-plans"
+      ]
+    },
+    {
+      "title": "your Recovery Adaption Plan",
+      "slug": "your-recovery-adaption-plan-d96f823b660c",
+      "excerpt": "If you are the type to go out do some hard training and then think, ok now I really need to recover. I am not going to do any yard work, or take the...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "endurance",
+        "heart-rate",
+        "base-building",
+        "recovery",
+        "winter-training",
+        "outdoor",
+        "trainingpeaks",
+        "indoor",
+        "import"
+      ]
+    },
+    {
+      "title": "Zone 2 Training Hmmm is Cycling is Still an Aerobic Sport",
+      "slug": "zone-2-training-hmmm-is-cycling-is-still-an-aerobic-sport-11b19d1e0f29",
+      "excerpt": "The legendary Cycling Coach, Joe Friel suggests a strong aerobic engine is what gets you in the game. Cycling is 95–99% aerobic other than short...",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": [
+        "zone2",
+        "ftp",
+        "threshold",
+        "aerobic",
+        "anaerobic",
+        "endurance",
+        "heart-rate",
+        "power",
+        "ramp-test",
+        "lactate-threshold"
+      ]
     }
   ],
   "tags": [
-    "zone2", "aerobic", "heart-rate", "endurance", "base-building", "polarized", "maffetone", "fat-burning",
-    "indoor", "setup", "smart-trainer", "beginner", "zwift", "trainer-setup", "bluetooth", "ant+",
-    "ftp", "anaerobic", "w-prime", "critical-power", "vo2max", "intervals", "testing", "power-analysis",
-    "periodization", "coach-jack", "base", "build", "peak", "event-blocks", "planning", "season-planning",
-    "winter-training", "reverse-periodization", "high-intensity", "motivation", "burnout",
-    "equipment", "buying-guide", "features", "connectivity", "trainer-comparison", "review",
-    "trainingpeaks", "garmin", "integration", "sync", "calendar", "workout-sync", "device-integration",
-    "export", "cross-platform", "workout-export", "compatibility", "platform-integration",
-    "threshold", "improvement", "lactate-threshold", "performance", "ramp-test", "accuracy",
-    "80-20", "intensity-distribution", "dr-seiler", "training-theory", "methodology",
-    "fundamentals", "training-basics", "pillars", "foundation", "hr-zones", "affordable",
-    "outdoor", "structured", "real-world", "outdoor-training", "flexibility"
+    "80-20",
+    "aerobic",
+    "anaerobic",
+    "ant+",
+    "api",
+    "base-building",
+    "bluetooth",
+    "calendar",
+    "coach-jack",
+    "coaching",
+    "cross-training",
+    "developer",
+    "endurance",
+    "export",
+    "ftp",
+    "garmin",
+    "heart-rate",
+    "import",
+    "indoor",
+    "integration",
+    "intervals",
+    "lactate-threshold",
+    "library",
+    "metrics",
+    "mobile-app",
+    "nutrition",
+    "off-season",
+    "outdoor",
+    "periodization",
+    "polarized",
+    "power",
+    "ramp-test",
+    "recovery",
+    "review",
+    "rollers",
+    "routes",
+    "setup",
+    "slopes",
+    "smart-trainer",
+    "structured",
+    "sync",
+    "tagging",
+    "threshold",
+    "trainerroad",
+    "training-plans",
+    "trainingpeaks",
+    "vo2max",
+    "w-prime",
+    "wahoo",
+    "weight-loss",
+    "winter-training",
+    "workout-editor",
+    "workouts",
+    "zone2",
+    "zwift"
   ],
-  "categories": ["Training", "Features", "Beginner"],
-  "difficulties": ["beginner", "intermediate", "advanced"]
+  "categories": [
+    "Training",
+    "Features",
+    "Beginner"
+  ],
+  "difficulties": [
+    "beginner",
+    "intermediate",
+    "advanced"
+  ]
 }
