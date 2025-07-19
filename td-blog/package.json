@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "pm2 start ecosystem.config.js --env production",
+    "start": "pm2 start ecosystem.config.js --env production --no-daemon",
+    "start-simple": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "stop": "pm2 stop td-blog",
     "restart": "pm2 restart td-blog",
@@ -24,10 +25,10 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pm2": "^6.0.8"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10",
-    "pm2": "^6.0.8"
+    "nodemon": "^3.1.10"
   }
 }
