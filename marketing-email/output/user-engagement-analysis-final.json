@@ -1,0 +1,32 @@
+{
+  "analysisDate": "2025-07-14T21:58:02.388Z",
+  "period": {
+    "start": "2025-06-14",
+    "end": "2025-07-14"
+  },
+  "totalNewUsers": 1799,
+  "engagement": {
+    "usersWithAnyAction": 457,
+    "usersWithNoAction": 1342,
+    "anyActionPercentage": 25.4,
+    "noActionPercentage": 74.6
+  },
+  "actionBreakdown": {
+    "appLogin": {
+      "count": 457,
+      "percentage": 25.4
+    },
+    "subscription": {
+      "count": 0,
+      "percentage": 0
+    },
+    "activity": {
+      "count": 0,
+      "percentage": 0
+    }
+  },
+  "insights": {
+    "engagementLevel": "moderate",
+    "mostCommonAction": "app_login"
+  }
+}

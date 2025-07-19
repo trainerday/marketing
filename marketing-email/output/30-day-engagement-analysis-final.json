@@ -1,0 +1,79 @@
+{
+  "analysisDate": "2025-07-14T22:29:37.466Z",
+  "analysisType": "optimized-30-day-engagement",
+  "registrationPeriod": {
+    "start": "2025-05-15",
+    "end": "2025-06-14",
+    "description": "Users who registered 30-60 days ago"
+  },
+  "engagementWindow": "30 days from registration date",
+  "totalUsers": 2063,
+  "overallEngagement": {
+    "usersWithAnyAction": 824,
+    "usersWithNoAction": 1239,
+    "anyActionPercentage": 39.9,
+    "noActionPercentage": 60.1
+  },
+  "detailedBreakdown": {
+    "appLogin": {
+      "count": 824,
+      "percentage": 39.9
+    },
+    "subscription": {
+      "count": 0,
+      "percentage": 0
+    },
+    "activityMetrics": {
+      "count": 0,
+      "percentage": 0
+    },
+    "calendarEvents": {
+      "count": 0,
+      "percentage": 0
+    },
+    "plans": {
+      "count": 0,
+      "percentage": 0
+    },
+    "stravaActivities": {
+      "count": 0,
+      "percentage": 0
+    }
+  },
+  "comparison": {
+    "baseline3DayAnalysis": {
+      "anyActionPercentage": 25.4,
+      "totalUsers": 1799,
+      "usersWithAnyAction": 457,
+      "period": {
+        "start": "2025-06-14",
+        "end": "2025-07-14"
+      }
+    },
+    "improvements": {
+      "engagementRateIncrease": 14.5,
+      "improvementFactor": 1.57,
+      "additionalEngagedUsers": 300
+    }
+  },
+  "insights": {
+    "engagementLevel": "moderate",
+    "primaryEngagementAction": "app_login",
+    "activationRate": 39.9,
+    "dropoffRate": 60.1,
+    "keyFindings": [
+      "39.9% of users take meaningful action within 30 days",
+      "App login is the dominant engagement activity",
+      "Subscription conversion remains at 0%",
+      "Extended timeframe improves activation rates",
+      "60.1% of users never meaningfully engage"
+    ],
+    "recommendations": [
+      "Focus on mobile app onboarding optimization",
+      "Implement progressive engagement campaigns",
+      "Review subscription strategy and pricing",
+      "Target non-engaged users with re-activation campaigns",
+      "Track micro-conversions for better insights"
+    ]
+  }
+}

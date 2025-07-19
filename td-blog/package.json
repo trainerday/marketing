@@ -14,13 +14,15 @@
     "logs": "pm2 logs td-blog",
     "monit": "pm2 monit",
     "validate": "node validate-search-index.js",
+    "sitemap": "node generate-sitemap.js",
+    "build": "npm run validate && npm run sitemap",
     "test": "npm run validate",
     "extract-posts": "node extract-posts.js",
     "download-images": "node download-images.js",
     "update-images": "node update-image-paths.js",
     "clean-html": "node clean-html-files.js",
     "setup-blog": "npm run extract-posts && npm run download-images && npm run update-images && npm run clean-html",
-    "heroku-postbuild": "npm run validate"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
