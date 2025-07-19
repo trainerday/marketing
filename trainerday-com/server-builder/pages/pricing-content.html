@@ -1,9 +1,9 @@
         <style>
         body {
-            background-color: #f8f9fa;
+            background-color: var(--light-background);
         }
         .pricing-container {
-            background-color: #ffffff;
+            background-color: var(--light-background);
             border-radius: 0;
             box-shadow: none;
             margin: 0;
@@ -12,63 +12,63 @@
             width: 100%;
         }
         .section-title {
-            color: #333;
+            color: var(--marketing-black);
             text-align: center;
             margin-bottom: 40px;
             font-weight: 700;
         }
         .pricing-card {
             background-color: #ffffff !important;
-            border: 1px solid #e9ecef;
+            border: 1px solid var(--mid-tone-grey);
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .pricing-card.premium {
             background-color: #ffffff !important;
-            border-color: #007bff;
-            box-shadow: 0 2px 6px rgba(0,123,255,0.2);
+            border-color: var(--workout-blue);
+            box-shadow: 0 2px 6px rgba(87, 125, 226, 0.2);
         }
         .plan-features h3 {
-            color: #333;
+            color: var(--marketing-black);
             font-weight: 600;
         }
         .plan-features ul li {
-            color: #555;
+            color: var(--medium-dark);
         }
         .plan-features p {
-            color: #666;
+            color: var(--medium-dark);
         }
         .plan-features .discount-link {
             text-decoration: none !important;
         }
         .compatibility-text {
-            color: #333;
+            color: var(--marketing-black);
             text-align: center;
             margin-bottom: 30px;
             font-weight: 600;
         }
         .plan-name, .plan-price .currency, .plan-price .amount, .plan-price .period {
-            color: #333 !important;
+            color: var(--marketing-black) !important;
         }
         .testimonial-content p {
-            color: #555 !important;
+            color: var(--medium-dark) !important;
         }
         .testimonial-author {
-            color: #333 !important;
+            color: var(--marketing-black) !important;
         }
         .pricing-container .testimonials {
             margin-top: 60px;
             padding-top: 40px;
-            border-top: 1px solid #e9ecef;
+            border-top: 1px solid var(--mid-tone-grey);
         }
         .pricing-container .testimonials .section-title {
-            color: #333;
+            color: var(--marketing-black);
             margin-bottom: 30px;
         }
         .pricing-container .final-cta {
             margin-top: 80px;
             padding-top: 60px;
-            border-top: 1px solid #e9ecef;
+            border-top: 1px solid var(--mid-tone-grey);
         }
         /* Remove pricing page compatibility styles - will use main CSS styles */
         .pricing-container .testimonials,
@@ -94,9 +94,9 @@
             border-color: #d40305 !important;
         }
         .pricing-container .btn-secondary {
-            background-color: #6c757d !important;
-            color: #ffffff !important;
-            border: 1px solid #6c757d !important;
+            background-color: #F4F5F9 !important;
+            color: var(--darkest-blue) !important;
+            border: 1px solid var(--mid-tone-grey) !important;
         }
         .pricing-container .final-cta .btn-primary {
             background-color: #F60406 !important;
@@ -108,10 +108,10 @@
             border-color: #d40305 !important;
         }
         .testimonials {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+            background: linear-gradient(135deg, #ffffff 0%, var(--light-background) 100%) !important;
             margin: 80px 0;
             padding: 60px;
-            border: 1px solid #e9ecef;
+            border: 1px solid var(--mid-tone-grey);
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             text-align: center;
@@ -126,7 +126,7 @@
             opacity: 0.6;
         }
         .testimonials .section-title {
-            color: #333;
+            color: var(--marketing-black);
             margin-bottom: 40px;
             font-size: 24px;
             text-align: center;
@@ -143,18 +143,18 @@
             height: 80px;
             border-radius: 50%;
             margin-bottom: 20px;
-            border: 3px solid #e9ecef;
-            background-color: #f8f9fa;
+            border: 3px solid var(--mid-tone-grey);
+            background-color: var(--light-background);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            color: #6c757d;
+            color: var(--mid-tone-grey);
             font-weight: 600;
         }
         .testimonial-content p {
             font-size: 22px !important;
-            color: #555 !important;
+            color: var(--medium-dark) !important;
             font-style: italic;
             line-height: 1.7;
             margin-bottom: 25px;
@@ -164,7 +164,7 @@
         .testimonial-content p::before {
             content: '"';
             font-size: 40px;
-            color: #007bff;
+            color: var(--workout-blue);
             position: absolute;
             left: -20px;
             top: -10px;
@@ -173,14 +173,14 @@
         .testimonial-content p::after {
             content: '"';
             font-size: 40px;
-            color: #007bff;
+            color: var(--workout-blue);
             position: absolute;
             right: -20px;
             bottom: -20px;
             font-family: serif;
         }
         .testimonial-author {
-            color: #333 !important;
+            color: var(--marketing-black) !important;
             font-weight: 600;
             font-size: 16px;
             text-align: center;
@@ -288,17 +288,6 @@
                         </div>
                     </div>
 
-                    <!-- Final CTA -->
-                    <div class="final-cta">
-                        <div class="cta-buttons">
-                            <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
-                        <a href="https://billing.prod.trainerday.com/account/checkout" class="btn btn-primary upgrade-link" style="display: none;">Upgrade Now</a>
-                            <a href="/login/" class="btn btn-secondary auth-link">
-                                <span class="icon">👤</span>
-                                Login
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

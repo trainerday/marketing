@@ -4,25 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coach Jack's 100% Custom Training Plans - TrainerDay</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- TrainerDay Analytics -->
-    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <!-- Prevent FOUC -->
+    <style>
+    body { 
+        visibility: hidden; 
+        background-color: #000000;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/css/styles.css"></noscript>
+    
+    <!-- Preload and defer Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Defer TrainerDay Analytics -->
+    <script defer src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
     <script>
-        var analytics = mixpanel;
-        // Initialize with TrainerDay production settings
-        analytics.init('td-web', {
-            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
-            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
-        });
+        // Initialize analytics when script loads
+        function initAnalytics() {
+            if (typeof mixpanel !== 'undefined') {
+                var analytics = mixpanel;
+                // Initialize with TrainerDay production settings
+                analytics.init('td-web', {
+                    trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+                    engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+                });
+                
+                // Track page view
+                analytics.track('Page View', {
+                    page: window.location.pathname,
+                    title: document.title,
+                    url: window.location.href
+                });
+            }
+        }
         
-        // Track page view
-        analytics.track('Page View', {
-            page: window.location.pathname,
-            title: document.title,
-            url: window.location.href
-        });
+        // Wait for DOM and analytics script to load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initAnalytics, 100);
+            });
+        } else {
+            setTimeout(initAnalytics, 100);
+        }
     </script>
 </head>
 <body>
@@ -156,17 +188,17 @@
     <!-- Main Content -->
     <main>        <style>
         body {
-            background-color: #f8f9fa;
+            background-color: var(--light-background);
         }
         .coach-jack-container {
-            background-color: #ffffff;
+            background-color: var(--light-background);
             margin: 0;
             padding: 0;
             width: 100%;
         }
         .coach-jack-hero {
             padding: 120px 0 60px;
-            background: linear-gradient(135deg, #F60406 0%, #d40305 100%);
+            background: linear-gradient(135deg, var(--primary-red) 0%, #d40305 100%);
             color: white;
         }
         .coach-jack-hero h1 {
@@ -234,8 +266,8 @@
         }
         .cta-button {
             background-color: transparent;
-            color: #F60406;
-            border: 1px solid #F60406;
+            color: var(--primary-red);
+            border: 1px solid var(--primary-red);
             padding: 15px 40px;
             border-radius: 4px;
             text-decoration: none;
@@ -245,19 +277,19 @@
             transition: all 0.3s ease;
         }
         .cta-button:hover {
-            background-color: #F60406;
+            background-color: var(--primary-red);
             color: white;
-            border-color: #F60406;
+            border-color: var(--primary-red);
         }
         .disclaimer {
             font-size: 0.9rem;
-            color: #e2e8f0;
+            color: var(--mid-tone-grey);
             margin-top: 20px;
             font-style: italic;
         }
         .video-section {
             padding: 80px 0;
-            background-color: #f8f9fa;
+            background-color: var(--light-background);
         }
         .video-content {
             max-width: 800px;
@@ -266,20 +298,20 @@
         }
         .video-content h2 {
             font-size: 2rem;
-            color: #333;
+            color: var(--darkest-blue);
             margin-bottom: 30px;
         }
         .video-content h2 span {
-            color: #F60406;
+            color: var(--primary-red);
         }
         .video-content p {
-            color: #555;
+            color: var(--medium-dark);
             line-height: 1.6;
             margin-bottom: 20px;
             font-size: 1.1rem;
         }
         .video-container {
-            background-color: #000;
+            background-color: var(--marketing-black);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -288,7 +320,7 @@
         }
         .steps-section {
             padding: 80px 0;
-            background-color: #ffffff;
+            background-color: var(--light-background);
         }
         .steps-content {
             max-width: 1000px;
@@ -296,12 +328,12 @@
         }
         .steps-content h2 {
             font-size: 2rem;
-            color: #333;
+            color: var(--darkest-blue);
             text-align: center;
             margin-bottom: 60px;
         }
         .steps-content h2 span {
-            color: #F60406;
+            color: var(--primary-red);
         }
         .steps-grid {
             display: grid;
@@ -310,7 +342,7 @@
             margin-bottom: 60px;
         }
         .step-item {
-            background-color: #f8f9fa;
+            background-color: var(--light-background);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -318,19 +350,19 @@
         .step-header {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #F60406;
+            color: var(--primary-red);
             margin-bottom: 20px;
         }
         .step-header span {
-            color: #666;
+            color: var(--medium-dark);
         }
         .step-content p {
-            color: #555;
+            color: var(--medium-dark);
             line-height: 1.6;
             margin-bottom: 15px;
         }
         .step-content strong {
-            color: #333;
+            color: var(--darkest-blue);
         }
         .step-images {
             display: grid;
@@ -353,7 +385,7 @@
         }
         .about-section {
             padding: 80px 0;
-            background-color: #f8f9fa;
+            background-color: var(--light-background);
         }
         .about-content {
             max-width: 900px;
@@ -361,23 +393,23 @@
         }
         .about-content h3 {
             font-size: 1.8rem;
-            color: #333;
+            color: var(--darkest-blue);
             margin-bottom: 30px;
             text-align: center;
         }
         .about-content p {
-            color: #555;
+            color: var(--medium-dark);
             line-height: 1.7;
             margin-bottom: 20px;
             font-size: 1.1rem;
         }
         .about-content h3.highlight {
-            color: #F60406;
+            color: var(--primary-red);
             font-size: 1.5rem;
             margin: 40px 0 20px 0;
         }
         .about-content strong {
-            color: #333;
+            color: var(--darkest-blue);
         }
         .workout-examples {
             display: grid;
@@ -386,7 +418,7 @@
             margin: 40px 0;
         }
         .workout-example {
-            background-color: white;
+            background-color: var(--light-background);
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -399,7 +431,7 @@
             margin-bottom: 15px;
         }
         .workout-example p {
-            color: #555;
+            color: var(--medium-dark);
             font-size: 0.95rem;
             line-height: 1.5;
         }
@@ -528,7 +560,7 @@
                         </div>
 
                         <div class="cta-center">
-                            <a href="/register/" class="cta-button auth-link">Don't wait! Subscribe and try Jack's plans now!</a>
+                            <a href="/register/" class="cta-button auth-link">Don't wait! Sign up and try Jack's plans now!</a>
                         </div>
                     </div>
                 </div>
@@ -556,10 +588,6 @@
                         
                         <p>Each workout in a week should have a physiological adaptation abjective. During a build period, all workouts should not have the same objective (i.e. more stress). It does not matter if you are a pro or a beginner, we can start at the same place and gradually build to harder workouts. Below is a simple threshold <strong>PROGRESSION WORKOUT</strong> highlighting the 4-components of each and all of our workouts. We use the standard term PROGRESSION to differentiate it from a full threshold or sweet spot focused workout. The progression is in the main work that each week it gets a little harder.</p>
                         
-                        <div class="cta-center">
-                            <a href="/register/" class="cta-button auth-link">Register and create your first plan *</a>
-                            <p class="disclaimer">* requires a TrainerDay pro membership. We have free community-based plans as well.</p>
-                        </div>
                         
                         <div class="workout-examples">
                             <div class="workout-example">
@@ -581,7 +609,7 @@
                         <p>TSS® is a registered trademark of Peaksware LLC (TrainingPeaks)</p>
                         
                         <div class="cta-center">
-                            <a href="/register/" class="cta-button auth-link">Join Now</a>
+                            <a href="/register/" class="cta-button auth-link">Sign Up Now</a>
                         </div>
                     </div>
                 </div>
@@ -628,6 +656,7 @@
             </div>
             <div class="footer-bottom">
                 <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                <a href="/login/" class="btn btn-secondary auth-link">Login</a>
                 <a href="https://app.trainerday.com" class="btn btn-primary webapp-link" style="display: none;">Go to Web App</a>
             </div>
         </div>
@@ -646,6 +675,25 @@
             </div>
         </div>
     </div>
+    
+    <!-- Show body content when CSS is ready -->
+    <script>
+    function showContent() {
+        document.body.style.visibility = 'visible';
+    }
+    
+    // Try multiple approaches to ensure content shows
+    if (document.readyState === 'complete') {
+        setTimeout(showContent, 100);
+    } else {
+        window.addEventListener('load', function() {
+            setTimeout(showContent, 50);
+        });
+    }
+    
+    // Fallback - always show after 300ms max
+    setTimeout(showContent, 300);
+    </script>
     
     <!-- Clicky Analytics -->
     <script async data-id="101125465" src="//static.getclicky.com/js"></script>

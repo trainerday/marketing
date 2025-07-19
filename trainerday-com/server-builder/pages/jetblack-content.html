@@ -4,7 +4,7 @@
             padding: 0;
             height: 100vh;
             overflow: hidden;
-            background-color: #000;
+            background-color: var(--marketing-black, #000000);
         }
         
         .jetblack-container {
@@ -21,7 +21,7 @@
             justify-content: center;
             align-items: center;
             padding: 40px;
-            background-color: #000;
+            background-color: var(--marketing-black, #000000);
             color: white;
             text-align: center;
         }
@@ -43,7 +43,7 @@
         .partnership-text {
             font-size: 1.2rem;
             margin-bottom: 20px;
-            color: #ccc;
+            color: var(--mid-tone-grey, #B4B4C5);
         }
         
         .offer-title {
@@ -57,11 +57,11 @@
         .offer-subtitle {
             font-size: 1.3rem;
             margin-bottom: 40px;
-            color: #ccc;
+            color: var(--mid-tone-grey, #B4B4C5);
         }
         
         .download-btn-jetblack {
-            background-color: #F60406;
+            background-color: var(--primary-red, #F60406);
             color: white;
             padding: 12px 24px;
             border-radius: 4px;
@@ -73,7 +73,7 @@
         }
         
         .download-btn-jetblack:hover {
-            background-color: #d40305;
+            background-color: color-mix(in srgb, var(--primary-red, #F60406) 80%, black);
             color: white;
             text-decoration: none;
         }
@@ -85,7 +85,7 @@
             left: 0;
             right: 0;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.3);
+            background: color-mix(in srgb, var(--marketing-black, #000000) 30%, transparent);
             backdrop-filter: blur(10px);
         }
         

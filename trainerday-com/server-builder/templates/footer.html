@@ -40,6 +40,7 @@
             </div>
             <div class="footer-bottom">
                 <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                <a href="/login/" class="btn btn-secondary auth-link">Login</a>
                 <a href="https://app.trainerday.com" class="btn btn-primary webapp-link" style="display: none;">Go to Web App</a>
             </div>
         </div>
@@ -58,6 +59,25 @@
             </div>
         </div>
     </div>
+    
+    <!-- Show body content when CSS is ready -->
+    <script>
+    function showContent() {
+        document.body.style.visibility = 'visible';
+    }
+    
+    // Try multiple approaches to ensure content shows
+    if (document.readyState === 'complete') {
+        setTimeout(showContent, 100);
+    } else {
+        window.addEventListener('load', function() {
+            setTimeout(showContent, 50);
+        });
+    }
+    
+    // Fallback - always show after 300ms max
+    setTimeout(showContent, 300);
+    </script>
     
     <!-- Clicky Analytics -->
     <script async data-id="101125465" src="//static.getclicky.com/js"></script>

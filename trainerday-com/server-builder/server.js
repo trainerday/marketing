@@ -41,6 +41,7 @@ const routes = {
   '/download': { content: 'download-content.html', title: 'Download - TrainerDay', minimal: false },
   '/coach-jack': { content: 'coach-jack-content.html', title: 'Coach Jack\'s 100% Custom Training Plans - TrainerDay', minimal: false },
   '/jetblack': { content: 'jetblack-content.html', title: 'JetBlack Partnership - 20 Free Training Sessions - TrainerDay', minimal: false },
+  '/zone2': { content: 'zone2-content.html', title: 'Zone 2 - TrainerDay - Indoor Cycling', minimal: false },
   '/register': { content: 'register-content.html', title: 'Join TrainerDay - Free Cycling Training', minimal: false },
   '/login': { content: 'login-content.html', title: 'Sign In - TrainerDay', minimal: false },
   '/404': { content: '404-content.html', title: '404 - Page Not Found - TrainerDay', minimal: false }

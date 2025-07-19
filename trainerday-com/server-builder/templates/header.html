@@ -4,25 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{TITLE}}</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- TrainerDay Analytics -->
-    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <!-- Prevent FOUC -->
+    <style>
+    body { 
+        visibility: hidden; 
+        background-color: #000000;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/css/styles.css"></noscript>
+    
+    <!-- Preload and defer Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Defer TrainerDay Analytics -->
+    <script defer src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
     <script>
-        var analytics = mixpanel;
-        // Initialize with TrainerDay production settings
-        analytics.init('td-web', {
-            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
-            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
-        });
+        // Initialize analytics when script loads
+        function initAnalytics() {
+            if (typeof mixpanel !== 'undefined') {
+                var analytics = mixpanel;
+                // Initialize with TrainerDay production settings
+                analytics.init('td-web', {
+                    trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+                    engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+                });
+                
+                // Track page view
+                analytics.track('Page View', {
+                    page: window.location.pathname,
+                    title: document.title,
+                    url: window.location.href
+                });
+            }
+        }
         
-        // Track page view
-        analytics.track('Page View', {
-            page: window.location.pathname,
-            title: document.title,
-            url: window.location.href
-        });
+        // Wait for DOM and analytics script to load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initAnalytics, 100);
+            });
+        } else {
+            setTimeout(initAnalytics, 100);
+        }
     </script>
 </head>
 <body>

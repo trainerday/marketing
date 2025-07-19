@@ -4,25 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download - TrainerDay</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- TrainerDay Analytics -->
-    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <!-- Prevent FOUC -->
+    <style>
+    body { 
+        visibility: hidden; 
+        background-color: #000000;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/css/styles.css"></noscript>
+    
+    <!-- Preload and defer Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Defer TrainerDay Analytics -->
+    <script defer src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
     <script>
-        var analytics = mixpanel;
-        // Initialize with TrainerDay production settings
-        analytics.init('td-web', {
-            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
-            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
-        });
+        // Initialize analytics when script loads
+        function initAnalytics() {
+            if (typeof mixpanel !== 'undefined') {
+                var analytics = mixpanel;
+                // Initialize with TrainerDay production settings
+                analytics.init('td-web', {
+                    trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+                    engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+                });
+                
+                // Track page view
+                analytics.track('Page View', {
+                    page: window.location.pathname,
+                    title: document.title,
+                    url: window.location.href
+                });
+            }
+        }
         
-        // Track page view
-        analytics.track('Page View', {
-            page: window.location.pathname,
-            title: document.title,
-            url: window.location.href
-        });
+        // Wait for DOM and analytics script to load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initAnalytics, 100);
+            });
+        } else {
+            setTimeout(initAnalytics, 100);
+        }
     </script>
 </head>
 <body>
@@ -156,7 +188,7 @@
     <!-- Main Content -->
     <main>        <style>
         body {
-            background-color: #f8f9fa;
+            background-color: var(--light-background);
         }
         .download-container {
             background-color: #ffffff;
@@ -171,7 +203,7 @@
         .download-hero h1 {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #333;
+            color: var(--marketing-black);
             margin-bottom: 40px;
             margin-top: 30px;
         }
@@ -192,7 +224,7 @@
         .qr-code {
             width: 360px;
             height: 360px;
-            border: 2px solid #e9ecef;
+            border: 2px solid var(--mid-tone-grey);
             border-radius: 15px;
             padding: 15px;
             background-color: white;
@@ -200,7 +232,7 @@
         }
         .qr-text {
             font-size: 1.2rem;
-            color: #333;
+            color: var(--marketing-black);
             font-weight: 600;
             margin: 0;
             text-align: center;
@@ -217,7 +249,7 @@
         .feature-icon {
             width: 20px;
             height: 20px;
-            background-color: #F60406;
+            background-color: var(--primary-red);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -236,18 +268,18 @@
         }
         .feature-content strong {
             display: block;
-            color: #333;
+            color: var(--marketing-black);
             font-weight: 600;
             margin-bottom: 5px;
         }
         .feature-content p {
-            color: #555;
+            color: var(--medium-dark);
             margin: 0;
             line-height: 1.5;
         }
         .download-platforms {
             padding: 60px 0;
-            background-color: #f8f9fa;
+            background-color: var(--light-background);
         }
         .platforms-grid {
             display: grid;
@@ -258,7 +290,7 @@
         }
         .platform-card {
             background-color: #ffffff;
-            border: 1px solid #e9ecef;
+            border: 1px solid var(--mid-tone-grey);
             border-radius: 15px;
             padding: 40px 30px;
             text-align: center;
@@ -270,13 +302,13 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         .platform-card h3 {
-            color: #333;
+            color: var(--marketing-black);
             font-size: 1.5rem;
             font-weight: 600;
             margin: 20px 0 10px 0;
         }
         .platform-card p {
-            color: #666;
+            color: var(--medium-dark);
             margin-bottom: 25px;
             font-size: 1rem;
         }
@@ -299,9 +331,9 @@
             left: 0;
             width: 240px;
             height: 180px;
-            background: linear-gradient(135deg, #333 0%, #111 100%);
+            background: linear-gradient(135deg, var(--marketing-black) 0%, var(--darkest-blue) 100%);
             border-radius: 8px 8px 0 0;
-            border: 3px solid #ddd;
+            border: 3px solid var(--mid-tone-grey);
             border-bottom: none;
         }
         /* MacBook Base/Keyboard */
@@ -312,7 +344,7 @@
             left: -20px;
             width: 280px;
             height: 140px;
-            background: linear-gradient(135deg, #f0f0f0 0%, #ddd 100%);
+            background: linear-gradient(135deg, var(--light-background) 0%, var(--mid-tone-grey) 100%);
             border-radius: 0 0 20px 20px;
             transform: perspective(200px) rotateX(60deg);
             transform-origin: top;
@@ -324,7 +356,7 @@
             left: 15px;
             width: 210px;
             height: 120px;
-            background-color: #000;
+            background-color: var(--marketing-black);
             border-radius: 3px;
             z-index: 2;
         }
@@ -334,12 +366,12 @@
             top: 60px;
             left: 50%;
             transform: translateX(-50%);
-            color: #666;
+            color: var(--medium-dark);
             font-size: 24px;
             z-index: 3;
         }
         .btn btn-primary {
-            background-color: #F60406;
+            background-color: var(--primary-red);
             color: white;
             padding: 15px 40px;
             border-radius: 4px;
@@ -350,7 +382,7 @@
             display: inline-block;
         }
         .btn btn-primary:hover {
-            background-color: #d40305;
+            background-color: var(--light-dark-blue);
             color: white;
         }
         .platform-image {
@@ -365,11 +397,11 @@
         }
         .testimonials-section {
             padding: 80px 0;
-            background-color: #f8f9fa;
+            background-color: var(--light-background);
         }
         .testimonials-section h2 {
             text-align: center;
-            color: #333;
+            color: var(--marketing-black);
             margin-bottom: 60px;
             font-size: 2rem;
         }
@@ -387,12 +419,12 @@
         }
         .testimonial-author {
             font-weight: 600;
-            color: #F60406;
+            color: var(--primary-red);
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
         .testimonial-content p {
-            color: #555;
+            color: var(--medium-dark);
             line-height: 1.6;
             margin-bottom: 10px;
         }
@@ -429,7 +461,7 @@
             gap: 8px;
         }
         .btn-primary {
-            background-color: #F60406;
+            background-color: var(--primary-red);
             color: white;
         }
         .btn-primary:hover {
@@ -437,11 +469,11 @@
             color: white;
         }
         .btn-secondary {
-            background-color: #6c757d;
+            background-color: var(--mid-tone-grey);
             color: white;
         }
         .btn-secondary:hover {
-            background-color: #5a6268;
+            background-color: var(--light-dark-blue);
             color: white;
         }
         @media (max-width: 768px) {
@@ -521,7 +553,7 @@
             <!-- Download Platforms -->
             <section class="download-platforms">
                 <div class="container">
-                    <h2 style="text-align: center; margin-bottom: 60px; color: #333; font-size: 2rem;">Download for Your Device</h2>
+                    <h2 style="text-align: center; margin-bottom: 60px; color: var(--marketing-black); font-size: 2rem;">Download for Your Device</h2>
                     <div class="platforms-grid">
                         <!-- iOS -->
                         <div class="platform-card">
@@ -618,12 +650,6 @@
             <section class="final-cta">
                 <div class="container">
                     <div class="cta-buttons">
-                        <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
-                        <a href="/login/" class="btn btn-secondary auth-link">
-                            <span class="icon">👤</span>
-                            Login
-                        </a>
-                        <a href="https://app.trainerday.com" class="btn btn-primary webapp-link" style="display: none;">Go to Web App</a>
                     </div>
                 </div>
             </section>
@@ -669,6 +695,7 @@
             </div>
             <div class="footer-bottom">
                 <a href="/register/" class="btn btn-primary auth-link">Sign Up</a>
+                <a href="/login/" class="btn btn-secondary auth-link">Login</a>
                 <a href="https://app.trainerday.com" class="btn btn-primary webapp-link" style="display: none;">Go to Web App</a>
             </div>
         </div>
@@ -687,6 +714,25 @@
             </div>
         </div>
     </div>
+    
+    <!-- Show body content when CSS is ready -->
+    <script>
+    function showContent() {
+        document.body.style.visibility = 'visible';
+    }
+    
+    // Try multiple approaches to ensure content shows
+    if (document.readyState === 'complete') {
+        setTimeout(showContent, 100);
+    } else {
+        window.addEventListener('load', function() {
+            setTimeout(showContent, 50);
+        });
+    }
+    
+    // Fallback - always show after 300ms max
+    setTimeout(showContent, 300);
+    </script>
     
     <!-- Clicky Analytics -->
     <script async data-id="101125465" src="//static.getclicky.com/js"></script>
