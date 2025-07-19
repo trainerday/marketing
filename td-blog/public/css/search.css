@@ -1,0 +1,298 @@
+/* Search Container */
+.search-wrapper {
+  max-width: 800px;
+  margin: 40px auto;
+  position: relative;
+}
+
+/* Tag Input Box */
+.tag-input-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 12px;
+  background: white;
+  min-height: 50px;
+  transition: border-color 0.2s ease;
+}
+
+.tag-input-box:focus-within {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(246, 4, 6, 0.1);
+}
+
+/* Tags */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--primary-red);
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.tag-remove:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Search Input */
+#search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  color: var(--darkest-blue);
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 0;
+}
+
+#search-input::placeholder {
+  color: #a0a6b1;
+  font-style: italic;
+}
+
+/* Search Hint */
+.search-hint {
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* Tag Suggestions Dropdown */
+.tag-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: -18px;
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.15s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background: var(--light-background);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-tag {
+  font-weight: 500;
+  color: var(--darkest-blue);
+}
+
+.suggestion-count {
+  font-size: 12px;
+  color: #9ca3af;
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 8px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Search Results */
+.search-results {
+  margin-top: 40px;
+}
+
+.results-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.results-header h3 {
+  color: var(--darkest-blue);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Results Grid */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.result-card {
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-red);
+}
+
+.result-card h4 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.result-card h4 a {
+  color: var(--darkest-blue);
+  text-decoration: none;
+}
+
+.result-card h4 a:hover {
+  color: var(--primary-red);
+}
+
+.result-excerpt {
+  color: #6b7280;
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Meta Badges */
+.result-meta {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.category-badge, .difficulty-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.category-training { background: #dbeafe; color: #1e40af; }
+.category-features { background: #f3e8ff; color: #7c3aed; }
+.category-beginner { background: #dcfce7; color: #16a34a; }
+
+.difficulty-beginner { background: #dcfce7; color: #16a34a; }
+.difficulty-intermediate { background: #fef3c7; color: #d97706; }
+.difficulty-advanced { background: #fee2e2; color: #dc2626; }
+
+/* Result Tags */
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.result-tag {
+  padding: 4px 8px;
+  background: #f8fafc;
+  color: #64748b;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.result-tag:hover {
+  background: var(--primary-red);
+  color: white;
+  border-color: var(--primary-red);
+}
+
+.more-tags {
+  padding: 4px 8px;
+  color: #9ca3af;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.no-results p:first-child {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--darkest-blue);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .search-wrapper {
+    margin: 20px auto;
+    padding: 0 16px;
+  }
+  
+  .tag-input-box {
+    padding: 10px 12px;
+  }
+  
+  #search-input {
+    min-width: 150px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .result-card {
+    padding: 20px;
+  }
+  
+  .tag {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+}

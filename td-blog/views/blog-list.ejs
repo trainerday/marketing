@@ -6,6 +6,7 @@
     <title><%= title %></title>
     <meta name="description" content="TrainerDay Blog - Expert cycling training content for the obsessed cyclist">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/css/search.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -51,30 +52,18 @@
                     <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 20px; color: #ffffff;">TrainerDay Blog</h1>
                     <p style="font-size: 1.2rem; color: var(--light-background); max-width: 600px; margin: 0 auto;">Expert cycling training content for the obsessed cyclist</p>
                 </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
-                    <% posts.forEach(function(post) { %>
-                    <article style="background-color: var(--medium-dark); border-radius: 15px; padding: 30px; border: 1px solid var(--light-dark-blue); transition: transform 0.3s ease, border-color 0.3s ease;">
-                        <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; line-height: 1.4;">
-                            <a href="<%= post.url %>" style="color: #ffffff; text-decoration: none; transition: color 0.3s ease;">
-                                <%= post.title %>
-                            </a>
-                        </h2>
-                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 0.9rem; color: var(--mid-tone-grey);">
-                            <span><%= post.date %></span>
-                            <span style="color: var(--primary-red);">•</span>
-                            <span>Cycling Training</span>
-                        </div>
-                        <p style="color: var(--light-background); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem;">
-                            <%= post.excerpt %>
-                        </p>
-                        <a href="<%= post.url %>" style="color: var(--primary-red); text-decoration: none; font-weight: 500; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 5px;">
-                            Read More →
-                        </a>
-                    </article>
-                    <% }); %>
-                </div>
             </div>
+        </section>
+
+        <!-- Search Interface -->
+        <section style="background: var(--light-background); padding: 40px 0;">
+            <div class="container">
+                <div id="search-container"></div>
+            </div>
+        </section>
+
+        <!-- Original Blog Posts Grid (hidden when search is active) -->
+        <section id="original-posts" style="display: none;">
         </section>
 
         <section style="background-color: var(--light-background); padding: 80px 0;">
@@ -158,5 +147,8 @@
             url: window.location.href
         });
     </script>
+
+    <!-- Search JavaScript -->
+    <script src="/js/search.js"></script>
 </body>
 </html>

@@ -1,0 +1,196 @@
+{
+  "posts": [
+    {
+      "title": "Zone 2 Training - Is Cycling Still an Aerobic Sport?",
+      "slug": "zone-2-training-hmmm-is-cycling-is-still-an-aerobic-sport-11b19d1e0f29",
+      "excerpt": "Learn about aerobic base building and the importance of Zone 2 training for cycling performance with insights from top coaches.",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": ["zone2", "aerobic", "heart-rate", "endurance", "base-building", "polarized", "maffetone", "tadej-pogacar", "fat-burning"]
+    },
+    {
+      "title": "Indoor Cycling 101 - Beginner Setup",
+      "slug": "indoor-cycling-101-beginners-setup-a3b1e17c7d6c",
+      "excerpt": "Complete guide to setting up your indoor cycling space, choosing trainers, and getting started with apps like Zwift and TrainerDay.",
+      "category": "Beginner",
+      "difficulty": "beginner",
+      "tags": ["indoor", "setup", "smart-trainer", "beginner", "zwift", "trainer-setup", "space-planning", "bluetooth", "ant+"]
+    },
+    {
+      "title": "FTP Measures Aerobic - What About Anaerobic?",
+      "slug": "ftp-measures-aerobic-what-about-anaerobic-929722eb2016",
+      "excerpt": "Understanding the difference between aerobic FTP and anaerobic power capacity (W') for complete cycling fitness assessment.",
+      "category": "Training", 
+      "difficulty": "advanced",
+      "tags": ["ftp", "anaerobic", "w-prime", "critical-power", "vo2max", "intervals", "testing", "power-analysis", "energy-systems"]
+    },
+    {
+      "title": "Coach Jack Block Types - Periodization 101",
+      "slug": "coach-jack-block-types-dac5e6d91d27",
+      "excerpt": "Learn about Base, Build, Peak and Event training blocks for optimal periodization and peak performance timing.",
+      "category": "Training",
+      "difficulty": "intermediate", 
+      "tags": ["periodization", "coach-jack", "base", "build", "peak", "event-blocks", "planning", "season-planning"]
+    },
+    {
+      "title": "The Ultimate Training Plans for Zwift",
+      "slug": "the-ultimate-training-plans-for-zwift-e7c22439d7f0",
+      "excerpt": "Polarized training approach for Zwift with Coach Andrea Morelli's proven methods for elite cyclists.",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": ["zwift", "polarized", "coach-andrea", "training-plans", "elite", "4w-kg", "structured-training"]
+    },
+    {
+      "title": "What Type of Training to Do This Winter",
+      "slug": "what-type-of-training-to-do-this-winter-fe8f9287cee2",
+      "excerpt": "Winter training options: high intensity, base building, periodization, or chasing squirrels - which is best for you?",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": ["winter-training", "reverse-periodization", "base", "high-intensity", "motivation", "season-planning", "burnout"]
+    },
+    {
+      "title": "Smart Bike Trainers Review", 
+      "slug": "smart-bike-trainers-review-1ecff67489ca",
+      "excerpt": "Comprehensive review of smart bike trainers, features, connectivity, and which trainer is best for your needs.",
+      "category": "Features",
+      "difficulty": "beginner",
+      "tags": ["smart-trainer", "review", "equipment", "buying-guide", "features", "connectivity", "trainer-comparison"]
+    },
+    {
+      "title": "Indoor Cycling Trainers - Smart vs Non-Smart",
+      "slug": "indoor-cycling-trainers-smart-vs-non-smart-1a44ba928154", 
+      "excerpt": "Understanding the differences between smart and non-smart trainers to make the best purchase decision.",
+      "category": "Features",
+      "difficulty": "beginner",
+      "tags": ["smart-trainer", "non-smart", "comparison", "buying-guide", "equipment", "beginner", "trainer-types"]
+    },
+    {
+      "title": "Indoor Cycling - Bluetooth vs ANT+",
+      "slug": "indoor-cycling-what-is-bluetooth-and-ant-3e971e2bfcfb",
+      "excerpt": "Technical guide to wireless protocols for connecting your trainer to cycling apps and devices.",
+      "category": "Features", 
+      "difficulty": "intermediate",
+      "tags": ["bluetooth", "ant+", "connectivity", "technical", "wireless", "setup", "compatibility", "devices"]
+    },
+    {
+      "title": "TrainerDay and TrainingPeaks Integration",
+      "slug": "trainerday-and-trainingpeaks-48451053a7ef",
+      "excerpt": "How to sync TrainerDay workouts with TrainingPeaks for seamless calendar integration and workout planning.",
+      "category": "Features",
+      "difficulty": "intermediate", 
+      "tags": ["trainingpeaks", "integration", "sync", "calendar", "workout-sync", "planning", "features"]
+    },
+    {
+      "title": "Garmin Connect - Send to Calendar",
+      "slug": "garmin-send-to-calendar-1cb36bf07a64",
+      "excerpt": "Step-by-step guide to sending TrainerDay workouts to your Garmin device and Garmin Connect calendar.",
+      "category": "Features",
+      "difficulty": "intermediate",
+      "tags": ["garmin", "calendar", "sync", "garmin-connect", "workout-sync", "device-integration", "setup"]
+    },
+    {
+      "title": "Push Workouts to Garmin",
+      "slug": "push-workouts-to-garmin-53f88acb2f4c",
+      "excerpt": "How to push structured workouts from TrainerDay directly to your Garmin cycling computer.",
+      "category": "Features", 
+      "difficulty": "intermediate",
+      "tags": ["garmin", "workout-push", "garmin-connect", "structured-workouts", "device-sync", "integration"]
+    },
+    {
+      "title": "TrainerDay Workouts in Zwift",
+      "slug": "trainer-day-workouts-in-zwift-100dd6d63694",
+      "excerpt": "Import and use TrainerDay custom workouts inside Zwift for the best of both platforms.",
+      "category": "Features",
+      "difficulty": "intermediate",
+      "tags": ["zwift", "workout-import", "custom-workouts", "zwo-files", "integration", "zwift-workouts"]
+    },
+    {
+      "title": "Using TrainerDay Workouts in Other Platforms", 
+      "slug": "using-trainerday-workouts-in-other-platforms-f927661d8550",
+      "excerpt": "Export TrainerDay workouts to TrainerRoad, Zwift, and other training platforms for maximum flexibility.",
+      "category": "Features",
+      "difficulty": "intermediate", 
+      "tags": ["export", "cross-platform", "workout-export", "compatibility", "trainerroad", "platform-integration"]
+    },
+    {
+      "title": "Improving FTP - Complete Guide",
+      "slug": "improving-ftp-230ad390e462", 
+      "excerpt": "Evidence-based strategies for improving your Functional Threshold Power through proper training and testing.",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": ["ftp", "threshold", "improvement", "testing", "power-training", "lactate-threshold", "performance"]
+    },
+    {
+      "title": "Why the Ramp Test is the Best FTP Test",
+      "slug": "why-the-ramp-test-is-the-best-ftp-test-170537206c1b",
+      "excerpt": "Scientific analysis of why ramp tests provide the most accurate and practical FTP measurements for cyclists.",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": ["ramp-test", "ftp-test", "testing", "accuracy", "protocols", "power-testing", "assessment"]
+    },
+    {
+      "title": "The Benefits of Polarized Training for Cycling",
+      "slug": "the-benefits-of-a-polarized-approach-to-cycling-training-0da0417cac5f",
+      "excerpt": "Understanding polarized training methodology and how 80/20 intensity distribution improves cycling performance.",
+      "category": "Training", 
+      "difficulty": "advanced",
+      "tags": ["polarized", "80-20", "intensity-distribution", "endurance", "methodology", "dr-seiler", "training-theory"]
+    },
+    {
+      "title": "Cycling Training Made Easy - Four Pillars of Performance",
+      "slug": "cycling-training-made-easy-the-four-pillars-of-performance-586ade4b75e7",
+      "excerpt": "The four fundamental pillars every cyclist needs to focus on for optimal performance and training success.",
+      "category": "Training",
+      "difficulty": "beginner",
+      "tags": ["fundamentals", "performance", "training-basics", "beginner", "pillars", "foundation", "methodology"]
+    },
+    {
+      "title": "No Power Meter? No Problem - Heart Rate Training",
+      "slug": "no-power-meter-on-your-bike-no-problem-heart-rate-training-b901c7a11c06",
+      "excerpt": "Complete guide to effective training using heart rate zones when you don't have a power meter.",
+      "category": "Training",
+      "difficulty": "beginner", 
+      "tags": ["heart-rate", "zones", "no-power-meter", "budget-training", "hr-zones", "beginner", "affordable"]
+    },
+    {
+      "title": "Structured Training Outdoors",
+      "slug": "structured-training-outdoors-5f654cd4beb7",
+      "excerpt": "How to effectively do structured interval training on outdoor rides and real-world conditions.",
+      "category": "Training",
+      "difficulty": "intermediate",
+      "tags": ["outdoor", "structured", "intervals", "real-world", "outdoor-training", "power-outdoors", "flexibility"]
+    },
+    {
+      "title": "Designing the Perfect Interval Workout Using W'bal",
+      "slug": "designing-the-perfect-interval-workout-using-wbal-missing-videos-20a0c039dfa0",
+      "excerpt": "Learn how to design VO2max intervals using W' balance for precise training that matches your fitness profile.",
+      "category": "Training",
+      "difficulty": "advanced",
+      "tags": ["intervals", "wbal", "vo2max", "interval-design", "anaerobic", "training-design", "power-analysis", "advanced"]
+    },
+    {
+      "title": "Everything You Need to Know About Training in 15 Minutes",
+      "slug": "everything-you-need-to-know-about-training-in-15-minutes-dylan-johnson-cts-d6bd3dff859b",
+      "excerpt": "Dylan Johnson's comprehensive guide to cycling training fundamentals including VO2max, threshold, and polarized training.",
+      "category": "Training", 
+      "difficulty": "intermediate",
+      "tags": ["dylan-johnson", "fundamentals", "vo2max", "threshold", "polarized", "training-basics", "comprehensive", "cts"]
+    }
+  ],
+  "tags": [
+    "zone2", "aerobic", "heart-rate", "endurance", "base-building", "polarized", "maffetone", "fat-burning",
+    "indoor", "setup", "smart-trainer", "beginner", "zwift", "trainer-setup", "bluetooth", "ant+",
+    "ftp", "anaerobic", "w-prime", "critical-power", "vo2max", "intervals", "testing", "power-analysis",
+    "periodization", "coach-jack", "base", "build", "peak", "event-blocks", "planning", "season-planning",
+    "winter-training", "reverse-periodization", "high-intensity", "motivation", "burnout",
+    "equipment", "buying-guide", "features", "connectivity", "trainer-comparison", "review",
+    "trainingpeaks", "garmin", "integration", "sync", "calendar", "workout-sync", "device-integration",
+    "export", "cross-platform", "workout-export", "compatibility", "platform-integration",
+    "threshold", "improvement", "lactate-threshold", "performance", "ramp-test", "accuracy",
+    "80-20", "intensity-distribution", "dr-seiler", "training-theory", "methodology",
+    "fundamentals", "training-basics", "pillars", "foundation", "hr-zones", "affordable",
+    "outdoor", "structured", "real-world", "outdoor-training", "flexibility"
+  ],
+  "categories": ["Training", "Features", "Beginner"],
+  "difficulties": ["beginner", "intermediate", "advanced"]
+}
