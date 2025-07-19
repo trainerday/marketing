@@ -74,8 +74,13 @@ class BlogSearch {
       
       if (e.key === 'ArrowDown') {
         e.preventDefault();
-        this.activeSuggestionIndex = Math.min(this.activeSuggestionIndex + 1, suggestions.length - 1);
-        this.updateActiveSuggestion();
+        // If dropdown is hidden, show it again
+        if (suggestionsEl.style.display === 'none' || !suggestionsEl.style.display) {
+          this.showSuggestions(this.searchInput.value);
+        } else {
+          this.activeSuggestionIndex = Math.min(this.activeSuggestionIndex + 1, suggestions.length - 1);
+          this.updateActiveSuggestion();
+        }
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         this.activeSuggestionIndex = Math.max(this.activeSuggestionIndex - 1, -1);
@@ -121,21 +126,21 @@ class BlogSearch {
     if (!query || query.length === 0) {
       // Show popular/category tags when no query
       suggestions = ['Training', 'Features', 'Beginner', 'intermediate', 'advanced', 'ftp', 'zone2', 'intervals', 'zwift', 'indoor']
-        .filter(tag => !this.selectedTags.includes(tag))
+        .filter(tag => !this.selectedTags.some(selected => selected.toLowerCase() === tag.toLowerCase()))
         .slice(0, 8);
     } else {
       // Filter tags that match the query
       suggestions = this.searchIndex.tags
         .filter(tag => 
           tag.toLowerCase().includes(query.toLowerCase()) && 
-          !this.selectedTags.includes(tag)
+          !this.selectedTags.some(selected => selected.toLowerCase() === tag.toLowerCase())
         )
         .slice(0, 8);
       
       // If no matches, show popular tags
       if (suggestions.length === 0) {
         suggestions = ['Training', 'Features', 'Beginner', 'ftp', 'zone2', 'intervals']
-          .filter(tag => !this.selectedTags.includes(tag))
+          .filter(tag => !this.selectedTags.some(selected => selected.toLowerCase() === tag.toLowerCase()))
           .slice(0, 4);
       }
     }
@@ -187,8 +192,16 @@ class BlogSearch {
   }
 
   addTag(tag) {
-    if (!this.selectedTags.includes(tag)) {
-      this.selectedTags.push(tag);
+    // Normalize tag: trim whitespace and handle case sensitivity
+    const normalizedTag = tag.trim();
+    
+    // Check for duplicates (case-insensitive)
+    const isDuplicate = this.selectedTags.some(existingTag => 
+      existingTag.toLowerCase() === normalizedTag.toLowerCase()
+    );
+    
+    if (!isDuplicate && normalizedTag.length > 0) {
+      this.selectedTags.push(normalizedTag);
       this.updateTagsUI();
       this.performSearch();
     }
@@ -205,15 +218,19 @@ class BlogSearch {
     const tagContainer = document.querySelector('.tag-input-box');
     const input = this.searchInput;
     
-    tagContainer.innerHTML = `
-      ${this.selectedTags.map(tag => 
-        `<span class="tag" data-tag="${tag}">
-          ${tag} <button class="tag-remove" onclick="blogSearch.removeTag('${tag}')">×</button>
-        </span>`
-      ).join('')}
-    `;
+    // Remove existing tag elements but keep the input
+    const existingTags = tagContainer.querySelectorAll('.tag');
+    existingTags.forEach(tag => tag.remove());
     
-    tagContainer.appendChild(input);
+    // Add new tag elements before the input
+    this.selectedTags.forEach(tag => {
+      const tagElement = document.createElement('span');
+      tagElement.className = 'tag';
+      tagElement.setAttribute('data-tag', tag);
+      tagElement.innerHTML = `${tag} <button class="tag-remove" onclick="blogSearch.removeTag('${tag}')">×</button>`;
+      tagContainer.insertBefore(tagElement, input);
+    });
+    
     input.focus();
   }
 
@@ -271,7 +288,10 @@ class BlogSearch {
               <p class="result-excerpt">${post.excerpt}</p>
               <div class="result-meta">
                 <span class="category-badge category-${post.category.toLowerCase()}">${post.category}</span>
-                <span class="difficulty-badge difficulty-${post.difficulty}">${post.difficulty}</span>
+                ${post.category.toLowerCase() !== post.difficulty.toLowerCase() ? 
+                  `<span class="difficulty-badge difficulty-${post.difficulty}">${post.difficulty}</span>` : 
+                  ''
+                }
               </div>
               <div class="result-tags">
                 ${post.tags.slice(0, 4).map(tag => 

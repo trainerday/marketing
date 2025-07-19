@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "pm2 start ecosystem.config.js --env production --no-daemon",
-    "start-simple": "node ./bin/www",
+    "start": "npm run validate && pm2 start ecosystem.config.js --env production --no-daemon",
+    "start-simple": "npm run validate && node ./bin/www",
     "dev": "nodemon ./bin/www",
     "stop": "pm2 stop td-blog",
     "restart": "pm2 restart td-blog",
@@ -13,11 +13,14 @@
     "status": "pm2 status",
     "logs": "pm2 logs td-blog",
     "monit": "pm2 monit",
+    "validate": "node validate-search-index.js",
+    "test": "npm run validate",
     "extract-posts": "node extract-posts.js",
     "download-images": "node download-images.js",
     "update-images": "node update-image-paths.js",
     "clean-html": "node clean-html-files.js",
-    "setup-blog": "npm run extract-posts && npm run download-images && npm run update-images && npm run clean-html"
+    "setup-blog": "npm run extract-posts && npm run download-images && npm run update-images && npm run clean-html",
+    "heroku-postbuild": "npm run validate"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
