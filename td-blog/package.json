@@ -1,0 +1,33 @@
+{
+  "name": "td-blog",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "pm2 start ecosystem.config.js --env production",
+    "dev": "nodemon ./bin/www",
+    "stop": "pm2 stop td-blog",
+    "restart": "pm2 restart td-blog",
+    "reload": "pm2 reload td-blog",
+    "delete": "pm2 delete td-blog",
+    "status": "pm2 status",
+    "logs": "pm2 logs td-blog",
+    "monit": "pm2 monit",
+    "extract-posts": "node extract-posts.js",
+    "download-images": "node download-images.js",
+    "update-images": "node update-image-paths.js",
+    "clean-html": "node clean-html-files.js",
+    "setup-blog": "npm run extract-posts && npm run download-images && npm run update-images && npm run clean-html"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "pm2": "^6.0.8"
+  }
+}

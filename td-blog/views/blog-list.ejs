@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <meta name="description" content="TrainerDay Blog - Expert cycling training content for the obsessed cyclist">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://blog.trainerday.com/wp-content/uploads/2024/03/cropped-favicon-32x32-1-32x32.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/td_white.svg" alt="TrainerDay" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <div class="nav-desktop">
+                    <div class="nav-links">
+                    </div>
+                    <a href="https://trainerday.com" class="download-cta">Open TrainerDay</a>
+                    <a href="/blog" class="auth-link-text">Blog</a>
+                </div>
+                <div class="nav-mobile">
+                    <div class="mobile-nav-content">
+                        <a href="https://trainerday.com" class="download-cta-mobile">Open TrainerDay</a>
+                        <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                    <div class="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+                    <div class="mobile-menu">
+                        <a href="/blog" class="mobile-menu-item">Blog</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 70px;">
+        <section class="section-black">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 60px;">
+                    <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 20px; color: #ffffff;">TrainerDay Blog</h1>
+                    <p style="font-size: 1.2rem; color: var(--light-background); max-width: 600px; margin: 0 auto;">Expert cycling training content for the obsessed cyclist</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+                    <% posts.forEach(function(post) { %>
+                    <article style="background-color: var(--medium-dark); border-radius: 15px; padding: 30px; border: 1px solid var(--light-dark-blue); transition: transform 0.3s ease, border-color 0.3s ease;">
+                        <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; line-height: 1.4;">
+                            <a href="<%= post.url %>" style="color: #ffffff; text-decoration: none; transition: color 0.3s ease;">
+                                <%= post.title %>
+                            </a>
+                        </h2>
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 0.9rem; color: var(--mid-tone-grey);">
+                            <span><%= post.date %></span>
+                            <span style="color: var(--primary-red);">•</span>
+                            <span>Cycling Training</span>
+                        </div>
+                        <p style="color: var(--light-background); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem;">
+                            <%= post.excerpt %>
+                        </p>
+                        <a href="<%= post.url %>" style="color: var(--primary-red); text-decoration: none; font-weight: 500; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 5px;">
+                            Read More →
+                        </a>
+                    </article>
+                    <% }); %>
+                </div>
+            </div>
+        </section>
+
+        <section style="background-color: var(--light-background); padding: 80px 0;">
+            <div class="container" style="text-align: center;">
+                <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; color: var(--darkest-blue);">Ready to Train Smarter?</h2>
+                <p style="font-size: 1.1rem; color: var(--darkest-blue); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                    Join thousands of cyclists using TrainerDay to optimize their training and reach their performance goals.
+                </p>
+                <a href="https://trainerday.com" class="btn btn-primary" style="font-size: 1.1rem; padding: 15px 30px;">
+                    Start Training with TrainerDay
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="minimal-footer">
+        <div class="container">
+            <div class="minimal-footer-content">
+                <div>&copy; 2024 TrainerDay. All rights reserved.</div>
+                <div class="minimal-footer-links">
+                    <a href="https://trainerday.com/privacy">Privacy Policy</a>
+                    <a href="https://trainerday.com/terms">Terms of Service</a>
+                    <a href="https://trainerday.com/contact">Contact</a>
+                    <a href="https://trainerday.com">TrainerDay</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            const menu = document.querySelector('.mobile-menu');
+            
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            menu.classList.toggle('active');
+        }
+
+        // Add hover effects to blog cards
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.borderColor = 'var(--primary-red)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.borderColor = 'var(--light-dark-blue)';
+            });
+        });
+
+        // Add hover effects to blog post titles
+        document.querySelectorAll('h2 a').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.color = 'var(--primary-red)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.color = '#ffffff';
+            });
+        });
+    </script>
+
+    <!-- Analytics -->
+    <script async data-id="101456719" src="//static.getclicky.com/js"></script>
+    <script src="https://unpkg.com/@trainerday/analytics-client@latest/dist/analytics-client.min.js"></script>
+    <script>
+        var analytics = mixpanel;
+        // Initialize with TrainerDay production settings
+        analytics.init('td-blog', {
+            trackingUrl: 'https://analytics-api.prod.trainerday.com/track?data=',
+            engageUrl: 'https://analytics-api.prod.trainerday.com/engage?data='
+        });
+        
+        // Track page view
+        analytics.track('Page View', {
+            page: window.location.pathname,
+            title: document.title,
+            url: window.location.href
+        });
+    </script>
+</body>
+</html>
